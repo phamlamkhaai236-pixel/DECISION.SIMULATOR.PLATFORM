@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Decision Simulator - Nền Tảng Truyện Nhập Vai Đa Tầng</title>
+    <title>Decision Simulator - Nền Tảng Truyện Nhập Vai</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -70,7 +70,6 @@
             margin: 0 auto;
             padding: 24px;
         }
-        /* Hero Banner */
         .hero-banner {
             position: relative;
             background: linear-gradient(135deg, #2e1065, #1e1b4b, #0f172a);
@@ -193,8 +192,7 @@
             font-size: 12px;
             color: #94a3b8;
         }
-
-        /* Game Screen (Ẩn đi ban đầu, hiện lên khi bấm vào chơi) */
+        /* Màn hình chơi game */
         #game-screen {
             display: none;
             max-width: 900px;
@@ -262,8 +260,6 @@
             text-transform: uppercase;
             letter-spacing: 1px;
         }
-
-        /* Bottom Navigation Bar */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -298,7 +294,6 @@
     </style>
 </head>
 <body>
-
     <header class="navbar">
         <div class="logo-box" onclick="goHome()">
             <div class="logo-icon">DS</div>
@@ -315,16 +310,16 @@
     <div class="container" id="home-screen">
         <div class="hero-banner">
             <span class="badge">✨ NỀN TẢNG MÔ PHỎNG QUYẾT ĐỊNH & NHẬP VAI</span>
-            <h2>Khoảnh khắc đổi đầu tại bàn cơm & ngã rẽ cuộc đời</h2>
-            <p>Trải nghiệm hệ thống cốt truyện tâm lý học đường, định hướng tương lai. Mỗi lựa chọn của bạn sẽ quyết định số phận nhân vật.</p>
-            <button class="btn-play" onclick="startPlay()">▶ Nhập Vai Ngay Miễn Phí</button>
+            <h2>Khoảnh khắc đối đầu tại bàn cơm & ngã rẽ cuộc đời</h2>
+            <p>Trải nghiệm hệ thống cốt truyện tâm lý học đường và định hướng tương lai. Mỗi lựa chọn của bạn sẽ quyết định số phận nhân vật.</p>
+            <button class="btn-play" onclick="startPlay('story1')">▶ Nhập Vai Ngay Miễn Phí</button>
         </div>
 
         <div class="section-header">
             <div class="section-title"><span></span> Được chơi nhiều nhất</div>
         </div>
         <div class="story-grid">
-            <div class="story-card" onclick="startPlay()">
+            <div class="story-card" onclick="startPlay('story1')">
                 <div class="card-poster">
                     <div class="player-count">👥 8.420</div>
                 </div>
@@ -336,75 +331,54 @@
         </div>
     </div>
 
-    <!-- MÀN HÌNH CHƠI GAME NHẬP VAI TƯƠNG TÁC -->
+    <!-- MÀN HÌNH CHƠI GAME TƯƠNG TÁC -->
     <div class="container" id="game-screen">
-        <div class="story-container" id="game-box">
-            <!-- Nội dung game sẽ chạy ở đây -->
-        </div>
+        <div class="story-container" id="game-box"></div>
     </div>
 
-    <!-- Thanh điều hướng dưới -->
     <nav class="bottom-nav">
         <a class="nav-item active" onclick="goHome()">
             <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
             Trang chủ
         </a>
-        <a class="nav-item" onclick="startPlay()">
+        <a class="nav-item" onclick="startPlay('story1')">
             <svg viewBox="0 0 24 24"><path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/></svg>
             Chơi ngay
         </a>
     </nav>
 
     <script>
-        const storyData = {
-            tier1: {
-                tier: "Tầng 1 / 5: Bàn cơm gia đình",
-                title: "Khoảnh khắc đối đầu tại bàn cơm",
-                text: "Bát cơm nóng hổi đặt mạnh xuống bàn tạo ra một âm thanh khô khốc cắt đứt không gian tĩnh lặng. Bố nhìn bạn kiên quyết: 'Con cứ đăng ký ngành Kinh tế đi, đừng mơ mộng nghệ thuật bắp bênh nữa.' Cuốn sổ phác thảo giấu dưới cặp bỗng nặng trĩu.",
-                choices: [
-                    { text: "Lựa chọn A: Im lặng gặt đầu định hướng của gia đình để giữ bình yên.", next: "tier2_A" },
-                    { text: "Lựa chọn B: Phản bác trực diện, tuyên bố muốn tự chọn con đường nghệ thuật.", next: "tier2_B" },
-                    { text: "Lựa chọn C: Xin thêm thời gian để chuẩn bị bản thuyết trình chứng minh năng lực.", next: "tier2_C" },
-                    { text: "Lựa chọn D: Thoả hiệp học kinh tế theo ý gia đình nhưng bảo lưu đam mê tay trái.", next: "tier2_D" },
-                    { text: "Lựa chọn E: Đứng dậy rời khỏi bàn ăn, chọn thái độ im lặng kháng cự.", next: "tier2_E" }
-                ]
-            },
-            tier2_A: {
-                tier: "Tầng 2 / 5: Sự im lặng an toàn",
-                title: "Con đường được vẽ sẵn",
-                text: "Bạn chọn cách gật đầu. Bố mẹ thở phào nhẹ nhõm, không khí bữa cơm dịu lại. Tuy nhiên, sâu thẳm bên trong, một cảm giác trống trải bắt đầu nảy sinh.",
-                choices: [{ text: "🔄 Quay lại từ đầu", next: "tier1" }]
-            },
-            tier2_B: {
-                tier: "Tầng 2 / 5: Cuộc chiến quan điểm",
-                title: "Tiếng nói cá nhân",
-                text: "Lời phản bác vừa thốt ra khiến phòng ăn rơi vào sự im lặng đáng sợ. Ánh mắt bố đầy thất vọng, còn mẹ thì bắt đầu rơi nước mắt.",
-                choices: [{ text: "🔄 Quay lại từ đầu", next: "tier1" }]
-            },
-            tier2_C: {
-                tier: "Tầng 2 / 5: Bản thuyết trình chứng minh",
-                title: "Cơ hội đàm phán",
-                text: "Bố ngạc nhiên trước thái độ điềm tĩnh của bạn rồi gật đầu đồng ý cho bạn 3 ngày để chứng minh năng lực.",
-                choices: [{ text: "🔄 Quay lại từ đầu", next: "tier1" }]
-            },
-            tier2_D: {
-                tier: "Tầng 2 / 5: Giải pháp song song",
-                title: "Ngả rẽ đôi dòng",
-                text: "Gia đình chấp nhận sự thỏa hiệp. Ban ngày học kinh tế, ban đêm dành trọn cho những nét cọ.",
-                choices: [{ text: "🔄 Quay lại từ đầu", next: "tier1" }]
-            },
-            tier2_E: {
-                tier: "Tầng 2 / 5: Sự kháng cự lạnh lùng",
-                title: "Khoảng cách thế hệ",
-                text: "Hành động bỏ đi khiến bầu không khí chạm đáy băng giá. Đêm hôm đó, bạn khóa trái cửa phòng tự lập.",
-                choices: [{ text: "🔄 Quay lại từ đầu", next: "tier1" }]
+        // Nơi chứa dữ liệu các câu chuyện (Sẽ được bổ sung từng truyện ở các bước tiếp theo)
+        const storiesDatabase = {
+            story1: {
+                tier1: {
+                    tier: "Tầng 1 / 5: Bàn cơm gia đình",
+                    title: "Khoảnh khắc đối đầu tại bàn cơm",
+                    text: "Bát cơm nóng hổi đặt mạnh xuống bàn tạo ra một âm thanh khô khốc cắt đứt không gian tĩnh lặng. Bố nhìn bạn kiên quyết: 'Con cứ đăng ký ngành Kinh tế đi, đừng mơ mộng nghệ thuật bắp bênh nữa.'",
+                    choices: [
+                        { text: "Lựa chọn A: Im lặng gật đầu định hướng của gia đình.", next: "tier2_A" },
+                        { text: "Lựa chọn B: Phản bác trực diện, tuyên bố muốn tự chọn con đường.", next: "tier2_B" }
+                    ]
+                },
+                tier2_A: {
+                    tier: "Tầng 2 / 5: Sự im lặng an toàn",
+                    title: "Con đường được vẽ sẵn",
+                    text: "Bạn chọn cách gật đầu. Bố mẹ thở phào nhẹ nhõm, không khí bữa cơm dịu lại.",
+                    choices: [{ text: "🔄 Quay lại trang chủ", next: "home" }]
+                },
+                tier2_B: {
+                    tier: "Tầng 2 / 5: Cuộc chiến quan điểm",
+                    title: "Tiếng nói cá nhân",
+                    text: "Lời phản bác vừa thốt ra khiến phòng ăn rơi vào sự im lặng đáng sợ.",
+                    choices: [{ text: "🔄 Quay lại trang chủ", next: "home" }]
+                }
             }
         };
 
-        function startPlay() {
+        function startPlay(storyId) {
             document.getElementById('home-screen').style.display = 'none';
             document.getElementById('game-screen').style.display = 'block';
-            renderStory('tier1');
+            renderStory(storyId, 'tier1');
         }
 
         function goHome() {
@@ -412,13 +386,18 @@
             document.getElementById('game-screen').style.display = 'none';
         }
 
-        function renderStory(key) {
-            const node = storyData[key];
+        function renderStory(storyId, nodeKey) {
+            if (nodeKey === 'home') {
+                goHome();
+                return;
+            }
+            const story = storiesDatabase[storyId];
+            const node = story[nodeKey];
             const box = document.getElementById('game-box');
             
             let choicesHtml = '';
             node.choices.forEach(c => {
-                choicesHtml += `<button class="choice-btn" onclick="renderStory('${c.next}')">${c.text}</button>`;
+                choicesHtml += `<button class="choice-btn" onclick="renderStory('${storyId}', '${c.next}')">${c.text}</button>`;
             });
 
             box.innerHTML = `
@@ -433,3 +412,148 @@
     </script>
 </body>
 </html>
+story2: {
+                tier1: {
+                    tier: "Tầng 1 / 5: Thông báo chọn đội tuyển",
+                    title: "Ngã rẽ đội tuyển học sinh giỏi",
+                    text: "Giáo viên chủ nhiệm bước vào lớp với chồng danh sách đăng ký đội tuyển quốc gia trên tay. Cô gọi thẳng tên bạn: 'Em có năng lực Văn học rất tốt, cô muốn điền tên em vào danh sách thi học sinh giỏi cấp quốc gia, nhưng thời gian tới sẽ phải ôn luyện căng thẳng đấy.' Bạn nhìn sang cuốn lịch bàn thấy sát ngày thi đại học, áp lực bủa vây.",
+                    choices: [
+                        { text: "Lựa chọn A: Nhận lời tham gia đội tuyển, chấp nhận dồn toàn lực ôn thi quốc gia.", next: "tier2_A" },
+                        { text: "Lựa chọn B: Từ chối khéo với lý do muốn tập trung chuẩn bị cho khối thi đại học.", next: "tier2_B" },
+                        { text: "Lựa chọn C: Xin cô cho thời gian suy nghĩ và tham khảo ý kiến gia đình.", next: "tier2_C" },
+                        { text: "Lựa chọn D: Đồng ý với điều kiện cô giáo hỗ trợ cân bằng lại tiến độ học tập các môn khác.", next: "tier2_D" }
+                    ]
+                },
+                tier2_A: {
+                    tier: "Tầng 2 / 5: Guồng quay ôn luyện",
+                    title: "Những đêm thức trắng",
+                    text: "Quyết định bước chân vào đội tuyển kéo theo những buổi học cường độ cao. Đống tài liệu dày cộm khiến thời gian ngủ của bạn thu hẹp lại chỉ còn 4 tiếng mỗi đêm.",
+                    choices: [
+                        { text: "Lựa chọn A1: Tiếp tục cắn răng chịu đựng, duy trì phong độ đến cùng.", next: "tier3_A1" },
+                        { text: "Lựa chọn A2: Kiệt sức, bắt đầu cảm thấy chao đảo và muốn xin rút lui.", next: "tier3_A2" },
+                        { text: "🔄 Quay lại trang chủ", next: "home" }
+                    ]
+                },
+                tier2_B: {
+                    tier: "Tầng 2 / 5: Con đường an toàn",
+                    title: "Sự tập trung đơn tuyến",
+                    text: "Từ chối đội tuyển giúp bạn có nhiều thời gian thảnh thơi hơn cho mục tiêu xét tuyển đại học dài hạn. Tuy nhiên, bạn bỏ lỡ một cơ hội khẳng định bản thân lớn.",
+                    choices: [{ text: "🔄 Quay lại trang chủ", next: "home" }]
+                },
+                tier2_C: {
+                    tier: "Tầng 2 / 5: Cân nhắc thiệt hơn",
+                    title: "Lời khuyên từ người đi trước",
+                    text: "Bạn đem chuyện này hỏi ý kiến thầy cô cũ và gia đình. Mọi người chia sẻ hai luồng ý kiến trái chiều khiến bạn càng thêm đắn đo.",
+                    choices: [{ text: "🔄 Quay lại trang chủ", next: "home" }]
+                },
+                tier2_D: {
+                    tier: "Tầng 2 / 5: Sự đồng hành",
+                    title: "Giao ước đặc biệt",
+                    text: "Cô giáo mỉm cười gật đầu đồng ý tạo điều kiện riêng. Bạn bước vào đội tuyển với tâm thế vững vàng hơn một chút nhờ sự hỗ trợ phía sau.",
+                    choices: [{ text: "🔄 Quay lại trang chủ", next: "home" }]
+                },
+                tier3_A1: {
+                    tier: "Tầng 3 / 5: Kỳ thi sát hạch",
+                    title: "Vòng loại đội tuyển chính thức",
+                    text: "Đề thi thử vòng loại quốc gia bất ngờ xuất hiện một dạng đề mở hoàn toàn mới lạ so với các năm trước. Tay bạn run lên khi cầm bút.",
+                    choices: [
+                        { text: "Lựa chọn A1-1: Dùng tư duy phản biện sắc bén để viết một bài văn phá cách.", next: "tier4_A1_1" },
+                        { text: "Lựa chọn A1-2: Bám sát cấu trúc an toàn khuôn mẫu sách giáo khoa đã học.", next: "tier4_A1_2" }
+                    ]
+                },
+                tier3_A2: {
+                    tier: "Tầng 3 / 5: Giới hạn chịu đựng",
+                    title: "Khoảnh khắc gục ngã",
+                    text: "Cơ thể phát tín hiệu báo động đỏ khi bạn ngất xỉu ngay tại phòng tự học vì suy nhược.",
+                    choices: [{ text: "🔄 Quay lại trang chủ", next: "home" }]
+                },
+                tier4_A1_1: {
+                    tier: "Tầng 4 / 5: Trái ngọt bất ngờ",
+                    title: "Tiếng vang phòng thi",
+                    text: "Bài làm phá cách của bạn khiến ban giám khảo ngạc nhiên và đánh giá rất cao về tư duy độc lập.",
+                    choices: [
+                        { text: "Lựa chọn kết thúc: Nhận vé vào đội tuyển chính thức, tiến tới vạch đích quốc gia!", next: "tier5_WIN" }
+                    ]
+                },
+                tier4_A1_2: {
+                    tier: "Tầng 4 / 5: Kết quả tầm trung",
+                    title: "Sự an toàn quen thuộc",
+                    text: "Bài làm điểm số ở mức khá tốt nhưng thiếu đi dấu ấn cá nhân bứt phá mạnh mẽ.",
+                    choices: [{ text: "🔄 Quay lại trang chủ", next: "home" }]
+                },
+                tier5_WIN: {
+                    tier: "Tầng 5 / 5: Đỉnh cao vinh quang",
+                    title: "Cánh cửa tương lai mở rộng",
+                    text: "Vượt qua hàng trăm đối thủ nặng ký, bạn chính thức giành giải thưởng cao trong kỳ thi học sinh giỏi, khẳng định bản lĩnh tuổi trẻ!",
+                    choices: [{ text: "🔄 Quay lại trang chủ", next: "home" }]
+                }
+            }
+story3: {
+                tier1: {
+                    tier: "Tầng 1 / 5: Khởi động ý tưởng STEM",
+                    title: "Bản vẽ trên trang giấy trắng",
+                    text: "Cuộc thi sáng tạo khoa học kỹ thuật cấp trường đã phát động. Nhóm của bạn đang tranh luận sôi nổi về việc chọn đề tài. Giữa vô vàn ý tưởng, bạn đề xuất chế tạo một mô hình robot hỗ trợ dập tắt đám cháy nhỏ ở khu vực khuất tầm nhìn, nhưng kinh phí và thời gian thì cực kỳ eo hẹp.",
+                    choices: [
+                        { text: "Lựa chọn A: Quyết tâm theo đuổi dự án robot cứu hỏa, tự lập kế hoạch phân công chi tiết.", next: "tier2_A" },
+                        { text: "Lựa chọn B: Đổi sang một đề tài an toàn, dễ làm hơn để chắc suất đạt giải khuyến khích.", next: "tier2_B" },
+                        { text: "Lựa chọn C: Kêu gọi thêm thành viên từ các lớp khác để chung tay góp vốn và công sức.", next: "tier2_C" }
+                    ]
+                },
+                tier2_A: {
+                    tier: "Tầng 2 / 5: Giai đoạn lắp ráp phần cứng",
+                    title: "Linh kiện chập chờn",
+                    text: "Mạch điện điều khiển liên tục bị lỗi ngắn mạch khi thử nghiệm cảm biến nhiệt độ. Thời gian nộp sản phẩm vòng sơ khảo chỉ còn tính bằng ngày.",
+                    choices: [
+                        { text: "Lựa chọn A1: Thức xuyên đêm tự hàn lại mạch và viết lại toàn bộ mã nguồn Python điều khiển.", next: "tier3_A1" },
+                        { text: "Lựa chọn A2: Mang ra tiệm nhờ thợ điện tử hỗ trợ kiểm tra phần cứng gấp.", next: "tier3_A2" },
+                        { text: "🔄 Quay lại trang chủ", next: "home" }
+                    ]
+                },
+                tier2_B: {
+                    tier: "Tầng 2 / 5: Lối đi an toàn",
+                    title: "Sản phẩm quen thuộc",
+                    text: "Đề tài an toàn giúp nhóm hoàn thành sớm nhưng không tạo được ấn tượng mạnh trước ban giám khảo.",
+                    choices: [{ text: "🔄 Quay lại trang chủ", next: "home" }]
+                },
+                tier2_C: {
+                    tier: "Tầng 2 / 5: Sức mạnh tập thể",
+                    title: "Sự bất đồng ý kiến",
+                    text: "Việc kết hợp nhiều thành viên mới mang lại nguồn vốn tốt nhưng lại xảy ra tranh cãi về thiết kế giao diện điều khiển robot.",
+                    choices: [{ text: "🔄 Quay lại trang chủ", next: "home" }]
+                },
+                tier3_A1: {
+                    tier: "Tầng 3 / 5: Thử nghiệm thực tế",
+                    title: "Bài kiểm tra ngọn lửa giả lập",
+                    text: "Robot bước vào bài kiểm tra vận hành thử nghiệm trước hội đồng nhà trường. Cảm biến nhận diện khói phát hiện ngọn lửa nhưng cơ chế phun nước bị kẹt van.",
+                    choices: [
+                        { text: "Lựa chọn A1-1: Nhanh trí can thiệp thủ công bằng công tắc dự phòng trên phần mềm.", next: "tier4_A1_1" },
+                        { text: "Lựa chọn A1-2: Để mặc hệ thống tự động xử lý theo thuật toán đã lập trình sẵn.", next: "tier4_A1_2" }
+                    ]
+                },
+                tier3_A2: {
+                    tier: "Tầng 3 / 5: Sự phụ thuộc",
+                    title: "Giải pháp dịch vụ",
+                    text: "Thợ sửa giúp máy chạy ổn định nhưng bạn không nắm rõ bản chất lỗi khiến việc tinh chỉnh sau đó gặp khó khăn lớn.",
+                    choices: [{ text: "🔄 Quay lại trang chủ", next: "home" }]
+                },
+                tier4_A1_1: {
+                    tier: "Tầng 4 / 5: Bản lĩnh xử lý tình huống",
+                    title: "Khoảnh khắc cứu vãn",
+                    text: "Phản ứng cực kỳ nhanh nhạy của bạn giúp robot kích hoạt thành công tia nước dập tắt hoàn toàn ngọn lửa trong tiếng hò reo của khán giả.",
+                    choices: [
+                        { text: "Lựa chọn kết thúc: Đạt giải Nhất cuộc thi sáng tạo khoa học kỹ thuật trường học!", next: "tier5_WIN" }
+                    ]
+                },
+                tier4_A1_2: {
+                    tier: "Tầng 4 / 5: Sự cố kỹ thuật",
+                    title: "Lỗi hệ thống",
+                    text: "Thuật toán không tự khắc phục kịp thời khiến robot bỏ lỡ mục tiêu trong sự tiếc nuối.",
+                    choices: [{ text: "🔄 Quay lại trang chủ", next: "home" }]
+                },
+                tier5_WIN: {
+                    tier: "Tầng 5 / 5: Vinh quang công nghệ",
+                    title: "Dấu ấn tuổi trẻ",
+                    text: "Sản phẩm robot cứu hỏa của bạn không chỉ đạt giải cao mà còn được chọn để đem đi tranh tài ở các cấp cuộc thi lớn hơn!",
+                    choices: [{ text: "🔄 Quay lại trang chủ", next: "home" }]
+                }
+            }
