@@ -17,7 +17,6 @@
             color: #ffffff;
             padding-bottom: 80px;
         }
-        /* Top Navigation Bar */
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -33,6 +32,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            cursor: pointer;
         }
         .logo-icon {
             width: 34px;
@@ -65,14 +65,11 @@
             font-weight: 600;
             border: 1px solid #373752;
         }
-        
-        /* Main Container */
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 24px;
         }
-
         /* Hero Banner */
         .hero-banner {
             position: relative;
@@ -120,13 +117,13 @@
             align-items: center;
             gap: 8px;
             box-shadow: 0 4px 14px rgba(245, 158, 11, 0.4);
+            cursor: pointer;
+            border: none;
             transition: transform 0.2s;
         }
         .btn-play:hover {
             transform: scale(1.02);
         }
-
-        /* Section Header */
         .section-header {
             display: flex;
             justify-content: space-between;
@@ -147,14 +144,6 @@
             border-radius: 4px;
             display: inline-block;
         }
-        .see-all {
-            font-size: 13px;
-            color: #94a3b8;
-            text-decoration: none;
-        }
-        .see-all:hover { color: #fff; }
-
-        /* Grid Cards */
         .story-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -175,19 +164,11 @@
         }
         .card-poster {
             height: 260px;
-            background: #2a2a3c;
             position: relative;
             display: flex;
             align-items: flex-end;
             padding: 12px;
-            background-size: cover;
-            background-position: center;
-        }
-        .card-poster::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.8));
+            background: linear-gradient(135deg, #475569, #1e293b);
         }
         .player-count {
             position: absolute;
@@ -199,10 +180,6 @@
             border-radius: 20px;
             font-size: 11px;
             color: #e2e8f0;
-            z-index: 1;
-            display: flex;
-            align-items: center;
-            gap: 4px;
         }
         .card-info {
             padding: 14px;
@@ -211,16 +188,82 @@
             font-size: 14px;
             font-weight: 600;
             margin-bottom: 4px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
         }
         .card-info p {
             font-size: 12px;
             color: #94a3b8;
         }
 
-        /* Bottom Tab Navigation Bar */
+        /* Game Screen (Ẩn đi ban đầu, hiện lên khi bấm vào chơi) */
+        #game-screen {
+            display: none;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .story-container {
+            background: #181820;
+            border: 1px solid #272735;
+            border-radius: 16px;
+            padding: 30px;
+            margin-top: 20px;
+        }
+        .story-tag {
+            background: rgba(245, 158, 11, 0.15);
+            color: #fbbf24;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+        .story-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #fff;
+        }
+        .story-text {
+            font-size: 15px;
+            color: #cbd5e1;
+            line-height: 1.7;
+            margin-bottom: 24px;
+            background: #121217;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #f59e0b;
+        }
+        .choices-box {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .choice-btn {
+            background: #22222e;
+            border: 1px solid #37374f;
+            color: #fff;
+            padding: 14px 18px;
+            border-radius: 10px;
+            text-align: left;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .choice-btn:hover {
+            background: #2a2a3d;
+            border-color: #f59e0b;
+            transform: translateX(4px);
+        }
+        .tier-indicator {
+            font-size: 12px;
+            color: #94a3b8;
+            margin-bottom: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Bottom Navigation Bar */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -242,6 +285,7 @@
             gap: 4px;
             font-size: 11px;
             font-weight: 500;
+            cursor: pointer;
         }
         .nav-item.active, .nav-item:hover {
             color: #f59e0b;
@@ -255,119 +299,137 @@
 </head>
 <body>
 
-    <!-- Top Navigation -->
     <header class="navbar">
-        <div class="logo-box">
+        <div class="logo-box" onclick="goHome()">
             <div class="logo-icon">DS</div>
             <div class="logo-text">
                 <h1>DECISION SIMULATOR</h1>
             </div>
         </div>
         <div class="user-panel">
-            <div class="coin-badge">🪙 100 Xu</div>
+            <div class="coin-badge">🪙 200 Xu</div>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <div class="container">
-        <!-- Hero Banner -->
+    <!-- TRANG CHỦ -->
+    <div class="container" id="home-screen">
         <div class="hero-banner">
-            <span class="badge">✨ KHÔNG GIAN TÂM LÝ & ĐA TẦNG LỰA CHỌN</span>
-            <h2>Lựa chọn của bạn sẽ định hình cái kết nào?</h2>
-            <p>Khám phá hệ thống mô phỏng quyết định với hơn 35+ cốt truyện sâu sắc, đa dạng vai trò và kết cục mở phản ánh thực tế trưởng thành.</p>
-            <a href="#" class="btn-play">▶ Nhập Vai Ngay Miễn Phí</a>
+            <span class="badge">✨ NỀN TẢNG MÔ PHỎNG QUYẾT ĐỊNH & NHẬP VAI</span>
+            <h2>Khoảnh khắc đổi đầu tại bàn cơm & ngã rẽ cuộc đời</h2>
+            <p>Trải nghiệm hệ thống cốt truyện tâm lý học đường, định hướng tương lai. Mỗi lựa chọn của bạn sẽ quyết định số phận nhân vật.</p>
+            <button class="btn-play" onclick="startPlay()">▶ Nhập Vai Ngay Miễn Phí</button>
         </div>
 
-        <!-- Section 1: Được chơi nhiều nhất -->
         <div class="section-header">
             <div class="section-title"><span></span> Được chơi nhiều nhất</div>
-            <a href="#" class="see-all">Xem tất cả &rarr;</a>
         </div>
         <div class="story-grid">
-            <div class="story-card">
-                <div class="card-poster" style="background: linear-gradient(135deg, #475569, #1e293b);">
-                    <div class="player-count">👥 8.293</div>
+            <div class="story-card" onclick="startPlay()">
+                <div class="card-poster">
+                    <div class="player-count">👥 8.420</div>
                 </div>
                 <div class="card-info">
                     <h3>Ngã Rẽ Bàn Ăn Tối</h3>
                     <p>Hướng nghiệp & Gia đình</p>
                 </div>
             </div>
-            <div class="story-card">
-                <div class="card-poster" style="background: linear-gradient(135deg, #0284c7, #0369a1);">
-                    <div class="player-count">👥 4.150</div>
-                </div>
-                <div class="card-info">
-                    <h3>Áp Lực Điểm Số</h3>
-                    <p>Tâm lý học đường</p>
-                </div>
-            </div>
-            <div class="story-card">
-                <div class="card-poster" style="background: linear-gradient(135deg, #0d9488, #115e59);">
-                    <div class="player-count">👥 3.200</div>
-                </div>
-                <div class="card-info">
-                    <h3>Bức Thư Nặc Danh</h3>
-                    <p>Đạo đức & Vùng xám</p>
-                </div>
-            </div>
-            <div class="story-card">
-                <div class="card-poster" style="background: linear-gradient(135deg, #9333ea, #6b21a8);">
-                    <div class="player-count">👥 2.910</div>
-                </div>
-                <div class="card-info">
-                    <h3>Thế Giới Ảo 24/7</h3>
-                    <p>Khủng hoảng số</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Section 2: Trưởng Thành & Hướng Nghiệp -->
-        <div class="section-header">
-            <div class="section-title"><span></span> Trưởng Thành & Hướng Nghiệp</div>
-            <a href="#" class="see-all">Xem tất cả &rarr;</a>
-        </div>
-        <div class="story-grid">
-            <div class="story-card">
-                <div class="card-poster" style="background: linear-gradient(135deg, #b45309, #78350f);">
-                    <div class="player-count">👥 1.840</div>
-                </div>
-                <div class="card-info">
-                    <h3>Ước Mơ Hay Kỳ Vọng</h3>
-                    <p>Đóng vai học sinh cuối cấp</p>
-                </div>
-            </div>
-            <div class="story-card">
-                <div class="card-poster" style="background: linear-gradient(135deg, #1e3a8a, #172554);">
-                    <div class="player-count">👥 1.520</div>
-                </div>
-                <div class="card-info">
-                    <h3>Quyết Định Đêm Trước Kỳ Thi</h3>
-                    <p>Đa tầng lựa chọn</p>
-                </div>
-            </div>
         </div>
     </div>
 
-    <!-- Bottom Navigation Bar -->
+    <!-- MÀN HÌNH CHƠI GAME NHẬP VAI TƯƠNG TÁC -->
+    <div class="container" id="game-screen">
+        <div class="story-container" id="game-box">
+            <!-- Nội dung game sẽ chạy ở đây -->
+        </div>
+    </div>
+
+    <!-- Thanh điều hướng dưới -->
     <nav class="bottom-nav">
-        <a href="#" class="nav-item active">
+        <a class="nav-item active" onclick="goHome()">
             <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
             Trang chủ
         </a>
-        <a href="#" class="nav-item">
+        <a class="nav-item" onclick="startPlay()">
             <svg viewBox="0 0 24 24"><path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/></svg>
-            Lịch sử chơi
-        </a>
-        <a href="#" class="nav-item">
-            <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-            Tạo truyện
-        </a>
-        <a href="#" class="nav-item">
-            <svg viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0-2-.9-2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12z"/></svg>
-            Kho truyện
+            Chơi ngay
         </a>
     </nav>
 
+    <script>
+        const storyData = {
+            tier1: {
+                tier: "Tầng 1 / 5: Bàn cơm gia đình",
+                title: "Khoảnh khắc đối đầu tại bàn cơm",
+                text: "Bát cơm nóng hổi đặt mạnh xuống bàn tạo ra một âm thanh khô khốc cắt đứt không gian tĩnh lặng. Bố nhìn bạn kiên quyết: 'Con cứ đăng ký ngành Kinh tế đi, đừng mơ mộng nghệ thuật bắp bênh nữa.' Cuốn sổ phác thảo giấu dưới cặp bỗng nặng trĩu.",
+                choices: [
+                    { text: "Lựa chọn A: Im lặng gặt đầu định hướng của gia đình để giữ bình yên.", next: "tier2_A" },
+                    { text: "Lựa chọn B: Phản bác trực diện, tuyên bố muốn tự chọn con đường nghệ thuật.", next: "tier2_B" },
+                    { text: "Lựa chọn C: Xin thêm thời gian để chuẩn bị bản thuyết trình chứng minh năng lực.", next: "tier2_C" },
+                    { text: "Lựa chọn D: Thoả hiệp học kinh tế theo ý gia đình nhưng bảo lưu đam mê tay trái.", next: "tier2_D" },
+                    { text: "Lựa chọn E: Đứng dậy rời khỏi bàn ăn, chọn thái độ im lặng kháng cự.", next: "tier2_E" }
+                ]
+            },
+            tier2_A: {
+                tier: "Tầng 2 / 5: Sự im lặng an toàn",
+                title: "Con đường được vẽ sẵn",
+                text: "Bạn chọn cách gật đầu. Bố mẹ thở phào nhẹ nhõm, không khí bữa cơm dịu lại. Tuy nhiên, sâu thẳm bên trong, một cảm giác trống trải bắt đầu nảy sinh.",
+                choices: [{ text: "🔄 Quay lại từ đầu", next: "tier1" }]
+            },
+            tier2_B: {
+                tier: "Tầng 2 / 5: Cuộc chiến quan điểm",
+                title: "Tiếng nói cá nhân",
+                text: "Lời phản bác vừa thốt ra khiến phòng ăn rơi vào sự im lặng đáng sợ. Ánh mắt bố đầy thất vọng, còn mẹ thì bắt đầu rơi nước mắt.",
+                choices: [{ text: "🔄 Quay lại từ đầu", next: "tier1" }]
+            },
+            tier2_C: {
+                tier: "Tầng 2 / 5: Bản thuyết trình chứng minh",
+                title: "Cơ hội đàm phán",
+                text: "Bố ngạc nhiên trước thái độ điềm tĩnh của bạn rồi gật đầu đồng ý cho bạn 3 ngày để chứng minh năng lực.",
+                choices: [{ text: "🔄 Quay lại từ đầu", next: "tier1" }]
+            },
+            tier2_D: {
+                tier: "Tầng 2 / 5: Giải pháp song song",
+                title: "Ngả rẽ đôi dòng",
+                text: "Gia đình chấp nhận sự thỏa hiệp. Ban ngày học kinh tế, ban đêm dành trọn cho những nét cọ.",
+                choices: [{ text: "🔄 Quay lại từ đầu", next: "tier1" }]
+            },
+            tier2_E: {
+                tier: "Tầng 2 / 5: Sự kháng cự lạnh lùng",
+                title: "Khoảng cách thế hệ",
+                text: "Hành động bỏ đi khiến bầu không khí chạm đáy băng giá. Đêm hôm đó, bạn khóa trái cửa phòng tự lập.",
+                choices: [{ text: "🔄 Quay lại từ đầu", next: "tier1" }]
+            }
+        };
+
+        function startPlay() {
+            document.getElementById('home-screen').style.display = 'none';
+            document.getElementById('game-screen').style.display = 'block';
+            renderStory('tier1');
+        }
+
+        function goHome() {
+            document.getElementById('home-screen').style.display = 'block';
+            document.getElementById('game-screen').style.display = 'none';
+        }
+
+        function renderStory(key) {
+            const node = storyData[key];
+            const box = document.getElementById('game-box');
+            
+            let choicesHtml = '';
+            node.choices.forEach(c => {
+                choicesHtml += `<button class="choice-btn" onclick="renderStory('${c.next}')">${c.text}</button>`;
+            });
+
+            box.innerHTML = `
+                <span class="story-tag">Cốt truyện tương tác • Đa tầng lựa chọn</span>
+                <div class="tier-indicator">${node.tier}</div>
+                <h2 class="story-title">${node.title}</h2>
+                <div class="story-text">${node.text}</div>
+                <div class="choices-box">${choicesHtml}</div>
+            `;
+            window.scrollTo(0, 0);
+        }
+    </script>
 </body>
 </html>
