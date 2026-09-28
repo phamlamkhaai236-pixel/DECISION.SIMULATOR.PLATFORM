@@ -3,19 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GenZ Simulation Hub - 5 Tầng Quyết Định Độc Lập</title>
+    <title>GenZ Simulation Hub - 5 Tầng Quyết Định Độc Lập & AI Chat</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-        body { background-color: #07060a; color: #f1f5f9; min-height: 100vh; padding-bottom: 50px; }
+        body { background-color: #07060a; color: #f1f5f9; min-height: 100vh; padding-bottom: 50px; display: flex; flex-direction: column; }
+        
         header { background: #110f17; border-bottom: 1px solid #1f1b2c; padding: 16px 32px; position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; }
         .logo { font-size: 16px; font-weight: 800; background: linear-gradient(135deg, #60a5fa, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; cursor: pointer; }
-        .container { max-width: 1000px; margin: 0 auto; padding: 30px 20px; }
         
+        .main-layout { display: flex; max-width: 1300px; width: 100%; margin: 0 auto; padding: 20px; gap: 20px; flex: 1; }
+        .content-area { flex: 3; }
+        
+        /* Cột AI Chat Box bên cạnh */
+        .ai-chat-sidebar { flex: 1; background: #121019; border: 1px solid #1f1b2c; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; height: 600px; position: sticky; top: 80px; }
+        .ai-chat-title { font-size: 14px; font-weight: 700; color: #60a5fa; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+        .chat-messages { flex: 1; overflow-y: auto; background: #09080d; border-radius: 10px; padding: 12px; margin-bottom: 12px; display: flex; flex-direction: column; gap: 10px; font-size: 13px; }
+        .message { padding: 10px 14px; border-radius: 8px; line-height: 1.4; max-width: 85%; }
+        .message.ai { background: #1b1726; color: #e2e8f0; align-self: flex-start; border-left: 3px solid #60a5fa; }
+        .message.user { background: #251e38; color: #fff; align-self: flex-end; }
+        .chat-input-box { display: flex; gap: 8px; }
+        .chat-input { flex: 1; background: #09080d; border: 1px solid #28223b; border-radius: 8px; padding: 10px 12px; color: #fff; font-size: 12px; outline: none; }
+        .chat-input:focus { border-color: #60a5fa; }
+        .btn-send { background: #60a5fa; color: #07060a; border: none; padding: 0 14px; border-radius: 8px; font-weight: 700; font-size: 12px; cursor: pointer; }
+        .btn-send:hover { background: #93c5fd; }
+
         .category-title { font-size: 15px; font-weight: 700; color: #cbd5e1; margin: 24px 0 12px 0; display: flex; align-items: center; gap: 8px; }
         .category-title span { width: 6px; height: 16px; background: #60a5fa; border-radius: 3px; }
         
-        .stories-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+        .stories-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
         .story-card { background: #121019; border: 1px solid #1f1b2c; border-radius: 12px; padding: 20px; cursor: pointer; transition: 0.2s; display: flex; flex-direction: column; justify-content: space-between; }
         .story-card:hover { border-color: #60a5fa; background: #161320; transform: translateY(-3px); }
         .story-card h4 { font-size: 14px; color: #fff; margin-bottom: 6px; font-weight: 700; }
@@ -44,6 +60,13 @@
         .custom-input:focus { border-color: #60a5fa; }
         .btn-submit-custom { background: #60a5fa; color: #07060a; border: none; padding: 0 20px; border-radius: 8px; font-weight: 700; font-size: 13px; cursor: pointer; }
         .btn-submit-custom:hover { background: #93c5fd; }
+
+        /* Nút ở tầng kết quả yêu cầu */
+        .result-actions { display: flex; gap: 12px; margin-top: 20px; }
+        .btn-retry { flex: 1; background: #1b1726; border: 1px solid #2d2640; color: #cbd5e1; padding: 14px; border-radius: 10px; font-weight: 700; font-size: 13px; cursor: pointer; text-align: center; }
+        .btn-retry:hover { background: #2d2640; color: #fff; }
+        .btn-finish { flex: 1; background: #10b981; border: none; color: #07060a; padding: 14px; border-radius: 10px; font-weight: 700; font-size: 13px; cursor: pointer; text-align: center; }
+        .btn-finish:hover { background: #34d399; }
     </style>
 </head>
 <body>
@@ -52,68 +75,88 @@
         <div class="logo" onclick="goHome()">🌟 GENZ DECISION HUB — 5 TẦNG QUYẾT ĐỊNH ĐỘC LẬP</div>
     </header>
 
-    <div class="container">
-        <!-- TRANG CHỦ -->
-        <div id="home-view">
-            <h2 style="font-size: 24px; font-weight: 800; margin-bottom: 6px;">Hệ Thống Mô Phỏng Tình Huống Chuyên Sâu</h2>
-            <p style="color: #94a3b8; font-size: 13px; margin-bottom: 20px;">Mỗi cốt truyện dưới đây chứa đựng 5 tầng thử thách với các lựa chọn hoàn toàn độc lập, được thiết kế riêng biệt theo đúng hoàn cảnh nhân vật.</p>
-            
-            <div class="category-title"><span></span> Thể Loại 1: Trưởng Thành & Hướng Nghiệp</div>
-            <div class="stories-grid">
-                <div class="story-card" onclick="startSim('t1_banantoi')">
-                    <div>
-                        <h4>1. Bàn Ăn Tối Chủ Nhật</h4>
-                        <p>Đối mặt áp lực chọn ngành kinh tế truyền thống gia đình hay tự do nghệ thuật qua 5 vòng giằng xé.</p>
+    <div class="main-layout">
+        <!-- KHU VỰC NỘI DUNG CHÍNH -->
+        <div class="content-area">
+            <!-- TRANG CHỦ -->
+            <div id="home-view">
+                <h2 style="font-size: 22px; font-weight: 800; margin-bottom: 6px;">Hệ Thống Mô Phỏng Tình Huống Chuyên Sâu</h2>
+                <p style="color: #94a3b8; font-size: 13px; margin-bottom: 20px;">Mỗi cốt truyện dưới đây chứa đựng 5 tầng thử thách với các lựa chọn hoàn toàn độc lập, được thiết kế riêng biệt.</p>
+                
+                <div class="category-title"><span></span> Thể Loại 1: Trưởng Thành & Hướng Nghiệp</div>
+                <div class="stories-grid">
+                    <div class="story-card" onclick="startSim('t1_banantoi')">
+                        <div>
+                            <h4>1. Bàn Ăn Tối Chủ Nhật</h4>
+                            <p>Đối mặt áp lực chọn ngành kinh tế truyền thống gia đình hay tự do nghệ thuật qua 5 vòng giằng xé.</p>
+                        </div>
+                        <span class="role-badge">Góc nhìn: Đứa con</span>
                     </div>
-                    <span class="role-badge">Góc nhìn: Đứa con trong gia đình</span>
+                    <div class="story-card" onclick="startSim('t1_ngarebando')">
+                        <div>
+                            <h4>2. Ngã Rẽ Bạn Bè</h4>
+                            <p>Khi mỗi người bạn thân rẽ sang hướng đi khác nhau, tìm ra lối đi cho chính mình.</p>
+                        </div>
+                        <span class="role-badge">Góc nhìn: Học sinh cấp 3</span>
+                    </div>
                 </div>
-                <div class="story-card" onclick="startSim('t1_ngarebando')">
-                    <div>
-                        <h4>2. Ngã Rẽ Bạn Bè</h4>
-                        <p>Khi mỗi người bạn thân rẽ sang hướng đi khác nhau (chuyên, nghề, du học), tìm ra lối đi cho chính mình.</p>
+
+                <div class="category-title"><span></span> Thể Loại 2: Tâm Lý Học Học Đường & Đời Sống</div>
+                <div class="stories-grid">
+                    <div class="story-card" onclick="startSim('t2_dongho')">
+                        <div>
+                            <h4>1. Chiếc Đồng Hồ 2 Giờ Sáng</h4>
+                            <p>5 tầng đối mặt với chứng mất ngủ kinh niên và hội chứng sợ thua kém bạn bè.</p>
+                        </div>
+                        <span class="role-badge">Góc nhìn: Học sinh luyện thi</span>
                     </div>
-                    <span class="role-badge">Góc nhìn: Học sinh cấp 3</span>
                 </div>
             </div>
 
-            <div class="category-title"><span></span> Thể Loại 2: Tâm Lý Học Đường & Đời Sống Gen Z</div>
-            <div class="stories-grid">
-                <div class="story-card" onclick="startSim('t2_dongho')">
-                    <div>
-                        <h4>1. Chiếc Đồng Hồ 2 Giờ Sáng</h4>
-                        <p>5 tầng đối mặt với chứng mất ngủ kinh niên và hội chứng sợ thua kém bạn bè trong kỳ thi lớn.</p>
+            <!-- MÀN HÌNH MÔ PHỎNG -->
+            <div id="sim-view">
+                <div class="btn-back" onclick="goHome()">← Quay lại danh sách cốt truyện</div>
+                <div class="sim-box">
+                    <div class="progress-indicator" id="progressBar">
+                        <div class="progress-dot" id="dot-0"></div>
+                        <div class="progress-dot" id="dot-1"></div>
+                        <div class="progress-dot" id="dot-2"></div>
+                        <div class="progress-dot" id="dot-3"></div>
+                        <div class="progress-dot" id="dot-4"></div>
                     </div>
-                    <span class="role-badge">Góc nhìn: Học sinh luyện thi</span>
+                    <div class="stage-title" id="stageTitle"></div>
+                    <div class="sim-content" id="simText"></div>
+                    
+                    <div class="choices-list" id="choicesList"></div>
+
+                    <div class="custom-input-box" id="customInputBox">
+                        <input type="text" class="custom-input" id="customInput" placeholder="Hoặc tự do nhập phương án xử lý riêng của bạn ở tầng này...">
+                        <button class="btn-submit-custom" onclick="submitCustom()">Gửi Ý Kiến</button>
+                    </div>
+
+                    <div class="result-actions" id="resultActions" style="display: none;">
+                        <button class="btn-retry" onclick="restartCurrentStory()">🔄 Tôi chưa an tâm, muốn thử lựa chọn khác</button>
+                        <button class="btn-finish" onclick="goHome()">✅ Tôi đã tìm thấy hướng đi phù hợp cho mình</button>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- MÀN HÌNH MÔ PHỎNG -->
-        <div id="sim-view">
-            <div class="btn-back" onclick="goHome()">← Quay lại danh sách cốt truyện</div>
-            <div class="sim-box">
-                <div class="progress-indicator" id="progressBar">
-                    <div class="progress-dot" id="dot-0"></div>
-                    <div class="progress-dot" id="dot-1"></div>
-                    <div class="progress-dot" id="dot-2"></div>
-                    <div class="progress-dot" id="dot-3"></div>
-                    <div class="progress-dot" id="dot-4"></div>
-                </div>
-                <div class="stage-title" id="stageTitle"></div>
-                <div class="sim-content" id="simText"></div>
-                
-                <div class="choices-list" id="choicesList"></div>
-
-                <div class="custom-input-box">
-                    <input type="text" class="custom-input" id="customInput" placeholder="Hoặc tự do nhập phương án xử lý riêng của bạn ở tầng này...">
-                    <button class="btn-submit-custom" onclick="submitCustom()">Gửi Ý Kiến</button>
-                </div>
+        <!-- CỘT AI CHAT BOX HỖ TRỢ -->
+        <div class="ai-chat-sidebar">
+            <div class="ai-chat-title">💬 Trợ lý AI Tư Vấn & Giải Đáp</div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="message ai">Chào bạn! Mình là trợ lý AI. Bạn có thể hỏi bất kỳ thắc mắc nào về tâm lý, hướng nghiệp hoặc tình huống đang chơi nhé!</div>
+            </div>
+            <div class="chat-input-box">
+                <input type="text" class="chat-input" id="chatInput" placeholder="Nhập câu hỏi cho AI..." onkeypress="handleChatKey(event)">
+                <button class="btn-send" onclick="sendChatMessage()">Gửi</button>
             </div>
         </div>
     </div>
 
     <script>
-        // CSDL toàn bộ cốt truyện với 5 TẦNG HOÀN TOÀN ĐỘC LẬP VÀ RIÊNG BIỆT
+        // CSDL cốt truyện với 5 tầng riêng biệt
         const dbStories = {
             "t1_banantoi": {
                 title: "Bàn Ăn Tối Chủ Nhật",
@@ -157,11 +200,9 @@
                     },
                     {
                         title: "Tầng 5: Kết cục trưởng thành",
-                        text: "Hành trình giằng xé đã đi đến hồi kết. Quyết định của bạn tại bàn ăn tối năm đó đã định hình một ngã rẽ hoàn toàn mới cho cuộc đời bạn...",
-                        choices: [
-                            "🏁 Nhìn nhận kết quả: Bạn đã dũng cảm bảo vệ chính kiến và bắt đầu chịu trách nhiệm tự lập với con đường đã chọn.",
-                            "🏁 Nhìn nhận kết quả: Bạn chọn thỏa hiệp với gia đình và tìm kiếm không gian sáng tạo riêng trong thế giới nội tâm."
-                        ]
+                        text: "Bằng việc xác định được lựa chọn của mình mà không còn bị đóng băng trong sợ hãi hay mơ hồ, bạn đã bước đầu làm chủ được tiến trình ra quyết định của bản thân.\n\nKhông có lựa chọn nào hoàn hảo 100%, chỉ có lựa chọn mà bạn đã chuẩn bị tâm lý và bản lĩnh để chịu trách nhiệm với nó. Bạn đang đi đúng hướng — bằng sự chủ động, trung thực và lòng can đảm.",
+                        isResult: true,
+                        choices: []
                     }
                 ]
             },
@@ -180,7 +221,7 @@
                     },
                     {
                         title: "Tầng 2: Khoảng cách vô hình",
-                        text: "Thời gian trôi qua, đứa đi du học khoe ảnh trời Tây rực rỡ, đứa học nghề đã có thu nhập đầu tiên. Bạn vẫn đang vật lộn với đống sách vở luyện thi căng thẳng.",
+                        text: "Thời gian trôi qua, đứa đi du học khoe ảnh trời Tây rực rỡ, đứa học nghề đã có thu nhập đầu tiên. Bạn đang vật lộn với đống sách vở luyện thi căng thẳng.",
                         choices: [
                             "Cảm giác đố kỵ và tự ti bắt đầu nảy sinh, lướt mạng xã hội ít lại để đỡ phải so sánh.",
                             "Chủ động nhắn tin hỏi thăm công việc của đứa học nghề để học hỏi sự thực tế.",
@@ -207,11 +248,9 @@
                     },
                     {
                         title: "Tầng 5: Định hình bản sắc",
-                        text: "Qua cơn bão tuổi trẻ, mỗi người đã rẽ sang một nhánh thế giới khác nhau. Bạn nhìn lại chặng đường vừa qua...",
-                        choices: [
-                            "🏁 Tổng kết: Bạn nhận ra việc đồng hành cùng chính mình mới là quan trọng nhất sau những ngã rẽ bạn bè.",
-                            "🏁 Tổng kết: Bạn học được cách trân trọng những người bạn thật lòng và bỏ lại sau lưng những mối quan hệ độc hại."
-                        ]
+                        text: "Bạn vừa tìm ra một hướng đi có sự chủ động, tôn trọng và kết nối. Không có lựa chọn hoàn hảo, chỉ có lựa chọn bạn đủ sẵn sàng để chịu trách nhiệm.",
+                        isResult: true,
+                        choices: []
                     }
                 ]
             },
@@ -257,11 +296,9 @@
                     },
                     {
                         title: "Tầng 5: Sự cân bằng mới",
-                        text: "Sau cú ngã nhẹ đó, bạn học được cách điều chỉnh lại guồng quay cuộc sống...",
-                        choices: [
-                            "🏁 Tổng kết: Sức khỏe tinh thần là nền tảng của mọi thành công. Bạn đã tìm ra nhịp học bền vững hơn.",
-                            "🏁 Tổng kết: Bạn thiết lập lại thời gian biểu khoa học, kết hợp ngủ đủ giấc và thể thao điều độ."
-                        ]
+                        text: "Sức khỏe tinh thần là nền tảng của mọi thành công. Bạn đã thiết lập lại thời gian biểu khoa học và sẵn sàng đối diện tương lai.",
+                        isResult: true,
+                        choices: []
                     }
                 ]
             }
@@ -283,6 +320,11 @@
             document.getElementById('sim-view').style.display = 'none';
         }
 
+        function restartCurrentStory() {
+            currentStep = 0;
+            renderStageContent();
+        }
+
         function renderStageContent() {
             const story = dbStories[currentStoryKey];
             const stage = story.stages[currentStep];
@@ -298,12 +340,26 @@
                 if (i === currentStep) dot.classList.add('active');
             }
 
-            // Render các lựa chọn độc lập riêng biệt của tầng đó
             const choicesBox = document.getElementById('choicesList');
+            const customInputBox = document.getElementById('customInputBox');
+            const resultActions = document.getElementById('resultActions');
+
             choicesBox.innerHTML = '';
-            stage.choices.forEach((choiceText, index) => {
-                choicesBox.innerHTML += `<button class="choice-btn" onclick="nextStage()">👉 Phương án ${index + 1}: ${choiceText}</button>`;
-            });
+
+            if (stage.isResult) {
+                // Nếu là tầng kết quả: ẩn khung chọn và hiện 2 nút yêu cầu
+                choicesBox.style.display = 'none';
+                customInputBox.style.display = 'none';
+                resultActions.style.display = 'flex';
+            } else {
+                choicesBox.style.display = 'flex';
+                customInputBox.style.display = 'flex';
+                resultActions.style.display = 'none';
+
+                stage.choices.forEach((choiceText, index) => {
+                    choicesBox.innerHTML += `<button class="choice-btn" onclick="nextStage()">👉 Phương án ${index + 1}: ${choiceText}</button>`;
+                });
+            }
             document.getElementById('customInput').value = '';
         }
 
@@ -312,9 +368,6 @@
             if (currentStep < story.stages.length - 1) {
                 currentStep++;
                 renderStageContent();
-            } else {
-                alert("🎉 Chúc mừng bạn đã hoàn thành trọn vẹn 5 tầng quyết định của cốt truyện này!");
-                goHome();
             }
         }
 
@@ -324,8 +377,36 @@
                 alert("Vui lòng nhập phương án xử lý chủ động của bạn!");
                 return;
             }
-            alert(`Đã ghi nhận phương án chủ động: "${val}". Hệ thống đã ghi nhận nhánh rẽ riêng của bạn.`);
             nextStage();
+        }
+
+        // Xử lý AI Chat Box bên cạnh
+        function handleChatKey(e) {
+            if (e.key === 'Enter') sendChatMessage();
+        }
+
+        function sendChatMessage() {
+            const inputEl = document.getElementById('chatInput');
+            const chatMessages = document.getElementById('chatMessages');
+            const text = inputEl.value.trim();
+            if (!text) return;
+
+            // Thêm tin nhắn user
+            chatMessages.innerHTML += `<div class="message user">${text}</div>`;
+            inputEl.value = '';
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            // Phản hồi từ AI giả lập thông minh
+            setTimeout(() => {
+                let aiReply = "Mình hiểu những băn khoăn của bạn. Trong các tình huống này, việc lắng nghe tiếng nói nội tâm và chủ động chịu trách nhiệm là chìa khóa quan trọng nhất!";
+                if (text.toLowerCase().includes("áp lực") || text.toLowerCase().includes("stress")) {
+                    aiReply = "Áp lực là điều hiển nhiên khi chúng ta ở tuổi trưởng thành. Hãy thử hít thở sâu, chia nhỏ mục tiêu và nhớ rằng bạn không nhất thiết phải hoàn hảo ngay lập tức.";
+                } else if (text.toLowerCase().includes("chọn ngành") || text.toLowerCase().includes("nghề nghiệp")) {
+                    aiReply = "Việc chọn ngành nên cân nhắc giữa sở thích, năng lực thực tế và sự thấu hiểu từ gia đình. Bạn hoàn toàn có thể tìm giải pháp trung gian hoặc chuẩn bị năng lực tự lập nhé!";
+                }
+                chatMessages.innerHTML += `<div class="message ai">${aiReply}</div>`;
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 600);
         }
     </script>
 </body>
