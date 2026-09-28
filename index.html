@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Decision Simulator Platform - 35 Truyện & AI Trợ Lý</title>
+    <title>Decision Simulator - 35 Truyện & AI Trợ Lý</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -13,228 +13,485 @@
             font-family: 'Plus Jakarta Sans', sans-serif;
         }
         body {
-            background-color: #f1f5f9;
-            color: #1e293b;
-            display: flex;
-            height: 100vh;
-            overflow: hidden;
+            background-color: #0c0a10;
+            color: #f8fafc;
+            padding-bottom: 90px;
         }
-        /* Sidebar Menu */
-        sidebar {
-            width: 280px;
-            background: #ffffff;
-            border-right: 1px solid #e2e8f0;
-            display: flex;
-            flex-direction: column;
-            padding: 24px;
-        }
-        .logo h1 {
-            font-size: 16px;
-            font-weight: 700;
-            color: #0f172a;
-        }
-        .logo p {
-            font-size: 11px;
-            color: #64748b;
-            margin-bottom: 24px;
-        }
-        .menu-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            overflow-y: auto;
-        }
-        .menu-list li {
-            padding: 10px 14px;
-            border-radius: 8px;
-            cursor: pointer;
-            color: #475569;
-            font-size: 13px;
-            font-weight: 500;
-            transition: all 0.2s;
-        }
-        .menu-list li:hover, .menu-list li.active {
-            background: #eff6ff;
-            color: #2563eb;
-        }
-
-        /* Main Content Area */
-        main {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            background: #f8fafc;
-            overflow: hidden;
-        }
-        .topbar {
-            padding: 16px 32px;
-            background: #ffffff;
-            border-bottom: 1px solid #e2e8f0;
+        .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 16px 24px;
+            background: #121019;
+            border-bottom: 1px solid #1f1b2c;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
-        .story-container {
-            flex: 1;
-            padding: 40px;
-            overflow-y: auto;
-            max-width: 900px;
+        .logo-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+        }
+        .logo-icon {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg, #f59e0b, #b45309);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+            color: #000;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+        }
+        .logo-text h1 {
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: #fff;
+        }
+        .logo-text span {
+            font-size: 11px;
+            color: #94a3b8;
+        }
+        .user-panel {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .coin-badge {
+            background: #1a1625;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            color: #fbbf24;
+            font-weight: 600;
+            border: 1px solid #2e2640;
+        }
+        .container {
+            max-width: 1200px;
             margin: 0 auto;
-            width: 100%;
+            padding: 24px;
         }
-        .story-card {
-            background: #ffffff;
-            padding: 32px;
-            border-radius: 16px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
-            margin-bottom: 24px;
+        .hero-banner {
+            position: relative;
+            background: linear-gradient(135deg, #311042, #1e1b4b, #0f172a);
+            border-radius: 20px;
+            padding: 40px;
+            overflow: hidden;
+            border: 1px solid #4338ca;
+            margin-bottom: 32px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-        .badge {
-            background: #eff6ff;
-            color: #2563eb;
-            padding: 4px 12px;
+        .hero-banner .badge {
+            background: rgba(245, 158, 11, 0.2);
+            color: #fbbf24;
+            padding: 5px 14px;
             border-radius: 20px;
             font-size: 11px;
             font-weight: 600;
             display: inline-block;
+            margin-bottom: 16px;
+            border: 1px solid rgba(245, 158, 11, 0.4);
+        }
+        .hero-banner h2 {
+            font-size: 30px;
+            font-weight: 700;
             margin-bottom: 12px;
+            max-width: 650px;
+            line-height: 1.3;
         }
-        h2 { font-size: 24px; color: #0f172a; margin-bottom: 16px; }
-        p { font-size: 15px; color: #334155; margin-bottom: 20px; line-height: 1.7; }
-
-        .choices {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-top: 20px;
-        }
-        .choice-btn {
-            background: #f8fafc;
-            border: 1px solid #cbd5e1;
-            padding: 14px 20px;
-            border-radius: 10px;
-            text-align: left;
+        .hero-banner p {
             font-size: 14px;
-            font-weight: 500;
-            color: #1e293b;
+            color: #cbd5e1;
+            margin-bottom: 24px;
+            max-width: 580px;
+            line-height: 1.6;
+        }
+        .btn-play {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: #000;
+            padding: 12px 24px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 14px rgba(245, 158, 11, 0.4);
             cursor: pointer;
-            transition: all 0.2s;
+            border: none;
+            transition: transform 0.2s;
         }
-        .choice-btn:hover {
-            background: #eff6ff;
-            border-color: #3b82f6;
-            color: #1d4ed8;
+        .btn-play:hover {
+            transform: scale(1.03);
         }
-
-        /* AI Assistant Widget */
-        .ai-widget {
-            width: 320px;
-            background: #ffffff;
-            border-left: 1px solid #e2e8f0;
+        .section-header {
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
         }
-        .ai-header {
-            padding: 16px;
-            background: #1e293b;
-            color: white;
-            font-weight: 600;
-            font-size: 14px;
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
             display: flex;
             align-items: center;
             gap: 8px;
+            color: #fff;
         }
-        .ai-messages {
-            flex: 1;
-            padding: 16px;
-            overflow-y: auto;
-            font-size: 13px;
-            color: #475569;
+        .section-title span {
+            width: 8px;
+            height: 18px;
+            background: #f59e0b;
+            border-radius: 4px;
+            display: inline-block;
+        }
+        .story-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .story-card {
+            background: #14121c;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid #221e2f;
+            transition: transform 0.2s, border-color 0.2s;
+            cursor: pointer;
+        }
+        .story-card:hover {
+            transform: translateY(-4px);
+            border-color: #f59e0b;
+        }
+        .card-poster {
+            height: 160px;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            padding: 12px;
+            background-size: cover;
+            background-position: center;
+        }
+        .player-count {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
+            padding: 4px 8px;
+            border-radius: 20px;
+            font-size: 11px;
+            color: #e2e8f0;
+        }
+        .card-info {
+            padding: 14px;
+        }
+        .card-info h3 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: #fff;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .card-info p {
+            font-size: 12px;
+            color: #94a3b8;
+        }
+
+        /* Màn hình chơi game */
+        #game-screen {
+            display: none;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+        .story-container {
+            background: #14121c;
+            border: 1px solid #221e2f;
+            border-radius: 16px;
+            padding: 35px;
+            margin-top: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+        .story-tag {
+            background: rgba(245, 158, 11, 0.15);
+            color: #fbbf24;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+        .story-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #fff;
+        }
+        .story-text {
+            font-size: 15px;
+            color: #cbd5e1;
+            line-height: 1.8;
+            margin-bottom: 24px;
+            background: #0d0b12;
+            padding: 22px;
+            border-radius: 12px;
+            border-left: 4px solid #f59e0b;
+        }
+        .choices-box {
             display: flex;
             flex-direction: column;
             gap: 12px;
         }
+        .choice-btn {
+            background: #1c1828;
+            border: 1px solid #30264a;
+            color: #fff;
+            padding: 16px 20px;
+            border-radius: 10px;
+            text-align: left;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            line-height: 1.5;
+        }
+        .choice-btn:hover {
+            background: #27213a;
+            border-color: #f59e0b;
+            transform: translateX(4px);
+        }
+        .tier-indicator {
+            font-size: 12px;
+            color: #a78bfa;
+            margin-bottom: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* GIAO DIỆN CHATBOX AI NỔI */
+        .ai-chat-bubble {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: #000;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(245, 158, 11, 0.5);
+            z-index: 1000;
+            transition: transform 0.2s;
+        }
+        .ai-chat-bubble:hover {
+            transform: scale(1.1);
+        }
+        .ai-chat-window {
+            position: fixed;
+            bottom: 95px;
+            right: 25px;
+            width: 350px;
+            height: 480px;
+            background: #14121c;
+            border: 1px solid #30264a;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            display: none;
+            flex-direction: column;
+            z-index: 1000;
+            overflow: hidden;
+        }
+        .ai-chat-header {
+            background: #1c1828;
+            padding: 14px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #30264a;
+        }
+        .ai-chat-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #fbbf24;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .ai-close-btn {
+            background: none;
+            border: none;
+            color: #94a3b8;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .ai-chat-body {
+            flex: 1;
+            padding: 14px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
         .ai-msg {
-            background: #f1f5f9;
+            max-width: 85%;
             padding: 10px 14px;
             border-radius: 10px;
-            max-width: 85%;
-            line-height: 1.4;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        .ai-msg.bot {
+            background: #1c1828;
+            color: #cbd5e1;
+            align-self: flex-start;
+            border-left: 3px solid #f59e0b;
         }
         .ai-msg.user {
-            background: #2563eb;
-            color: white;
+            background: #f59e0b;
+            color: #000;
             align-self: flex-end;
+            font-weight: 500;
         }
-        .ai-input-area {
+        .ai-chat-footer {
             padding: 12px;
-            border-top: 1px solid #e2e8f0;
+            background: #121019;
+            border-top: 1px solid #30264a;
             display: flex;
             gap: 8px;
         }
-        .ai-input-area input {
+        .ai-chat-input {
             flex: 1;
+            background: #1c1828;
+            border: 1px solid #30264a;
+            border-radius: 8px;
             padding: 8px 12px;
-            border: 1px solid #cbd5e1;
-            border-radius: 6px;
+            color: #fff;
             font-size: 13px;
             outline: none;
         }
-        .ai-input-area button {
-            background: #2563eb;
-            color: white;
+        .ai-chat-input:focus {
+            border-color: #f59e0b;
+        }
+        .ai-send-btn {
+            background: #f59e0b;
+            color: #000;
             border: none;
-            padding: 8px 14px;
-            border-radius: 6px;
-            font-weight: 600;
+            padding: 0 14px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 13px;
             cursor: pointer;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #121019;
+            border-top: 1px solid #1f1b2c;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            z-index: 900;
+        }
+        .nav-item {
+            text-decoration: none;
+            color: #94a3b8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            font-size: 11px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        .nav-item.active, .nav-item:hover {
+            color: #f59e0b;
+        }
+        .nav-item svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
         }
     </style>
 </head>
 <body>
-
-    <!-- Sidebar danh mục truyện -->
-    <sidebar>
-        <div class="logo">
-            <h1>DECISION SIMULATOR</h1>
-            <p>Hệ thống 35+ Cốt truyện Đa tầng</p>
-        </div>
-        <ul class="menu-list" id="story-menu">
-            <!-- Sinh tự động danh sách 35 truyện -->
-        </ul>
-    </sidebar>
-
-    <!-- Main Content Area -->
-    <main>
-        <div class="topbar">
-            <span id="tier-label" style="font-size: 14px; font-weight: 600; color: #475569;">Trạng thái: Tầng 1 / 5</span>
-            <span style="font-size: 12px; background: #dcfce7; color: #166534; padding: 4px 10px; border-radius: 12px; font-weight: 600;">Interactive Simulation</span>
-        </div>
-        
-        <div class="story-container">
-            <div class="story-card" id="story-card-box">
-                <!-- Nội dung cốt truyện sẽ cập nhật động ở đây -->
+    <header class="navbar">
+        <div class="logo-box" onclick="goHome()">
+            <div class="logo-icon">DS</div>
+            <div class="logo-text">
+                <h1>DECISION SIMULATOR</h1>
+                <span>35 Cốt Truyện & AI Trợ Lý</span>
             </div>
         </div>
-    </main>
+        <div class="user-panel">
+            <div class="coin-badge">🪙 500 Xu</div>
+        </div>
+    </header>
 
-    <!-- Khung Chat AI Tích Hợp Riêng Về Dự Án -->
-    <div class="ai-widget">
-        <div class="ai-header">
-            <span>✨ Trợ lý AI Simulator</span>
+    <!-- TRANG CHỦ -->
+    <div class="container" id="home-screen">
+        <div class="hero-banner">
+            <span class="badge">✨ NỀN TẢNG MÔ PHỎNG QUYẾT ĐỊNH CHUYÊN SÂU</span>
+            <h2>Khám phá bản thân qua các ngã rẽ cuộc đời</h2>
+            <p>Hệ thống 35 câu chuyện hướng nghiệp, tâm lý và sinh tử. Mỗi cốt truyện dẫn dắt qua 5 tầng suy ngẫm để tìm ra hướng đi trọn vẹn nhất.</p>
+            <button class="btn-play" onclick="startPlay('story1')">▶ Trải Nghiệm Ngay</button>
         </div>
-        <div class="ai-messages" id="aiMessages">
-            <div class="ai-msg">Chào bạn! Tôi là trợ lý AI chuyên biệt cho nền tảng mô phỏng quyết định. Bạn muốn thảo luận về tâm lý nhân vật hay cần gợi ý nhánh rẽ qua 5 tầng không? Cứ hỏi tôi nhé!</div>
+
+        <div class="section-header">
+            <div class="section-title"><span></span> Kho Tàng 35 Cốt Truyện Đặc Sắc</div>
         </div>
-        <div class="ai-input-area">
-            <input type="text" id="aiInput" placeholder="Nhập câu hỏi cho AI..." onkeypress="handleAIKey(event)">
-            <button onclick="sendAIMessage()">Gửi</button>
+        <div class="story-grid" id="story-grid">
+            <!-- Sinh tự động bằng JS -->
         </div>
     </div>
 
+    <!-- MÀN HÌNH CHƠI GAME TƯƠNG TÁC -->
+    <div class="container" id="game-screen">
+        <div class="story-container" id="game-box"></div>
+    </div>
+
+    <!-- BONG BÓNG VÀ CỬA SỔ CHAT AI -->
+    <div class="ai-chat-bubble" onclick="toggleAIChat()">🤖</div>
+    <div class="ai-chat-window" id="aiChatWindow">
+        <div class="ai-chat-header">
+            <div class="ai-chat-title">✨ Trợ Lý AI Decision Simulator</div>
+            <button class="ai-close-btn" onclick="toggleAIChat()">×</button>
+        </div>
+        <div class="ai-chat-body" id="aiChatBody">
+            <div class="ai-msg bot">Chào bạn! Mình là trợ lý AI chuyên biệt cho dự án này. Bạn cần mình gợi ý nhánh rẽ qua 5 tầng hoặc giải đáp thắc mắc nào cứ hỏi nhé!</div>
+        </div>
+        <div class="ai-chat-footer">
+            <input type="text" class="ai-chat-input" id="aiInput" placeholder="Nhập câu hỏi cho AI..." onkeypress="handleAIKey(event)">
+            <button class="ai-send-btn" onclick="sendAIMessage()">Gửi</button>
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <a class="nav-item active" onclick="goHome()">
+            <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+            Trang chủ
+        </a>
+        <a class="nav-item" onclick="startPlay('story1')">
+            <svg viewBox="0 0 24 24"><path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/></svg>
+            Ngẫu nhiên
+        </a>
+    </nav>
+
     <script>
-        // Cơ sở dữ liệu tự động sinh 35 truyện, mỗi truyện đủ 5 tầng lựa chọn
         const storiesDatabase = {};
         const titles = [
             "Ngã Rẽ Bàn Ăn Tối", "Áp Lực Kỳ Thi Chuyên", "Robot Cứu Hỏa STEM", "Talkshow Đồi A1",
@@ -247,135 +504,186 @@
             "Săn Lùng Quái Vật", "Học Viện Phép Thuật", "Hành Trình Săn Học Bổng", "Bí Ẩn Vùng Đất Cấm",
             "Bản Thiết Kế Cuối Cùng", "Kế Hoạch Khởi Nghiệp", "Chương Cuối Cuộc Đời"
         ];
+        
+        const posters = [
+            "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+            "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=400",
+            "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=400",
+            "https://images.unsplash.com/photo-1461360370896-922624d12aa1?w=400",
+            "https://images.unsplash.com/photo-1505664194779-8beaceb93744?w=400"
+        ];
 
+        // Khởi tạo 35 truyện sâu sắc, mỗi truyện đủ 5 tầng, tầng cuối có 2 lựa chọn triết lý chuẩn mẫu ảnh
         for (let i = 1; i <= 35; i++) {
             let sId = 'story' + i;
+            let tName = titles[i-1] || ("Hành trình trải nghiệm " + i);
+            let posterUrl = posters[i % posters.length];
+
             storiesDatabase[sId] = {
-                title: titles[i-1] || ("Cốt truyện số " + i),
+                title: tName,
+                poster: posterUrl,
+                players: (Math.random() * 7000 + 1500).toFixed(0),
                 tier1: {
-                    tier: "Tầng 1 / 5: Khởi đầu thử thách",
-                    text: `Tình huống bắt đầu của câu chuyện ${titles[i-1]}. Bạn đối mặt với một quyết định mang tính bước ngoặt định hình tương lai.`,
+                    tier: "Tầng 1 / 5: Điểm Khởi Đầu Định Mệnh",
+                    text: `Bước ngoặt đầu tiên xuất hiện tại câu chuyện "${tName}". Không khí xung quanh chùng xuống khi bạn phải đưa ra nhận định ban đầu trước áp lực từ hoàn cảnh và những người xung quanh.`,
                     choices: [
-                        { text: "Lựa chọn A: Dấn thân đối mặt trực diện với thử thách.", next: "tier2_A" },
-                        { text: "Lựa chọn B: Lựa chọn con đường an toàn hơn.", next: "tier2_B" }
+                        { text: "Lựa chọn A: Dũng cảm bước lên đối mặt trực diện, giữ vững lập trường cá nhân.", next: "tier2_A" },
+                        { text: "Lựa chọn B: Chọn cách nhẫn nhịn, quan sát thật kỹ động thái của đối phương.", next: "tier2_B" }
                     ]
                 },
                 tier2_A: {
-                    tier: "Tầng 2 / 5: Diễn biến phức tạp",
-                    text: "Hệ quả từ lựa chọn ban đầu đẩy bạn vào tình thế khó khăn đòi hỏi sự quyết đoán cao độ.",
+                    tier: "Tầng 2 / 5: Diễn Biến Phức Tạp",
+                    text: "Sự quyết đoán bước đầu lập tức vấp phải những luồng ý kiến trái chiều. Một nút thắt bất ngờ được hé lộ khiến bạn nhận ra quyết định này ảnh hưởng sâu sắc đến tương lai.",
                     choices: [
-                        { text: "Lựa chọn A1: Kiên định với mục tiêu đề ra.", next: "tier3_A1" },
-                        { text: "Lựa chọn A2: Thay đổi chiến thuật linh hoạt.", next: "tier3_A2" }
+                        { text: "Lựa chọn A1: Phản biện sắc bén, bảo vệ đến cùng quan điểm của mình.", next: "tier3_A1" },
+                        { text: "Lựa chọn A2: Mềm mỏng tìm kiếm sự thấu hiểu và đồng thuận.", next: "tier3_A2" }
                     ]
                 },
                 tier2_B: {
-                    tier: "Tầng 2 / 5: Góc nhìn mới",
-                    text: "Con đường an toàn giúp bạn tránh rủi ro trước mắt nhưng mở ra một nút thắt bất ngờ khác.",
+                    tier: "Tầng 2 / 5: Góc Nhìn Đa Chiều",
+                    text: "Sự cẩn trọng giúp bạn tránh được sóng gió trước mắt nhưng lại đặt ra câu hỏi lớn về sự chủ động. Bạn cần một bước bứt phá để không bị bỏ lại phía sau.",
                     choices: [
-                        { text: "Lựa chọn B1: Tận dụng cơ hội bứt phá.", next: "tier3_A1" },
-                        { text: "Lựa chọn B2: Quan sát thêm tình hình.", next: "tier3_A2" }
+                        { text: "Lựa chọn B1: Tự tin thể hiện năng lực bản thân qua hành động thực tế.", next: "tier3_A1" },
+                        { text: "Lựa chọn B2: Lắng nghe lời khuyên từ những người đi trước.", next: "tier3_A2" }
                     ]
                 },
                 tier3_A1: {
-                    tier: "Tầng 3 / 5: Đỉnh điểm cao trào",
-                    text: "Tình huống lên cao trào khi các bên liên quan yêu cầu câu trả lời rõ ràng.",
+                    tier: "Tầng 3 / 5: Đỉnh Điểm Cao Trào",
+                    text: "Tình huống chạm tới giới hạn chịu đựng. Sự lựa chọn của bạn ở thời điểm này sẽ định hình uy tín và bản lĩnh của chính mình.",
                     choices: [
-                        { text: "Lựa chọn A1-1: Dùng tư duy sắc bén giải quyết triệt để.", next: "tier4_A1" },
-                        { text: "Lựa chọn A1-2: Tìm kiếm sự trợ giúp từ đồng đội.", next: "tier4_A1" }
+                        { text: "Lựa chọn A1-1: Giữ vững cái đầu lạnh, đưa ra giải pháp đột phá.", next: "tier4_A1" },
+                        { text: "Lựa chọn A1-2: Chia sẻ áp lực và tìm kiếm sự hỗ trợ từ đồng minh.", next: "tier4_A2" }
                     ]
                 },
                 tier3_A2: {
-                    tier: "Tầng 3 / 5: Ngã rẽ hiểm nghèo",
-                    text: "Sự thay đổi chiến thuật mang lại kết quả trái chiều, đòi hỏi tinh thần thép.",
+                    tier: "Tầng 3 / 5: Thử Thách Bản Lĩnh",
+                    text: "Sự uyển chuyển mang lại bầu không khí dễ chịu hơn, nhưng thử thách thực sự vẫn đang chờ đón ở chặng đường nước rút phía trước.",
                     choices: [
-                        { text: "Lựa chọn A2-1: Đánh cược nước cuối cùng.", next: "tier4_A1" },
-                        { text: "Lựa chọn A2-2: Rút lui an toàn.", next: "tier4_A1" }
+                        { text: "Lựa chọn A2-1: Tự mình gánh vác và giải quyết dứt điểm vấn đề.", next: "tier4_A1" },
+                        { text: "Lựa chọn A2-2: Phối hợp nhịp nhàng cùng tập thể.", next: "tier4_A2" }
                     ]
                 },
                 tier4_A1: {
-                    tier: "Tầng 4 / 5: Cận kề vạch đích",
-                    text: "Mọi nỗ lực và kiên trì qua các tầng trước đã kết tinh thành cơ hội thành công.",
+                    tier: "Tầng 4 / 5: Cận Kề Hồi Kết",
+                    text: "Mọi nỗ lực xuyên suốt các tầng đã đưa bạn đến sát vạch đích. Con đường phía trước rộng mở nhưng đòi hỏi sự cam kết tuyệt đối.",
                     choices: [
-                        { text: "🏆 Tiến thẳng tới cái kết vinh quang đỉnh cao!", next: "tier5_WIN" },
-                        { text: "⭐ Chấp nhận cái kết mở đầy bất ngờ.", next: "tier5_WIN" }
+                        { text: "Lựa chọn kết luận: Hoàn thiện hành trình với sự tự chủ và kiên định cao nhất.", next: "tier5_FINAL" }
                     ]
                 },
-                tier5_WIN: {
-                    tier: "Tầng 5 / 5: Hoàn thành xuất sắc",
-                    text: `Chúc mừng bạn đã hoàn thành xuất sắc toàn bộ 5 tầng quyết định của cốt truyện "${titles[i-1]}"!`,
+                tier4_A2: {
+                    tier: "Tầng 4 / 5: Chặng Đường Nước Rút",
+                    text: "Sự đồng lòng tạo nên sức mạnh lớn lao, giúp bạn vượt qua những rào cản tâm lý nặng nề nhất để tiến về đích.",
                     choices: [
-                        { text: "🔄 Quay lại tầng 1 khởi động lại", next: "tier1" }
+                        { text: "Lựa chọn kết luận: Đúc kết bài học kinh nghiệm và khép lại hành trình.", next: "tier5_FINAL" }
+                    ]
+                },
+                tier5_FINAL: {
+                    tier: "Tầng 5 / 5: Hồi Kết Sâu Sắc",
+                    title: "Định Hướng Trưởng Thành",
+                    text: "Bằng việc xác định được lựa chọn của mình mà không còn bị đóng băng trong sự sợ hãi hay mơ hồ, bạn đã bước đầu làm chủ được tiến trình ra quyết định của bản thân.<br><br><span style='color: #fbbf24; font-style: italic;'>'Không có lựa chọn nào hoàn hảo 100%, chỉ có lựa chọn mà bạn đã chuẩn bị tâm lý và bản lĩnh để chịu trách nhiệm với nó.'</span><br><br><b>Bạn đang đi đúng hướng - bằng sự chủ động, trung thực và lòng can đảm.</b>",
+                    choices: [
+                        { text: "Tôi chưa an tâm, muốn thử lựa chọn khác", action: "restart" },
+                        { text: "Tôi đã tìm thấy hướng đi phù hợp cho mình", action: "home" }
                     ]
                 }
             };
         }
 
-        let currentStoryId = 'story1';
-
-        // Render danh mục menu bên trái
-        const menuEl = document.getElementById('story-menu');
+        // Render trang chủ
+        const gridEl = document.getElementById('story-grid');
+        let htmlContent = '';
         for (let i = 1; i <= 35; i++) {
             let sId = 'story' + i;
-            let li = document.createElement('li');
-            li.innerText = `${i}. ${storiesDatabase[sId].title}`;
-            if(i === 1) li.classList.add('active');
-            li.onclick = () => {
-                document.querySelectorAll('.menu-list li').forEach(el => el.classList.remove('active'));
-                li.classList.add('active');
-                currentStoryId = sId;
-                renderNode('tier1');
-            };
-            menuEl.appendChild(li);
-        }
-
-        function renderNode(nodeKey) {
-            const story = storiesDatabase[currentStoryId];
-            const node = story[nodeKey];
-            const cardBox = document.getElementById('story-card-box');
-            document.getElementById('tier-label').innerText = `Trạng thái: ${node.tier}`;
-
-            let choicesHtml = '';
-            node.choices.forEach(c => {
-                choicesHtml += `<button class="choice-btn" onclick="renderNode('${c.next}')">${c.text}</button>`;
-            });
-
-            cardBox.innerHTML = `
-                <span class="badge">${story.title}</span>
-                <h2>${node.tier}</h2>
-                <p>${node.text}</p>
-                <div class="choices">${choicesHtml}</div>
+            let data = storiesDatabase[sId];
+            htmlContent += `
+                <div class="story-card" onclick="startPlay('${sId}')">
+                    <div class="card-poster" style="background-image: url('${data.poster}');">
+                        <div class="player-count">👥 ${data.players}</div>
+                    </div>
+                    <div class="card-info">
+                        <h3>${data.title}</h3>
+                        <p>5 Tầng Mô Phỏng</p>
+                    </div>
+                </div>
             `;
         }
+        gridEl.innerHTML = htmlContent;
 
-        // Khởi chạy mặc định truyện 1
-        renderNode('tier1');
+        let activeStoryId = 'story1';
 
-        // Logic Chat AI Trợ Lý tích hợp
+        function startPlay(storyId) {
+            activeStoryId = storyId;
+            document.getElementById('home-screen').style.display = 'none';
+            document.getElementById('game-screen').style.display = 'block';
+            renderStory(storyId, 'tier1');
+        }
+
+        function goHome() {
+            document.getElementById('home-screen').style.display = 'block';
+            document.getElementById('game-screen').style.display = 'none';
+            window.scrollTo(0, 0);
+        }
+
+        function renderStory(storyId, nodeKey) {
+            const story = storiesDatabase[storyId];
+            const node = story[nodeKey];
+            const box = document.getElementById('game-box');
+            
+            let choicesHtml = '';
+            if (node.choices) {
+                node.choices.forEach(c => {
+                    if (c.action === 'restart') {
+                        choicesHtml += `<button class="choice-btn" style="text-align:center; background:#1c1828; border-color:#7c3aed;" onclick="renderStory('${storyId}', 'tier1')">${c.text}</button>`;
+                    } else if (c.action === 'home') {
+                        choicesHtml += `<button class="choice-btn" style="text-align:center; background:#1b3622; border-color:#10b981;" onclick="goHome()">${c.text}</button>`;
+                    } else {
+                        choicesHtml += `<button class="choice-btn" onclick="renderStory('${storyId}', '${c.next}')">${c.text}</button>`;
+                    }
+                });
+            }
+
+            box.innerHTML = `
+                <span class="story-tag">${story.title} • Đa Tầng Mô Phỏng</span>
+                <div class="tier-indicator">${node.tier}</div>
+                <h2 class="story-title">${node.title || node.tier}</h2>
+                <div class="story-text">${node.text}</div>
+                <div class="choices-box">${choicesHtml}</div>
+            `;
+            window.scrollTo(0, 0);
+        }
+
+        // LOGIC CHATBOX AI
+        function toggleAIChat() {
+            const win = document.getElementById('aiChatWindow');
+            win.style.display = (win.style.display === 'flex') ? 'none' : 'flex';
+        }
+
         function handleAIKey(e) {
             if (e.key === 'Enter') sendAIMessage();
         }
 
         function sendAIMessage() {
             const input = document.getElementById('aiInput');
-            const txt = input.value.trim();
-            if(!txt) return;
+            const text = input.value.trim();
+            if (!text) return;
 
-            const box = document.getElementById('aiMessages');
-            box.innerHTML += `<div class="ai-msg user">${txt}</div>`;
+            const chatBody = document.getElementById('aiChatBody');
+            chatBody.innerHTML += `<div class="ai-msg user">${text}</div>`;
             input.value = '';
-            box.scrollTop = box.scrollHeight;
+            chatBody.scrollTop = chatBody.scrollHeight;
 
             setTimeout(() => {
-                let reply = "Hệ thống mô phỏng 35 cốt truyện qua 5 tầng đòi hỏi bạn phải cân nhắc kỹ các hệ quả ở từng ngã rẽ. Hãy thử thay đổi lựa chọn để xem các kết cục khác nhé!";
-                const low = txt.toLowerCase();
-                if(low.includes('gợi ý') || low.includes('chọn gì')) {
-                    reply = "Để đạt kết cục thắng lợi ở tầng 5, các lựa chọn hướng về sự chủ động và kiên định thường mang lại điểm số cao nhất!";
-                } else if(low.includes('chào') || low.includes('hi')) {
-                    reply = "Chào bạn! Trợ lý AI luôn sẵn sàng hỗ trợ bạn chinh phục toàn bộ các thử thách trong dự án này.";
+                let botReply = "Hệ thống 35 cốt truyện đi qua 5 tầng đều có các ngã rẽ mang tính chiêm nghiệm sâu sắc. Bạn cứ cân nhắc kỹ theo trực giác của mình nhé!";
+                const lower = text.toLowerCase();
+                if (lower.includes('gợi ý') || lower.includes('chọn gì') || lower.includes('giúp')) {
+                    botReply = "Để đi đến hồi kết trọn vẹn ở tầng 5, lời khuyên là hãy chọn các hướng đi thể hiện tính chủ động và tinh thần chịu trách nhiệm cao nhất!";
+                } else if (lower.includes('chào') || lower.includes('hi')) {
+                    botReply = "Chào bạn! Trợ lý AI luôn sẵn sàng đồng hành cùng bạn trên hành trình khám phá các ngã rẽ quyết định.";
                 }
-                box.innerHTML += `<div class="ai-msg">${reply}</div>`;
-                box.scrollTop = box.scrollHeight;
-            }, 500);
+
+                chatBody.innerHTML += `<div class="ai-msg bot">${botReply}</div>`;
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }, 600);
         }
     </script>
 </body>
