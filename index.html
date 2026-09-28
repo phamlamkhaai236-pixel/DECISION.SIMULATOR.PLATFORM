@@ -7,9 +7,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-        body { background-color: #07060a; color: #f1f5f9; min-height: 100vh; padding-bottom: 50px; display: flex; flex-direction: column; }
+        body { background-color: #0b0910; color: #f8fafc; min-height: 100vh; padding-bottom: 50px; display: flex; flex-direction: column; }
         
-        header { background: #110f17; border-bottom: 1px solid #1f1b2c; padding: 16px 32px; position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; }
+        header { background: #13101a; border-bottom: 1px solid #201b2d; padding: 16px 28px; position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; }
         .logo-box { display: flex; align-items: center; gap: 12px; cursor: pointer; }
         .logo-icon { width: 40px; height: 40px; background: linear-gradient(135deg, #f59e0b, #d97706); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; color: #000; box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4); }
         .logo-text h1 { font-size: 16px; font-weight: 700; color: #fff; }
@@ -18,55 +18,78 @@
         .main-layout { display: flex; max-width: 1400px; width: 100%; margin: 0 auto; padding: 24px; gap: 24px; flex: 1; }
         .content-area { flex: 3; }
         
+        /* Trang bìa Hero Banner đúng chuẩn ban đầu */
+        .hero-banner {
+            position: relative;
+            background: linear-gradient(135deg, #3b0764, #1e1b4b, #0f172a);
+            border-radius: 20px;
+            padding: 40px;
+            overflow: hidden;
+            border: 1px solid #7c3aed;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+        }
+        .hero-banner .badge {
+            background: rgba(245, 158, 11, 0.2);
+            color: #fbbf24;
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 14px;
+            border: 1px solid rgba(245, 158, 11, 0.4);
+        }
+        .hero-banner h2 { font-size: 28px; font-weight: 800; margin-bottom: 10px; color: #fff; }
+        .hero-banner p { font-size: 14px; color: #cbd5e1; margin-bottom: 20px; max-width: 600px; line-height: 1.6; }
+
         /* Cột AI Chat Box bên cạnh */
-        .ai-chat-sidebar { flex: 1; background: #121019; border: 1px solid #1f1b2c; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; height: 620px; position: sticky; top: 90px; }
+        .ai-chat-sidebar { flex: 1; background: #14111d; border: 1px solid #32284c; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; height: 620px; position: sticky; top: 90px; }
         .ai-chat-title { font-size: 14px; font-weight: 700; color: #fbbf24; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
-        .chat-messages { flex: 1; overflow-y: auto; background: #09080d; border-radius: 10px; padding: 12px; margin-bottom: 12px; display: flex; flex-direction: column; gap: 10px; font-size: 13px; }
+        .chat-messages { flex: 1; overflow-y: auto; background: #0d0a14; border-radius: 10px; padding: 12px; margin-bottom: 12px; display: flex; flex-direction: column; gap: 10px; font-size: 13px; }
         .message { padding: 10px 14px; border-radius: 8px; line-height: 1.5; max-width: 88%; }
-        .message.ai { background: #1b1726; color: #e2e8f0; align-self: flex-start; border-left: 3px solid #f59e0b; }
+        .message.ai { background: #1b1629; color: #cbd5e1; align-self: flex-start; border-left: 3px solid #f59e0b; }
         .message.user { background: #f59e0b; color: #000; font-weight: 600; align-self: flex-end; }
         .chat-input-box { display: flex; gap: 8px; }
-        .chat-input { flex: 1; background: #09080d; border: 1px solid #28223b; border-radius: 8px; padding: 10px 12px; color: #fff; font-size: 12px; outline: none; }
+        .chat-input { flex: 1; background: #1b1629; border: 1px solid #32284c; border-radius: 8px; padding: 10px 12px; color: #fff; font-size: 12px; outline: none; }
         .chat-input:focus { border-color: #f59e0b; }
         .btn-send { background: #f59e0b; color: #000; border: none; padding: 0 16px; border-radius: 8px; font-weight: 700; font-size: 12px; cursor: pointer; }
-        .btn-send:hover { background: #fbbf24; }
 
         .category-title { font-size: 16px; font-weight: 700; color: #fff; margin: 30px 0 14px 0; display: flex; align-items: center; gap: 10px; }
         .category-title span { width: 8px; height: 18px; background: #f59e0b; border-radius: 4px; }
         
         .stories-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
-        .story-card { background: #121019; border: 1px solid #1f1b2c; border-radius: 12px; padding: 18px; cursor: pointer; transition: 0.2s; display: flex; flex-direction: column; justify-content: space-between; }
-        .story-card:hover { border-color: #f59e0b; background: #161320; transform: translateY(-3px); }
+        .story-card { background: #14111d; border: 1px solid #221c33; border-radius: 12px; padding: 18px; cursor: pointer; transition: 0.2s; display: flex; flex-direction: column; justify-content: space-between; }
+        .story-card:hover { border-color: #f59e0b; background: #1b1629; transform: translateY(-3px); }
         .story-card h4 { font-size: 13px; color: #fff; margin-bottom: 6px; font-weight: 700; }
         .story-card p { font-size: 11px; color: #94a3b8; line-height: 1.5; margin-bottom: 12px; }
-        .role-badge { font-size: 10px; color: #fbbf24; background: rgba(245, 158, 11, 0.1); padding: 3px 8px; border-radius: 4px; align-self: flex-start; font-weight: 600; }
+        .role-badge { font-size: 10px; color: #fbbf24; background: rgba(245, 158, 11, 0.15); padding: 3px 8px; border-radius: 4px; align-self: flex-start; font-weight: 600; }
 
         #sim-view { display: none; }
-        .btn-back { background: #1b1726; border: 1px solid #2d2640; color: #cbd5e1; padding: 8px 16px; border-radius: 8px; font-size: 12px; cursor: pointer; margin-bottom: 20px; display: inline-block; font-weight: 600; }
-        .btn-back:hover { background: #262138; }
+        .btn-back { background: #1b1629; border: 1px solid #32284c; color: #cbd5e1; padding: 8px 16px; border-radius: 8px; font-size: 12px; cursor: pointer; margin-bottom: 20px; display: inline-block; font-weight: 600; }
+        .btn-back:hover { background: #251e38; }
         
-        .sim-box { background: #121019; border: 1px solid #1f1b2c; border-radius: 16px; padding: 30px; box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
+        .sim-box { background: #14111d; border: 1px solid #221c33; border-radius: 16px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         .progress-indicator { display: flex; gap: 6px; margin-bottom: 24px; }
-        .progress-dot { flex: 1; height: 4px; background: #1f1b2c; border-radius: 2px; }
+        .progress-dot { flex: 1; height: 4px; background: #221c33; border-radius: 2px; }
         .progress-dot.active { background: #f59e0b; }
         .progress-dot.passed { background: #10b981; }
         
         .stage-title { font-size: 12px; font-weight: 700; color: #fbbf24; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.5px; }
-        .sim-content { font-size: 15px; line-height: 1.8; color: #e2e8f0; background: #09080d; padding: 24px; border-radius: 12px; border-left: 4px solid #f59e0b; margin-bottom: 24px; }
+        .sim-content { font-size: 15px; line-height: 1.8; color: #cbd5e1; background: #0d0a14; padding: 24px; border-radius: 12px; border-left: 4px solid #f59e0b; margin-bottom: 24px; }
         
         .choices-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
-        .choice-btn { background: #191524; border: 1px solid #28223b; color: #fff; padding: 16px 20px; border-radius: 10px; font-size: 13px; text-align: left; cursor: pointer; transition: 0.2s; line-height: 1.5; }
-        .choice-btn:hover { background: #231d33; border-color: #f59e0b; }
+        .choice-btn { background: #1b1629; border: 1px solid #32284c; color: #fff; padding: 16px 20px; border-radius: 10px; font-size: 13px; text-align: left; cursor: pointer; transition: 0.2s; line-height: 1.5; }
+        .choice-btn:hover { background: #251e38; border-color: #f59e0b; }
         
-        .custom-input-box { display: flex; gap: 10px; border-top: 1px solid #1f1b2c; padding-top: 18px; }
-        .custom-input { flex: 1; background: #09080d; border: 1px solid #28223b; border-radius: 8px; padding: 12px 16px; color: #fff; font-size: 13px; outline: none; }
+        .custom-input-box { display: flex; gap: 10px; border-top: 1px solid #221c33; padding-top: 18px; }
+        .custom-input { flex: 1; background: #1b1629; border: 1px solid #32284c; border-radius: 8px; padding: 12px 16px; color: #fff; font-size: 13px; outline: none; }
         .custom-input:focus { border-color: #f59e0b; }
         .btn-submit-custom { background: #f59e0b; color: #000; border: none; padding: 0 20px; border-radius: 8px; font-weight: 700; font-size: 13px; cursor: pointer; }
-        .btn-submit-custom:hover { background: #fbbf24; }
 
         .result-actions { display: flex; gap: 12px; margin-top: 20px; }
-        .btn-retry { flex: 1; background: #1b1726; border: 1px solid #2d2640; color: #cbd5e1; padding: 14px; border-radius: 10px; font-weight: 700; font-size: 13px; cursor: pointer; text-align: center; }
-        .btn-retry:hover { background: #2d2640; color: #fff; }
+        .btn-retry { flex: 1; background: #1b1629; border: 1px solid #32284c; color: #cbd5e1; padding: 14px; border-radius: 10px; font-weight: 700; font-size: 13px; cursor: pointer; text-align: center; }
+        .btn-retry:hover { background: #251e38; color: #fff; }
         .btn-finish { flex: 1; background: #10b981; border: none; color: #000; padding: 14px; border-radius: 10px; font-weight: 700; font-size: 13px; cursor: pointer; text-align: center; }
         .btn-finish:hover { background: #34d399; }
     </style>
@@ -88,8 +111,11 @@
         <div class="content-area">
             <!-- TRANG CHỦ -->
             <div id="home-view">
-                <h2 style="font-size: 24px; font-weight: 800; margin-bottom: 6px;">Hệ Thống Mô Phỏng 34 Cốt Truyện Chuyên Sâu</h2>
-                <p style="color: #94a3b8; font-size: 13px; margin-bottom: 20px;">Lựa chọn chủ đề bên dưới để trải nghiệm 5 tầng quyết định độc lập, được thiết kế chuyên biệt cho từng hoàn cảnh.</p>
+                <div class="hero-banner">
+                    <span class="badge">✨ HỆ THỐNG MÔ PHỎNG 8 THỂ LOẠI & 34 CỐT TRUYỆN</span>
+                    <h2>Đối mặt ngã rẽ, làm chủ tương lai</h2>
+                    <p>Khám phá kho tàng tình huống thực tế chuyên sâu với 5 tầng lựa chọn độc bản cho từng cốt truyện. Rèn luyện tư duy giải quyết vấn đề và bản lĩnh đưa ra quyết định.</p>
+                </div>
                 
                 <div id="all-categories-container"></div>
             </div>
@@ -127,7 +153,7 @@
         <div class="ai-chat-sidebar">
             <div class="ai-chat-title">🤖 Trợ Lý AI Chuyên Sâu</div>
             <div class="chat-messages" id="chatMessages">
-                <div class="message ai">Chào bạn! Mình là trợ lý AI đồng hành xuyên suốt 34 cốt truyện. Hãy hỏi mình bất kỳ lúc nào bạn cần phân tích tâm lý nhân vật nhé!</div>
+                <div class="message ai">Chào bạn! Mình là trợ lý AI chuyên phân tích giải pháp. Hãy hỏi mình bất cứ câu hỏi nào trong quá trình trải nghiệm nhé!</div>
             </div>
             <div class="chat-input-box">
                 <input type="text" class="chat-input" id="chatInput" placeholder="Nhập câu hỏi cho AI..." onkeypress="handleChatKey(event)">
@@ -137,7 +163,6 @@
     </div>
 
     <script>
-        // Danh sách đầy đủ 8 thể loại với 34 cốt truyện được cấu trúc chi tiết 5 tầng riêng biệt
         const fullDatabase = [
             {
                 category: "THỂ LOẠI 1: TRƯỞNG THÀNH & HƯỚNG NGHIỆP",
@@ -165,7 +190,7 @@
                     {
                         id: "t1_s3", title: "Áp Lực Ngành 'Hot'", role: "Người trẻ trước cửa ĐH", desc: "Chạy theo xu hướng xã hội hay chọn ngành ít người hiểu nhưng đúng sở trường.",
                         stages: [
-                            { title: "Tầng 1: Cơn sốt tuyển sinh", text: "Mạng xã hội ngập tràn thông tin về ngành 'hot' điểm chuẩn cao ngất ngưởng. Bạn dao động dù thích ngành kỹ thuật khô khan.", choices: ["Chạy theo xu hướng đăng ký ngành hot để dễ xin việc.", "Kiên định chọn ngành đúng sở trường dù ít người hiểu.", "Đăng ký kết hợp cả hai nguyện vọng để thăm dò."] },
+                            { title: "Tầng 1: Cơn sốt tuyển sinh", text: "Mạng xã hội ngập tràn thông tin về ngành 'hot' điểm chuẩn cao ngất ngưởng. Bạn dao động dù thích ngành kỹ thuật.", choices: ["Chạy theo xu hướng đăng ký ngành hot để dễ xin việc.", "Kiên định chọn ngành đúng sở trường dù ít người hiểu.", "Đăng ký kết hợp cả hai nguyện vọng để thăm dò."] },
                             { title: "Tầng 2: Sức ép điểm số", text: "Điểm thi thử dao động mạnh khiến việc với tới ngành hot trở nên mong manh.", choices: ["Cố gắng cày ngày đêm bất chấp sức khỏe suy giảm.", "Điều chỉnh nguyện vọng về mức an toàn phù hợp thực tế.", "Tìm kiếm học bổng và xét tuyển kết hợp phương thức khác."] },
                             { title: "Tầng 3: Lời khuyên trái chiều", text: "Người đi trước cảnh báo ngành hot có nguy cơ bão hòa nhân lực khi ra trường.", choices: ["Lắng nghe, chuyển hướng sang chuyên môn ngách vững chắc.", "Bất chấp cảnh báo, tin vào sức hút của thương hiệu ngành.", "Tự mình nghiên cứu báo cáo thị trường việc làm 5 năm tới."] },
                             { title: "Tầng 4: Quyết định cuối cùng", text: "Đứng trước cổng trường nộp hồ sơ xét tuyển chính thức.", choices: ["Quyết định chọn ngành sở trường để đi đường dài.", "Đánh cược vào ngành hot theo số đông xã hội.", "Chọn ngành giao thoa giữa xu hướng và năng lực cá nhân."] },
@@ -177,7 +202,7 @@
                         stages: [
                             { title: "Tầng 1: Sự mù mịt ban đầu", text: "Bạn bè ai cũng có mục tiêu rõ ràng, riêng bạn nhìn đâu cũng thấy mơ hồ, trống rỗng.", choices: ["Hoảng loạn vì nghĩ mình kém cỏi hơn người khác.", "Bắt đầu ghi ra những việc mình không ghét làm lên giấy.", "Phó mặc cho hoàn cảnh đưa đẩy đến đâu hay đến đó."] },
                             { title: "Tầng 2: Thử nghiệm rải rác", text: "Tham gia vài buổi hướng nghiệp nhưng vẫn không tìm thấy ngọn lửa đam mê.", choices: ["Thử tự học một kỹ năng mới (thiết kế/lập trình) xem sao.", "Chán nản bỏ cuộc, tiếp tục ngồi ì trong vùng an toàn.", "Đăng ký làm tình nguyện viên để trải nghiệm thực tế xã hội."] },
-                            { title: "Tầng 3: Phát hiện đốm lửa", text: "Trong một dự án nhỏ ở trường, bạn nhận ra mình rất có năng lực tổ chức và điều phối.", choices: ["Đào sâu phát triển thế mạnh quản lý vừa phát hiện.", "Xem đó là may mắn tình cờ rồi bỏ quên qua một bên.", "Nhờ thầy cô đánh giá khách quan về năng lực tổ chức của mình."] },
+                            { title: "Tầng 3: Phát hiện đốm lửa", text: "Trong một dự án nhỏ ở trường, bạn nhận ra mình rất có năng lực tổ chức và điều phối.", choices: ["Đào sâu phát triển thế mạnh quản lý vừa phát hiện.", "Xem đó là may mắn tình cờ rồi bỏ quên qua một bên.", "Nhờ thầy cô đánh giá khách quan về năng lực tổ chức."] },
                             { title: "Tầng 4: Vẽ lại bản đồ", text: "Lập lộ trình 3 năm tới dựa trên những trải nghiệm thực tế đã qua.", choices: ["Xây dựng kế hoạch chi tiết từng mốc thời gian cụ thể.", "Lên kế hoạch chung chung để đỡ bị áp lực tâm lý.", "Tìm một người cố vấn dẫn dắt định hướng chuyên sâu."] },
                             { title: "Tầng 5: Làm chủ lộ trình", text: "Sự mù mịt tan biến khi bạn tự tay vẽ nên bản đồ tương lai bằng hành động nhỏ mỗi ngày.", isResult: true, choices: [] }
                         ]
@@ -186,7 +211,7 @@
                         id: "t1_s5", title: "Gánh Nặng Người Đi Trước", role: "Đứa con mang bóng anh/chị", desc: "Phải sống và chọn con đường bù đắp sự kỳ vọng sau thất bại của người đi trước.",
                         stages: [
                             { title: "Tầng 1: Cái bóng quá lớn", text: "Thầy cô và gia đình luôn so sánh bạn với người anh/chị từng là thủ khoa trường nhưng đã bỏ dở giữa chừng.", choices: ["Nổi loạn, cố tình làm trái ý để thoát khỏi cái bóng đó.", "Chấp nhận gánh vác kỳ vọng, nén tôi cá nhân xuống.", "Tuyên bố rõ ràng mình là cá thể độc lập không phải bản sao."] },
-                            { title: "Tầng 2: Áp lực vô hình", text: "Mỗi bước đi của bạn đều bị săm soi xem có lặp lại vết xe đổ của người đi trước không.", choices: ["Tìm gặp anh/chị để trò chuyện thấu hiểu nguyên nhân thất bại.", "Tự cô lập bản thân để tránh mọi sự phán xét xung quanh.", "Tập trung tuyệt đối vào thành tích để chứng minh bản lĩnh."] },
+                            { title: "Tầng 2: Áp lực vô hình", text: "Mỗi bước đi của bạn đều bị săm soi xem có lặp lại vết xe đổ của người đi trước không.", choices: ["Tìm gặp anh/chị để trò chuyện thấu hiểu nguyên nhân.", "Tự cô lập bản thân để tránh mọi sự phán xét xung quanh.", "Tập trung tuyệt đối vào thành tích để chứng minh bản lĩnh."] },
                             { title: "Tầng 3: Giọt nước tràn ly", text: "Bị so sánh trực diện trong một cuộc họp gia đình khiến bạn bùng nổ cảm xúc.", choices: ["Rời khỏi bữa ăn, thể hiện rõ sự tổn thương sâu sắc.", "Cãi tay đôi bảo vệ danh dự cá nhân đến cùng.", "Im lặng lạnh lùng chứng minh bằng kết quả thực tế sau đó."] },
                             { title: "Tầng 4: Sống cuộc đời mình", text: "Nhận ra việc sống vì kỳ vọng của người khác là cái bẫy tiêu diệt bản ngã.", choices: ["Dứt khoát chọn con đường hoàn toàn khác anh/chị.", "Tiếp tục đi con đường cũ nhưng với tâm thế hoàn toàn mới.", "Yêu cầu gia đình tôn trọng quyền tự quyết của bản thân."] },
                             { title: "Tầng 5: Giải phóng bản thân", text: "Bạn đã buông bỏ được gánh nặng không thuộc về mình để hiên ngang bước đi trên đôi chân.", isResult: true, choices: [] }
@@ -531,7 +556,6 @@
             }
         ];
 
-        // Render toàn bộ danh sách 34 cốt truyện ra trang chủ
         function initHomeView() {
             const container = document.getElementById('all-categories-container');
             container.innerHTML = '';
@@ -561,7 +585,6 @@
         let currentStepIndex = 0;
 
         function startSimulation(storyId) {
-            // Tìm cốt truyện trong database
             let found = null;
             fullDatabase.forEach(cat => {
                 cat.stories.forEach(st => {
@@ -598,7 +621,6 @@
             document.getElementById('stageTitle').innerText = `${currentActiveStory.title} — ${stage.title}`;
             document.getElementById('simText').innerText = stage.text;
 
-            // Cập nhật thanh progress 5 tầng
             for (let i = 0; i < 5; i++) {
                 const dot = document.getElementById(`dot-${i}`);
                 dot.className = 'progress-dot';
@@ -645,7 +667,6 @@
             advanceStep();
         }
 
-        // Tích hợp AI Chat Box phân tích trực tiếp
         function handleChatKey(e) {
             if (e.key === 'Enter') sendChatMessage();
         }
@@ -667,15 +688,12 @@
                     aiReply = "Áp lực là một phần của sự trưởng thành. Hãy hít thở sâu, chia nhỏ mục tiêu và cho phép bản thân nghỉ ngơi khi cần thiết nhé!";
                 } else if (lower.includes("chọn ngành") || lower.includes("nghề nghiệp") || lower.includes("hướng nghiệp")) {
                     aiReply = "Hướng nghiệp cần sự giao thoa giữa sở thích cá nhân, năng lực thực tế và hoàn cảnh gia đình. Đừng ngại thử nghiệm và chịu trách nhiệm với lựa chọn của mình!";
-                } else if (lower.includes("bạn bè") || lower.includes("tình bạn")) {
-                    aiReply = "Tình bạn chân chính là sự tôn trọng và cùng nhau tiến bộ. Đôi khi buông bỏ những mối quan hệ độc hại là cách tốt nhất để bảo vệ bản thân.";
                 }
                 chatMessages.innerHTML += `<div class="message ai">${aiReply}</div>`;
                 chatMessages.scrollTop = chatMessages.scrollHeight;
             }, 700);
         }
 
-        // Khởi chạy giao diện trang chủ
         initHomeView();
     </script>
 </body>
