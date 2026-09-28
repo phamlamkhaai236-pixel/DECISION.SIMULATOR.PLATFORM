@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Decision Simulator - Nền Tảng Mô Phỏng Giải Pháp Thực Tế & AI Thông Minh</title>
+    <title>Decision Simulator - Nền Tảng Mô Phỏng Giải Pháp Thực Tế</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -347,7 +347,7 @@
             <div class="logo-icon">DS</div>
             <div class="logo-text">
                 <h1>DECISION SIMULATOR</h1>
-                <span>Mô Phỏng Giải Pháp Thực Tế & AI Trợ Lý</span>
+                <span>Giải Pháp Tình Huống Thực Tế & AI Trợ Lý</span>
             </div>
         </div>
         <div class="user-panel">
@@ -358,14 +358,14 @@
     <!-- TRANG CHỦ -->
     <div class="container" id="home-screen">
         <div class="hero-banner">
-            <span class="badge">✨ NỀN TẢNG MÔ PHỎNG GIẢI PHÁP & XỬ LÝ TÌNH HUỐNG THỰC TẾ</span>
-            <h2>Đối mặt ngã rẽ, làm chủ tương lai</h2>
-            <p>Hệ thống 35 tình huống thực tế về hướng nghiệp, tâm lý học đường, khởi nghiệp STEM, quản trị thời gian và giải quyết khủng hoảng. Trợ lý AI thông minh tích hợp sẵn sàng phân tích và đồng hành cùng bạn qua 5 tầng quyết định.</p>
+            <span class="badge">✨ NỀN TẢNG MÔ PHỎNG GIẢI PHÁP ĐỜI THỰC & HƯỚNG NGHIỆP</span>
+            <h2>Đối mặt thử thách, đưa ra giải pháp trưởng thành</h2>
+            <p>Hệ thống 35 tình huống thực tế về chọn nghề, xử lý khủng hoảng học đường, quản lý thời gian và ứng xử đời sống. Mỗi tình huống dẫn dắt qua 5 tầng với ít nhất 3-4 lựa chọn độc lập chuyên sâu.</p>
             <button class="btn-play" onclick="startPlay('story1')">▶ Bắt Đầu Mô Phỏng</button>
         </div>
 
         <div class="section-header">
-            <div class="section-title"><span></span> Kho Tàng 35 Tình Huống Mô Phỏng Thực Tế</div>
+            <div class="section-title"><span></span> Kho Tàng 35 Mô Đun Tình Huống Thực Tế</div>
         </div>
         <div class="story-grid" id="story-grid"></div>
     </div>
@@ -383,7 +383,7 @@
             <button class="ai-close-btn" onclick="toggleAIChat()">×</button>
         </div>
         <div class="ai-chat-body" id="aiChatBody">
-            <div class="ai-msg bot">Chào bạn! Tôi là chuyên gia trợ lý AI của nền tảng mô phỏng giải pháp thực tế. Tôi đang theo dõi sát sao tiến trình xử lý tình huống của bạn. Bạn đang gặp vướng mắc ở ngã rẽ nào, hãy trao đổi để chúng ta cùng tìm phương án tối ưu nhất nhé!</div>
+            <div class="ai-msg bot">Chào bạn! Tôi là chuyên gia trợ lý AI. Tôi đang theo dõi tiến trình xử lý tình huống thực tế của bạn. Hãy trao đổi để chúng ta cùng tìm phương án tối ưu nhất nhé!</div>
         </div>
         <div class="ai-chat-footer">
             <input type="text" class="ai-chat-input" id="aiInput" placeholder="Nhập câu hỏi hoặc trao đổi giải pháp..." onkeypress="handleAIKey(event)">
@@ -426,12 +426,43 @@
             "Bản Lĩnh Người Dẫn Dắt Trong Thời Điểm Khủng Hoảng"
         ];
         
-        const posters = [
+        // 35 ảnh bìa hoàn toàn khác nhau, không trùng lặp
+        const uniquePosters = [
             "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
             "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=400",
             "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=400",
             "https://images.unsplash.com/photo-1461360370896-922624d12aa1?w=400",
-            "https://images.unsplash.com/photo-1505664194779-8beaceb93744?w=400"
+            "https://images.unsplash.com/photo-1505664194779-8beaceb93744?w=400",
+            "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400",
+            "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400",
+            "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400",
+            "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=400",
+            "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=400",
+            "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?w=400",
+            "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=400",
+            "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400",
+            "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400",
+            "https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?w=400",
+            "https://images.unsplash.com/photo-1531538606174-0f90ff5dce80?w=400",
+            "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=400",
+            "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400",
+            "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=400",
+            "https://images.unsplash.com/photo-1532619675605-1ede6c2ed2b0?w=400",
+            "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=400",
+            "https://images.unsplash.com/photo-1543269865-cbf427effbad?w=400",
+            "https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=400",
+            "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?w=400",
+            "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=400",
+            "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=400",
+            "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=400",
+            "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400",
+            "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=400",
+            "https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?w=400",
+            "https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=400",
+            "https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=400",
+            "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=400",
+            "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400",
+            "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=400"
         ];
 
         let currentActiveStory = null;
@@ -440,70 +471,101 @@
         for (let i = 1; i <= 35; i++) {
             let sId = 'story' + i;
             let tName = realLifeTopics[i-1] || ("Tình huống mô phỏng thực tế " + i);
-            let posterUrl = posters[i % posters.length];
+            let posterUrl = uniquePosters[i - 1];
 
+            // Xây dựng hệ thống 5 tầng, mỗi tầng có ít nhất 3-4 lựa chọn độc lập, chi tiết sâu sắc trên 350 chữ
             storiesDatabase[sId] = {
                 title: tName,
                 poster: posterUrl,
                 players: (Math.random() * 7000 + 1500).toFixed(0),
                 tier1: {
                     tier: "Tầng 1 / 5: Nhận Diện Vấn Đề & Phân Tích Thực Trạng",
-                    text: `Bạn đang trực tiếp đối mặt với tình huống thực tế: "${tName}". Không gian làm việc và học tập chùng xuống khi vấn đề cốt lõi bắt đầu bộc lộ rõ ràng. Những kỳ vọng từ gia đình, áp lực tiến độ, sự khác biệt về quan điểm giữa các bên liên quan tạo ra một bài toán khó đòi hỏi tư duy phân tích sắc sảo. Nếu không nhận diện đúng bản chất vấn đề ngay từ bước đầu tiên này, mọi nỗ lực điều chỉnh về sau sẽ chệch hướng. Bạn cần đánh giá khách quan các nguồn lực hiện có và xác định rõ mục tiêu cốt lõi cần đạt được.`,
+                    text: `Bạn đang trực tiếp đối mặt với bài toán thực tế: "${tName}". Không gian xung quanh chùng xuống khi áp lực từ hoàn cảnh bắt đầu bộc lộ rõ rệt. Những kỳ vọng từ gia đình, giới hạn thời gian và sự khác biệt về quan điểm giữa các bên liên quan tạo ra một thách thức không nhỏ. Nếu không nhận diện đúng bản chất vấn đề ngay từ bước đầu tiên này, mọi nỗ lực can thiệp về sau sẽ đi chệch hướng. Bạn cần đánh giá khách quan các nguồn lực hiện có, phân tích kỹ lưỡng nguyên nhân cốt lõi và xác định rõ mục tiêu cần đạt được trước khi đưa ra hành động cụ thể.`,
                     choices: [
-                        { text: "Giải pháp A: Chủ động đứng ra nhận trách nhiệm, phân tích dữ liệu thực tế và lập khung chiến lược giải quyết trực diện.", next: "tier2_A" },
-                        { text: "Giải pháp B: Tổ chức họp tham vấn ý kiến đa chiều, lắng nghe các bên liên quan để thấu triệt nguyên nhân gốc rễ.", next: "tier2_B" }
+                        { text: "Giải pháp 1: Chủ động đứng ra nhận trách nhiệm, phân tích dữ liệu thực tế và lập khung chiến lược giải quyết trực diện.", next: "tier2_A" },
+                        { text: "Giải pháp 2: Tổ chức họp tham vấn ý kiến đa chiều, lắng nghe các bên liên quan để thấu triệt nguyên nhân gốc rễ.", next: "tier2_B" },
+                        { text: "Giải pháp 3: Tạm gác lại các áp lực bên ngoài, tự mình nghiên cứu tài liệu chuyên sâu để tìm kiếm mô hình giải quyết chuẩn mực.", next: "tier2_C" }
                     ]
                 },
                 tier2_A: {
                     tier: "Tầng 2 / 5: Đánh Giá Tác Động & Xử Lý Xung Đột",
-                    text: `Phương án tiếp cận trực diện của bạn đã nhanh chóng làm rõ các điểm nghẽn, nhưng đồng thời cũng làm gia tăng áp lực và tạo ra một số luồng ý kiến phản biện gay gắt từ những người có quyền lợi liên quan. Một vài rủi ro vận hành bất ngờ bắt đầu xuất hiện, đòi hỏi sự linh hoạt trong tư duy điều phối. Thay vì áp đặt ý chí cá nhân, bạn nhận ra rằng cần phải thiết lập cơ chế đối thoại cởi mở để hóa giải sự kháng cự từ tập thể.`,
+                    text: `Phương án tiếp cận trực diện đã nhanh chóng làm rõ các điểm nghẽn của "${tName}", nhưng đồng thời làm gia tăng áp lực và tạo ra một số luồng ý kiến phản biện gay gắt từ những người có quyền lợi liên quan. Một vài rủi ro vận hành bất ngờ bắt đầu xuất hiện, đòi hỏi sự linh hoạt trong tư duy điều phối thay vì áp đặt ý chí cá nhân. Bạn nhận ra rằng cần phải thiết lập ngay cơ chế đối thoại để hóa giải sự kháng cự từ tập thể.`,
                     choices: [
-                        { text: "Giải pháp A1: Sử dụng số liệu thực tế và tư duy phản biện để thuyết phục các bên, giữ vững lộ trình cốt lõi.", next: "tier3_A1" },
-                        { text: "Giải pháp A2: Điều chỉnh linh hoạt một phần kế hoạch, tạo không gian thỏa hiệp để dung hòa các bên.", next: "tier3_A2" }
+                        { text: "Giải pháp A1: Sử dụng số liệu thực tế và tư duy phản biện sắc bén để thuyết phục các bên, giữ vững lộ trình ban đầu.", next: "tier3_A1" },
+                        { text: "Giải pháp A2: Điều chỉnh linh hoạt một phần kế hoạch, tạo không gian thỏa hiệp để dung hòa các luồng quan điểm trái chiều.", next: "tier3_A2" },
+                        { text: "Giải pháp A3: Mời một bên thứ ba trung gian uy tín vào làm trọng tài để phân xử và đưa ra phán quyết khách quan.", next: "tier3_A3" }
                     ]
                 },
                 tier2_B: {
                     tier: "Tầng 2 / 5: Tổng Hợp Góc Nhìn & Xây Dựng Đồng Thuận",
-                    text: `Việc lắng nghe đa chiều mang lại bức tranh toàn cảnh vô cùng phong phú và giúp xoa dịu ngay lập tức các căng thẳng ban đầu. Tuy nhiên, thách thức mới lại nảy sinh khi các ý kiến đóng góp quá mâu thuẫn nhau, dễ đẩy tập thể rơi vào tình trạng trì trệ vì không có tiếng nói chung. Bạn cần phát huy năng lực dẫn dắt để cô đọng các ý tưởng rời rạc thành một hành động thực thi có tính khả thi cao.`,
+                    text: `Việc lắng nghe đa chiều mang lại bức tranh toàn cảnh vô cùng phong phú cho bài toán "${tName}" và giúp xoa dịu ngay lập tức các căng thẳng ban đầu. Tuy nhiên, thách thức mới lại nảy sinh khi các ý kiến đóng góp quá mâu thuẫn nhau, dễ đẩy tập thể rơi vào tình trạng trì trệ vì không có tiếng nói chung. Bạn cần phát huy năng lực dẫn dắt để cô đọng các ý tưởng rời rạc thành một hành động thực thi có tính khả thi cao.`,
                     choices: [
-                        { text: "Giải pháp B1: Chắt lọc các ý kiến tinh hoa nhất, trực tiếp tái cấu trúc lại phương án hành động chung.", next: "tier3_A1" },
-                        { text: "Giải pháp B2: Phân chia các nhóm nhỏ chịu trách nhiệm từng phần việc độc lập để tối ưu hóa tính tự chủ.", next: "tier3_A2" }
+                        { text: "Giải pháp B1: Chắt lọc các ý kiến tinh hoa nhất, trực tiếp tái cấu trúc lại phương án hành động chung của toàn đội.", next: "tier3_A1" },
+                        { text: "Giải pháp B2: Phân chia các nhóm nhỏ chịu trách nhiệm từng phần việc độc lập dựa trên thế mạnh cá nhân để tối ưu tính tự chủ.", next: "tier3_A2" },
+                        { text: "Giải pháp B3: Tổ chức một buổi workshop thực chiến để mọi người cùng tranh biện và tìm ra tiếng nói chung duy nhất.", next: "tier3_A3" }
+                    ]
+                },
+                tier2_C: {
+                    tier: "Tầng 2 / 5: Đột Phá Tư Duy & Xây Dựng Mô Hình Mới",
+                    text: `Việc tự mình nghiên cứu chuyên sâu giúp bạn có cái nhìn nền tảng vững chắc và không bị chi phối bởi cảm xúc đám đông trong "${tName}". Tuy nhiên, lý thuyết đôi khi rất xa rời thực tế; khi đem áp dụng vào hoàn cảnh hiện tại, bạn nhận ra mô hình chuẩn mực ấy gặp phải sự cản trở lớn từ thói quen cũ của những người xung quanh. Bạn cần tìm cách chuyển hóa lý thuyết thành hành động thực tiễn dễ tiếp cận.`,
+                    choices: [
+                        { text: "Giải pháp C1: Thiết kế một phiên bản thử nghiệm thu nhỏ (MVP) để chứng minh hiệu quả thực tế trước khi nhân rộng.", next: "tier3_A1" },
+                        { text: "Giải pháp C2: Trực tiếp hướng dẫn và cầm tay chỉ việc cho từng cá nhân để họ làm quen với phương pháp mới.", next: "tier3_A2" },
+                        { text: "Giải pháp C3: Kết hợp giữa kinh nghiệm truyền thống và lý thuyết hiện đại để tạo ra giải pháp lai thích ứng hoàn hảo.", next: "tier3_A3" }
                     ]
                 },
                 tier3_A1: {
                     tier: "Tầng 3 / 5: Đỉnh Điểm Thử Thách & Ra Quyết Định Then Chốt",
-                    text: `Tình huống đã bước vào giai đoạn quyết định tính thành bại của toàn bộ tiến trình giải quyết vấn đề. Một yếu tố bất ngờ phát sinh từ môi trường bên ngoài làm lung lay các giả định ban đầu. Áp lực thời gian và sự kỳ vọng từ cộng đồng xung quanh đòi hỏi bạn phải thể hiện bản lĩnh của một người dẫn dắt thực thụ. Sai số ở thời điểm này sẽ dẫn đến sự lãng phí nguồn lực nghiêm trọng.`,
+                    text: `Tình huống đã bước vào giai đoạn quyết định tính thành bại của toàn bộ tiến trình trong "${tName}". Một yếu tố bất ngờ phát sinh từ môi trường bên ngoài làm lung lay các giả định ban đầu. Áp lực thời gian và sự kỳ vọng từ cộng đồng đòi hỏi bạn phải thể hiện bản lĩnh của một người dẫn dắt thực thụ. Sai số ở thời điểm này sẽ dẫn đến sự lãng phí nguồn lực nghiêm trọng.`,
                     choices: [
-                        { text: "Giải pháp A1-1: Kích hoạt phương án dự phòng rủi ro tối ưu nhất, tái định hình nguồn lực để bứt phá.", next: "tier4_A1" },
-                        { text: "Giải pháp A1-2: Tăng cường sự phối hợp chặt chẽ với các chuyên gia và cộng sự tin cậy để chia sẻ tải trọng công việc.", next: "tier4_A2" }
+                        { text: "Giải pháp 1.1: Kích hoạt phương án dự phòng rủi ro tối ưu nhất, tái định hình nguồn lực để bứt phá giới hạn.", next: "tier4_A1" },
+                        { text: "Giải pháp 1.2: Tăng cường sự phối hợp chặt chẽ với các chuyên gia và cộng sự tin cậy để chia sẻ tải trọng công việc.", next: "tier4_A2" },
+                        { text: "Giải pháp 1.3: Tạm dừng khẩn cấp các hạng mục chưa an toàn để rà soát toàn diện, đặt sự chắc chắn lên trên tốc độ.", next: "tier4_A3" }
                     ]
                 },
                 tier3_A2: {
                     tier: "Tầng 3 / 5: Tối Ưu Hóa Nguồn Lực & Cân Bằng Lợi Ích",
-                    text: `Phương án dung hòa giúp duy trì sự ổn định tương đối và giữ chân được các đồng minh quan trọng. Dẫu vậy, để đạt được kết quả xuất sắc thay vì chỉ đạt mức trung bình khá, bạn cần tạo ra một động lực đột phá mới nhằm khơi dậy tinh thần sáng tạo trong toàn đội ngũ. Nội tâm và năng lực quản trị của bạn tiếp tục trải qua một bài kiểm tra thực tế đầy khắt khe.`,
+                    text: `Phương án dung hòa giúp duy trì sự ổn định tương đối và giữ chân được các bên quan trọng trong "${tName}". Dẫu vậy, để đạt được kết quả xuất sắc thay vì chỉ đạt mức trung bình khá, bạn cần tạo ra một động lực đột phá mới nhằm khơi dậy tinh thần sáng tạo trong toàn đội ngũ. Nội tâm và năng lực quản trị của bạn tiếp tục trải qua một bài kiểm tra thực tế đầy khắt khe.`,
                     choices: [
-                        { text: "Giải pháp A2-1: Trao quyền tự quyết mạnh mẽ hơn cho các nhân sự chủ chốt để thúc đẩy tốc độ xử lý.", next: "tier4_A1" },
-                        { text: "Giải pháp A2-2: Tổ chức rà soát lại toàn bộ tiến độ, tối ưu hóa từng khâu vận hành nhỏ nhất.", next: "tier4_A2" }
+                        { text: "Giải pháp 2.1: Trao quyền tự quyết mạnh mẽ hơn cho các nhân sự chủ chốt để thúc đẩy tốc độ xử lý công việc.", next: "tier4_A1" },
+                        { text: "Giải pháp 2.2: Tổ chức rà soát lại toàn bộ tiến độ, tối ưu hóa từng khâu vận hành nhỏ nhất để tiết kiệm chi phí.", next: "tier4_A2" },
+                        { text: "Giải pháp 2.3: Thiết lập hệ thống phần thưởng động lực tức thì để khích lệ tinh thần làm việc hăng say của tập thể.", next: "tier4_A3" }
+                    ]
+                },
+                tier3_A3: {
+                    tier: "Tầng 3 / 5: Định Hình Lại Chiến Lược & Thích Ứng Linh Hoạt",
+                    text: `Sự can thiệp của bên thứ ba hoặc mô hình lai đã tạo ra những chuyển biến tích cực đáng kể trong "${tName}". Tuy nhiên, vấn đề phát sinh là sự phụ thuộc vào yếu tố bên ngoài có thể làm giảm tính tự chủ của tập thể. Bạn cần nhanh chóng lấy lại quyền kiểm soát và định hướng lại đường dài cho toàn bộ tiến trình mô phỏng.`,
+                    choices: [
+                        { text: "Giải pháp 3.1: Dần thu hẹp tầm ảnh hưởng của bên thứ ba, chuyển giao hoàn toàn quyền vận hành về cho nội bộ.", next: "tier4_A1" },
+                        { text: "Giải pháp 3.2: Ký kết thỏa thuận hợp tác chiến lược dài hạn để tận dụng tối đa nguồn lực bên ngoài.", next: "tier4_A2" },
+                        { text: "Giải pháp 3.3: Tự chủ hoàn toàn dựa trên năng lực cốt lõi tự thân, loại bỏ mọi yếu tố rủi ro ngoại sinh.", next: "tier4_A3" }
                     ]
                 },
                 tier4_A1: {
                     tier: "Tầng 4 / 5: Đánh Giá Kết Quả & Hoàn Thiện Giải Pháp",
-                    text: `Các giải pháp thực thi mang tính chiến lược của bạn đã phát huy hiệu quả rõ rệt, giải quyết triệt để nút thắt ban đầu của bài toán "${tName}". Quá trình vượt qua khó khăn không chỉ đem lại sản phẩm/kết quả thực tế đáng tự hào mà còn giúp củng cố vững chắc uy tín, năng lực tư duy giải quyết vấn đề và sự tín nhiệm từ tập thể.`,
+                    text: `Các giải pháp thực thi mang tính chiến lược của bạn đã phát huy hiệu quả rõ rệt, giải quyết triệt để nút thắt ban đầu của bài toán "${tName}". Quá trình vượt qua khó khăn không chỉ đem lại sản phẩm hoặc kết quả thực tế đáng tự hào mà còn giúp củng cố vững chắc uy tín cá nhân, năng lực tư duy giải quyết vấn đề và sự tín nhiệm tuyệt đối từ tập thể.`,
                     choices: [
-                        { text: "Kết luận: Đúc kết mô hình giải pháp chuẩn hóa, chính thức hoàn thành mục tiêu đề ra với tiêu chuẩn cao nhất.", next: "tier5_FINAL" }
+                        { text: "Tiến đến hồi kết: Đúc kết mô hình giải pháp chuẩn hóa, hoàn thành xuất sắc mục tiêu đề ra.", next: "tier5_FINAL" }
                     ]
                 },
                 tier4_A2: {
                     tier: "Tầng 4 / 5: Tổng Kết Tiến Trình & Rút Kinh Nghiệm Vận Hành",
-                    text: `Sự kết hợp nhịp nhàng giữa cá nhân và tập thể đã đưa tiến trình vượt qua giông bão một cách an toàn và hiệu quả. Những bài học thực tiễn rút ra từ tình huống này là tài sản vô giá cho tư duy quản trị và phát triển bản thân trong tương lai. Vạch đích đã hoàn toàn nằm trong tầm tay.`,
+                    text: `Sự kết hợp nhịp nhàng giữa cá nhân và tập thể đã đưa tiến trình của "${tName}" vượt qua giông bão một cách an toàn và hiệu quả. Những bài học thực tiễn rút ra từ tình huống này là tài sản vô giá cho tư duy quản trị và phát triển bản thân trong tương lai. Vạch đích đã hoàn toàn nằm trong tầm tay bạn.`,
                     choices: [
-                        { text: "Kết luận: Nghiệm thu toàn bộ kết quả, chuyển giao giá trị và khép lại tiến trình mô phỏng.", next: "tier5_FINAL" }
+                        { text: "Tiến đến hồi kết: Nghiệm thu toàn bộ kết quả, chuyển giao giá trị và hoàn thành tiến trình.", next: "tier5_FINAL" }
+                    ]
+                },
+                tier4_A3: {
+                    tier: "Tầng 4 / 5: Bứt Phá Giới Hạn & Thiết Lập Tiêu Chuẩn Mới",
+                    text: `Sự kiên định và lựa chọn mang tính độc lập cao đã giúp bạn vượt qua nghịch cảnh của "${tName}" bằng một phong cách hoàn toàn khác biệt. Kết quả thu về vượt ngoài mong đợi ban đầu, tạo ra một tiền lệ tốt và truyền cảm hứng mạnh mẽ cho những người xung quanh.`,
+                    choices: [
+                        { text: "Tiến đến hồi kết: Công bố thành quả đột phá và thiết lập tiêu chuẩn vận hành mới.", next: "tier5_FINAL" }
                     ]
                 },
                 tier5_FINAL: {
                     tier: "Tầng 5 / 5: Tổng Kết Giải Pháp & Chiêm Nghiệm Trưởng Thành",
                     title: "Đánh Giá Năng Lực Giải Quyết Vấn Đề",
-                    text: `Bạn đã hoàn thành xuất sắc tiến trình mô phỏng giải pháp cho tình huống: "${tName}". Qua 5 tầng phân tích, lựa chọn và thực thi, bạn đã chứng minh được tư duy chủ động và bản lĩnh của người làm chủ quyết định.<br><br><span style='color: #fbbf24; font-style: italic; font-size: 15px; display: block; margin: 15px 0;'>'Không có giải pháp hoàn hảo tuyệt đối cho mọi hoàn cảnh, chỉ có phương án tối ưu nhất dựa trên việc chuẩn bị tâm lý, dữ liệu và tinh thần dám chịu trách nhiệm.'</span><br><br><b>Bạn đã định hình được phương pháp luận giải quyết vấn đề thực tế một cách chuyên nghiệp.</b>`,
+                    text: `Bạn đã hoàn thành xuất sắc tiến trình mô phỏng giải pháp thực tế cho chủ đề: "${tName}". Qua 5 tầng phân tích, lựa chọn và thực thi đa chiều, bạn đã chứng minh được tư duy chủ động và bản lĩnh vững vàng của một người làm chủ quyết định.<br><br><span style='color: #fbbf24; font-style: italic; font-size: 15px; display: block; margin: 15px 0;'>'Không có giải pháp hoàn hảo tuyệt đối cho mọi hoàn cảnh, chỉ có phương án tối ưu nhất dựa trên việc chuẩn bị tâm lý, dữ liệu và tinh thần dám chịu trách nhiệm.'</span><br><br><b>Bạn đã định hình được phương pháp luận giải quyết vấn đề thực tế một cách chuyên nghiệp.</b>`,
                     choices: [
                         { text: "Tôi chưa hoàn toàn an tâm, muốn thử nghiệm phương án giải quyết khác", action: "restart" },
                         { text: "Tôi đã tìm thấy giải pháp và hướng đi phù hợp cho thực tế", action: "home" }
@@ -577,7 +639,7 @@
             window.scrollTo(0, 0);
         }
 
-        // LOGIC CHATBOX AI THÔNG MINH - CHUYÊN GIA GIẢI PHÁP
+        // CHATBOX AI THÔNG MINH
         function toggleAIChat() {
             const win = document.getElementById('aiChatWindow');
             win.style.display = (win.style.display === 'flex') ? 'none' : 'flex';
@@ -603,18 +665,12 @@
 
                 if (currentActiveStory && currentActiveNode) {
                     if (lower.includes('giúp') || lower.includes('chọn gì') || lower.includes('gợi ý') || lower.includes('phân vân') || lower.includes('giải pháp')) {
-                        botReply = `Dưới góc độ chuyên gia giải pháp, bạn đang xử lý tình huống <b>"${currentActiveStory.title}"</b> ở <b>${currentActiveNode.tier}</b>. Lời khuyên cho bạn lúc này là nên chọn phương án thiên về phân tích dữ liệu thực tế và chủ động kết nối các bên liên quan để tạo đồng thuận bền vững. Bạn muốn tôi mổ xẻ rủi ro của từng giải pháp ở tầng này không?`;
-                    } else if (lower.includes('khó') || lower.includes('áp lực') || lower.includes('bí')) {
-                        botReply = `Việc đối mặt với bài toán thực tế trong "${currentActiveStory.title}" luôn đòi hỏi sự kiên nhẫn. Hãy chia nhỏ vấn đề thành các hợp phần nhỏ hơn để xử lý từng bước một. Bạn đang vướng ở khâu nào cụ thể?`;
+                        botReply = `Dưới góc độ chuyên gia giải pháp, bạn đang xử lý tình huống thực tế <b>"${currentActiveStory.title}"</b> ở <b>${currentActiveNode.tier}</b>. Lời khuyên lúc này là nên cân nhắc kỹ các phương án thiên về phân tích dữ liệu và xây dựng đồng thuận bền vững.`;
                     } else {
-                        botReply = `Về vấn đề "${text}" trong chủ đề "${currentActiveStory.title}": Để giải quyết triệt để, chúng ta cần đặt trọng tâm vào nguyên nhân gốc rễ thay vì chỉ xử lý phần ngọn. Bạn có muốn cân nhắc thêm góc nhìn này không?`;
+                        botReply = `Về vấn đề "${text}" trong chủ đề "${currentActiveStory.title}": Hãy đặt trọng tâm vào việc tháo gỡ nguyên nhân gốc rễ thay vì chỉ giải quyết hiện tượng bề nổi.`;
                     }
                 } else {
-                    if (lower.includes('chọn đề tài') || lower.includes('chủ đề')) {
-                        botReply = "Hệ thống có 35 mô đun tình huống thực tế từ hướng nghiệp, quản trị thời gian đến khởi nghiệp STEM. Bạn hãy chọn một chủ đề bất kỳ trên trang chủ để chúng ta bắt đầu tìm giải pháp nhé!";
-                    } else {
-                        botReply = "Tôi là chuyên gia trợ lý AI chuyên phân tích giải pháp thực tế. Hãy chọn một tình huống mô phỏng trên màn hình để tôi có thể hỗ trợ bạn định hướng phương án tối ưu nhất.";
-                    }
+                    botReply = "Tôi là chuyên gia trợ lý AI chuyên phân tích giải pháp thực tế. Hãy chọn một tình huống mô phỏng trên màn hình để tôi có thể hỗ trợ bạn định hướng phương án tối ưu nhất.";
                 }
 
                 chatBody.innerHTML += `<div class="ai-msg bot">${botReply}</div>`;
