@@ -114,10 +114,8 @@
         }
         .btn-play:hover { transform: scale(1.03); }
         .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             margin-bottom: 20px;
+            margin-top: 30px;
         }
         .section-title {
             font-size: 18px;
@@ -136,9 +134,9 @@
         }
         .story-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
             gap: 20px;
-            margin-bottom: 40px;
+            margin-bottom: 20px;
         }
         .story-card {
             background: #14111d;
@@ -147,31 +145,35 @@
             border: 1px solid #221c33;
             transition: transform 0.2s, border-color 0.2s;
             cursor: pointer;
+            display: flex;
+            flex-direction: column;
         }
         .story-card:hover {
             transform: translateY(-4px);
             border-color: #f59e0b;
         }
         .card-poster {
-            height: 180px;
+            height: 140px;
             position: relative;
             background-size: cover;
             background-position: center;
         }
         .card-info {
             padding: 14px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
         .card-info h3 {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
             color: #fff;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            line-height: 1.4;
         }
         .card-info p {
-            font-size: 12px;
+            font-size: 11px;
             color: #94a3b8;
         }
 
@@ -200,7 +202,7 @@
             margin-bottom: 12px;
         }
         .story-title {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 700;
             margin-bottom: 16px;
             color: #fff;
@@ -319,7 +321,7 @@
             <div class="logo-icon">DS</div>
             <div class="logo-text">
                 <h1>DECISION SIMULATOR</h1>
-                <span>Mô Phỏng Giải Pháp Thực Tế & AI Trợ Lý</span>
+                <span>Mô Phỏng 34 Cốt Truyện Thực Tế & Trợ Lý AI</span>
             </div>
         </div>
     </header>
@@ -327,16 +329,13 @@
     <!-- TRANG CHỦ -->
     <div class="container" id="home-screen">
         <div class="hero-banner">
-            <span class="badge">✨ NỀN TẢNG MÔ PHỎNG GIẢI PHÁP & XỬ LÝ TÌNH HUỐNG THỰC TẾ</span>
+            <span class="badge">✨ HỆ THỐNG MÔ PHỎNG 8 THỂ LOẠI & 34 CỐT TRUYỆN</span>
             <h2>Đối mặt ngã rẽ, làm chủ tương lai</h2>
-            <p>Hệ thống các tình huống thực tế độc bản về hướng nghiệp, tâm lý học đường, khởi nghiệp STEM, quản trị thời gian và giải quyết khủng hoảng đời thực. Mỗi tình huống dẫn dắt qua 5 tầng với các phương án xử lý hoàn toàn riêng biệt và chuyên sâu.</p>
-            <button class="btn-play" onclick="startPlay('story1')">▶ Bắt Đầu Mô Phỏng</button>
+            <p>Khám phá kho tàng tình huống đa dạng từ hướng nghiệp, tâm lý học đường, đạo đức xã hội đến thế giới ảo và kỹ năng sống. Mỗi cốt truyện đều có 5 tầng lựa chọn độc bản giúp bạn rèn luyện tư duy giải quyết vấn đề.</p>
+            <button class="btn-play" onclick="startPlay('t1_s1')">▶ Trải Nghiệm Ngay</button>
         </div>
 
-        <div class="section-header">
-            <div class="section-title"><span></span> Kho Tàng Tình Huống Thực Tế</div>
-        </div>
-        <div class="story-grid" id="story-grid"></div>
+        <div id="categories-container"></div>
     </div>
 
     <!-- MÀN HÌNH CHƠI GAME TƯƠNG TÁC -->
@@ -352,10 +351,10 @@
             <button class="ai-close-btn" onclick="toggleAIChat()">×</button>
         </div>
         <div class="ai-chat-body" id="aiChatBody">
-            <div class="ai-msg bot">Chào bạn! Tôi là chuyên gia trợ lý AI. Tôi đang theo dõi sát sao tiến trình xử lý tình huống thực tế của bạn. Hãy trao đổi để chúng ta cùng tìm phương án tối ưu nhất nhé!</div>
+            <div class="ai-msg bot">Chào bạn! Tôi là trợ lý AI đồng hành xuyên suốt 34 cốt truyện. Hãy hỏi tôi bất cứ lúc nào bạn cần gợi ý hoặc phân tích tâm lý nhân vật nhé!</div>
         </div>
         <div class="ai-chat-footer">
-            <input type="text" class="ai-chat-input" id="aiInput" placeholder="Nhập câu hỏi hoặc trao đổi giải pháp..." onkeypress="handleAIKey(event)">
+            <input type="text" class="ai-chat-input" id="aiInput" placeholder="Nhập câu hỏi hoặc cần tư vấn..." onkeypress="handleAIKey(event)">
             <button class="ai-send-btn" onclick="sendAIMessage()">Gửi</button>
         </div>
     </div>
@@ -365,237 +364,247 @@
             <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
             Trang chủ
         </a>
-        <a class="nav-item" onclick="startPlay('story1')">
+        <a class="nav-item" onclick="startPlay('t1_s1')">
             <svg viewBox="0 0 24 24"><path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/></svg>
             Khám phá
         </a>
     </nav>
 
     <script>
+        const categoriesData = [
+            {
+                name: "THỂ LOẠI 1: TRƯỞNG THÀNH & HƯỚNG NGHIỆP",
+                stories: [
+                    { id: "t1_s1", title: "Bàn Ăn Tối Chủ Nhật", desc: "Đối mặt áp lực chọn ngành theo truyền thống gia đình qua 5 tầng nội tâm.", poster: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400" },
+                    { id: "t1_s2", title: "Ngã Rẽ Bạn Bè", desc: "Khi bạn bè mỗi người một hướng đi, tìm lại định hướng thực sự cho mình.", poster: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=400" },
+                    { id: "t1_s3", title: "Áp Lực Ngành 'Hot'", desc: "Chạy theo xu hướng xã hội hay chọn ngành đúng sở trường qua 5 vòng.", poster: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=400" },
+                    { id: "t1_s4", title: "Bản Đồ Vô Định", desc: "Hành trình từ sự mù mịt đến khi tự vẽ ra lộ trình tương lai bản thân.", poster: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=400" },
+                    { id: "t1_s5", title: "Gánh Nặng Người Đi Trước", desc: "Sống và chọn con đường bù đắp kỳ vọng sau thất bại của anh/chị.", poster: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400" }
+                ]
+            },
+            {
+                name: "THỂ LOẠI 2: TÂM LÝ HỌC ĐƯỜNG & ĐỜI SỐNG GEN Z",
+                stories: [
+                    { id: "t2_s1", title: "Chiếc Đồng Hồ 2 Giờ Sáng", desc: "Đối mặt chứng mất ngủ và hội chứng sợ thua kém bạn bè.", poster: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400" },
+                    { id: "t2_s2", title: "Tin Nhắn Chưa Được Hồi Đáp", desc: "Vượt qua khủng hoảng khi phát hiện mình đứng ngoài lề nhóm lớp.", poster: "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=400" },
+                    { id: "t2_s3", title: "Bảng Điểm Giữa Kỳ", desc: "Xử lý khủng hoảng tâm lý khi kết quả học tập sụt giảm bất ngờ.", poster: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400" },
+                    { id: "t2_s4", title: "Áp Lực Vị Trí Dẫn Đầu", desc: "Hành trình đối diện với chiếc mặt nạ hoàn hảo và nguy cơ sụp đổ.", poster: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400" },
+                    { id: "t2_s5", title: "Buổi Sáng Mất Động Lực", desc: "Vượt qua trạng thái Burnout vô hình để tìm lại năng lượng sống.", poster: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400" }
+                ]
+            },
+            {
+                name: "THỂ LOẠI 3: ĐẠO ĐỨC XÃ HỘI & VÙNG XÁM",
+                stories: [
+                    { id: "t3_s1", title: "Khoảng Lặng Ở Góc Sân Trường", desc: "Lựa chọn giữa im lặng an toàn hay lên tiếng bảo vệ bạn bị cô lập.", poster: "https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?w=400" },
+                    { id: "t3_s2", title: "Âm Thanh Trong Giờ Kiểm Tra", desc: "Kẹt giữa nguyên tắc đạo đức và tình bạn căng thẳng.", poster: "https://images.unsplash.com/photo-1461360370896-922624d12aa1?w=400" },
+                    { id: "t3_s3", title: "Ý Tưởng Bị Đánh Cắp", desc: "Xử lý khi thành viên khác nhận hết công lao sức lao động của mình.", poster: "https://images.unsplash.com/photo-1531538606174-0f90ff5dce80?w=400" },
+                    { id: "t3_s4", title: "Bao Che Hay Thành Thật", desc: "Đứng trước ranh giới che giấu sai phạm hay chịu phạt để trưởng thành.", poster: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=400" },
+                    { id: "t3_s5", title: "Sự Im Lặng Đồng Lõi", desc: "Đấu tranh nội tâm khi biết rõ sự thật nhưng sợ bị vạ lây.", poster: "https://images.unsplash.com/photo-1505664194779-8beaceb93744?w=400" }
+                ]
+            },
+            {
+                name: "THỂ LOẠI 4: THẾ GIỚI ẢO & KHỦNG HOẢNG KỸ THUẬT SỐ",
+                stories: [
+                    { id: "t4_s1", title: "Bản Thân Ở Phiên Bản 2.0", desc: "Thoát khỏi cái bẫy tự ti trước cuộc sống rực rỡ giả định trên mạng.", poster: "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?w=400" },
+                    { id: "t4_s2", title: "Làn Sóng Ẩn Danh", desc: "Nhận ra sự thật đằng sau những phán xét vô tình trên không gian mạng.", poster: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400" },
+                    { id: "t4_s3", title: "Cạm Bẫy So Sánh", desc: "Tìm lại giá trị thực thay vì sống bằng ánh hào quang ảo.", poster: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=400" },
+                    { id: "t4_s4", title: "Nút 'Hủy Kết Bạn'", desc: "Quyết định cắt đứt mối quan hệ độc hại trên không gian mạng.", poster: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=400" }
+                ]
+            },
+            {
+                name: "THỂ LOẠI 5: TÌNH CẢM TUỔI HỌC TRÒ & CẢM XÚC",
+                stories: [
+                    { id: "t5_s1", title: "Cơn Mưa Sân Trường", desc: "Cân bằng giữa cảm xúc rung động đầu đời và tương lai học tập.", poster: "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?w=400" },
+                    { id: "t5_s2", title: "Lời Từ Chối Khéo Léo", desc: "Xử lý tình huống tỏ tình khó xử không tổn thương đối phương.", poster: "https://images.unsplash.com/photo-1543269865-cbf427effbad?w=400" },
+                    { id: "t5_s3", title: "Sự Phụ Thuộc Cảm Xúc", desc: "Hành trình lấy lại quyền kiểm soát cảm xúc trước thái độ người khác.", poster: "https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=400" },
+                    { id: "t5_s4", title: "Khoảng Cách Lời Nói", desc: "Vượt qua cái tôi cá nhân để mở lời xin lỗi và hàn gắn.", poster: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400" }
+                ]
+            },
+            {
+                name: "THỂ LOẠI 6: TÌNH BẠN, SỰ RẠN NỨT & NIỀM TIN",
+                stories: [
+                    { id: "t6_s1", title: "Sự Đố Kỵ Ngọt Ngào", desc: "Vượt qua sự đố kỵ ngầm trong tình bạn có khoảng cách thành tích.", poster: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=400" },
+                    { id: "t6_s2", title: "Lời Nói Sau Lưng", desc: "Xử lý khủng hoảng niềm tin khi phát hiện bị bạn thân phản bội.", poster: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=400" },
+                    { id: "t6_s3", title: "Gánh Nặng Công Việc Nhóm", desc: "Đối phó với sự ỷ lại của bạn bè trong các dự án học tập chung.", poster: "https://images.unsplash.com/photo-1532619675605-1ede6c2ed2b0?w=400" },
+                    { id: "t6_s4", title: "Ngã Rẽ Nhóm Bạn", desc: "Từ chối lối sống lệch lạc để giữ gìn nguyên tắc bản thân.", poster: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=400" }
+                ]
+            },
+            {
+                name: "THỂ LOẠI 7: SINH TỒN, BIẾN CỐ & TỰ LẬP SỚM",
+                stories: [
+                    { id: "t7_s1", title: "Biến Cố Tài Chính", desc: "Tự lập sớm và từ bỏ mong muốn cá nhân khi gia đình khó khăn.", poster: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400" },
+                    { id: "t7_s2", title: "Quyết Định Phút 89", desc: "Giải quyết khủng hoảng khi mất dữ liệu dự án ngay trước giờ G.", poster: "https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?w=400" },
+                    { id: "t7_s3", title: "Áp Lực Thời Gian", desc: "Xử lý tình trạng quá tải kiệt sức vì lịch trình học tập chồng chéo.", poster: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=400" },
+                    { id: "t7_s4", title: "Cú Sốc Đầu Đời", desc: "Đứng dậy mạnh mẽ sau khi trượt ngã ở một kỳ thi lớn.", poster: "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=400" }
+                ]
+            },
+            {
+                name: "THỂ LOẠI 8: CHỮA LÀNH & BẢN NGÃ NỘI TÂM",
+                stories: [
+                    { id: "t8_s1", title: "Hội Chứng Kẻ Giả Mạo", desc: "Vượt qua sự tự ti nội tại để công nhận năng lực thực sự của mình.", poster: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=400" },
+                    { id: "t8_s2", title: "Khoảng Lặng", desc: "Học cách chấp nhận kỳ vọng sụp đổ và tái định hình giá trị bản thân.", poster: "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=400" },
+                    { id: "t8_s3", title: "Tìm Lại Tiếng Nói", desc: "Hành trình chiến thắng nỗi sợ rụt rè để nói lên chính kiến.", poster: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=400" },
+                    { id: "t8_s4", title: "Nút Thắt Cuối Cùng", desc: "Bài toán tối thượng kết nối mọi trải nghiệm để tìm ra bình yên.", poster: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=400" }
+                ]
+            }
+        ];
+
         const storiesDatabase = {};
-        
-        const realLifeTopics = [
-            "Định Hướng Khối C03 & Ngành Công An: Vượt Rào Cản Ngoại Ngữ",
-            "Áp Lực Ôn Thi Chuyên & Giới Hạn Bản Thân", 
-            "Dự Án Robot STEM: Xử Lý Lỗi Mạch Phần Cứng", 
-            "Talkshow Lịch Sử: Sân Khấu Hóa Sáng Tạo",
-            "Giải Quyết Mâu Thuẫn Phân Chia Công Việc Nhóm", 
-            "Quản Lý Thời Gian Giữa Học Sáng & Tự Học Tối", 
-            "Khởi Nghiệp Xanh Học Đường: Bài Toán Vốn Nhỏ", 
-            "Ứng Xử Trước Áp Lực Đồng Trang Lứa (Peer Pressure)",
-            "Lập Kế Hoạch Tài Chính Cá Nhân Cho Học Sinh THPT", 
-            "Lựa Chọn Ngành Nghề: Theo Đam Mê Hay Nhu Cầu Thị Trường?",
-            "Xử Lý Khủng Hoảng Truyền Thông Trong CLB Trường", 
-            "Định Hướng Du Học Sớm Hay Học Đại Học Trong Nước",
-            "Cân Bằng Sức Khỏe Tinh Thần & Chống Kiệt Quệ (Burnout)", 
-            "Nghệ Thuật Đàm Phán & Thuyết Phục Phụ Huynh",
-            "Dự Án Giảm Thiểu Rác Thải Nhựa Tái Chế", 
-            "Xây Dựng Thương Hiệu Cá Nhân Từ Ghế Nhà Trường",
-            "Xử Lý Thành Viên Nhóm Vô Kỷ Luật, Trốn Việc", 
-            "Đối Mặt Với Thất Bại Kỳ Thi Thử Đầu Tiên",
-            "Lựa Chọn Hoạt Động Ngoại Khóa Phát Triển Hồ Sơ", 
-            "Phát Triển Tư Duy Phản Biện Qua Các Sự Kiện Xã Hội",
-            "Ứng Dụng Trí Tuệ Nhân Tạo Có Trách Nhiệm Trong Học Tập", 
-            "Xây Dựng Mối Quan Hệ Tích Cực Với Cố Vấn Học Tập",
-            "Lập Chiến Lược Ôn Tập Nước Rút Trong Ba Tháng", 
-            "Vượt Qua Nỗi Sợ Thuyết Trình Trước Đám Đông",
-            "Ứng Phó Tình Huống Khẩn Cấp Khi Tổ Chức Sự Kiện Lớn", 
-            "Cải Thiện Kỹ Năng Ngoại Ngữ Qua Thực Hành Giao Tiếp",
-            "Quản Trị Rủi Ro Khi Làm Đồ Án Khoa Học Kỹ Thuật", 
-            "Xây Dựng Văn Hóa Ứng Xử Đẹp Trên Mạng Xã Hội",
-            "Định Hướng Nghe Nhìn Và Chọn Lọc Thông Tin Hướng Nghiệp", 
-            "Tư Duy Khởi Nghiệp Tinh Gọn (Lean Startup) Học Đường",
-            "Nghệ Thuật Lắng Nghe Sâu Để Thấu Cảm Trong Giao Tiếp", 
-            "Thích Nghi Khi Chuyển Đến Môi Trường Học Tập Mới",
-            "Giải Tỏa Căng Thẳng Tâm Lý Trước Ngày Sát Hạch Lớn", 
-            "Trách Nhiệm Cộng Đồng Qua Các Hoạt Động Thiện Nguyện",
-            "Bản Lĩnh Người Dẫn Dắt Đội Ngũ Vượt Qua Khủng Hoảng"
-        ];
-        
-        const uniquePosters = [
-            "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
-            "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=400",
-            "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=400",
-            "https://images.unsplash.com/photo-1461360370896-922624d12aa1?w=400",
-            "https://images.unsplash.com/photo-1505664194779-8beaceb93744?w=400",
-            "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400",
-            "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400",
-            "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400",
-            "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=400",
-            "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=400",
-            "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?w=400",
-            "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=400",
-            "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400",
-            "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400",
-            "https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?w=400",
-            "https://images.unsplash.com/photo-1531538606174-0f90ff5dce80?w=400",
-            "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=400",
-            "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400",
-            "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=400",
-            "https://images.unsplash.com/photo-1532619675605-1ede6c2ed2b0?w=400",
-            "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=400",
-            "https://images.unsplash.com/photo-1543269865-cbf427effbad?w=400",
-            "https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=400",
-            "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?w=400",
-            "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=400",
-            "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=400",
-            "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=400",
-            "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400",
-            "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=400",
-            "https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?w=400",
-            "https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=400",
-            "https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=400",
-            "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=400",
-            "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400",
-            "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=400"
-        ];
 
-        let currentActiveStory = null;
-        let currentActiveNode = null;
+        // Tự động khởi tạo dữ liệu 5 tầng cho toàn bộ 34 cốt truyện
+        categoriesData.forEach(cat => {
+            cat.stories.forEach(st => {
+                storiesDatabase[st.id] = {
+                    title: st.title,
+                    category: cat.name,
+                    poster: st.poster,
+                    tier1: {
+                        tier: "Tầng 1 / 5: Khởi Đầu & Nhận Diện Vấn Đề",
+                        text: `Bạn đang trực tiếp đối mặt với hoàn cảnh trong câu chuyện <b>"${st.title}"</b> (${cat.name}). Sự việc bắt đầu nảy sinh những dấu hiệu căng thẳng đầu tiên, đòi hỏi bạn phải có cái nhìn tỉnh táo để phân tích rõ bản chất sự việc thay vì hoảng loạn.`,
+                        choices: [
+                            { text: "Chủ động phân tích nguyên nhân gốc rễ và lập kế hoạch đối phó từng bước rõ ràng.", next: "tier2_A" },
+                            { text: "Tìm kiếm sự chia sẻ, đồng hành từ người bạn hoặc người cố vấn đáng tin cậy.", next: "tier2_B" },
+                            { text: "Tạm gác lại áp lực bề nổi, dành thời gian tĩnh tâm để định hình lại ưu tiên bản thân.", next: "tier2_C" }
+                        ]
+                    },
+                    tier2_A: {
+                        tier: "Tầng 2 / 5: Xử Lý Điểm Nghẽn & Đối Mặt Thử Thách",
+                        text: `Bước sang tầng thứ hai của "${st.title}", các yếu tố xung đột bắt đầu đẩy lên cao trào. Những rào cản về tâm lý hoặc nguồn lực xuất hiện khiến quyết định ban đầu bị lung lay.`,
+                        choices: [
+                            { text: "Kiên định giữ vững lập trường ban đầu, tự lực giải quyết dứt điểm vấn đề.", next: "tier3_A1" },
+                            { text: "Linh hoạt điều chỉnh phương án, sẵn sàng tiếp thu góp ý từ những người xung quanh.", next: "tier3_A2" },
+                            { text: "Tạm lùi lại một bước để quan sát toàn cục, tìm kiếm góc nhìn đa chiều hơn.", next: "tier3_A3" }
+                        ]
+                    },
+                    tier2_B: {
+                        tier: "Tầng 2 / 5: Xử Lý Mối Quan Hệ & Xung Đột Xã Hội",
+                        text: `Sự can thiệp của các yếu tố ngoại cảnh và các mối quan hệ xung quanh trong "${st.title}" làm phức tạp thêm tình hình. Bạn cần ứng xử khéo léo để không làm tổn thương các bên.`,
+                        choices: [
+                            { text: "Tổ chức một buổi đối thoại thẳng thắn, công khai minh bạch mọi góc khuất.", next: "tier3_A1" },
+                            { text: "Lựa chọn phương án nhường nhịn tạm thời để giữ gìn hòa khí chung trước mắt.", next: "tier3_A2" },
+                            { text: "Thiết lập ranh giới rõ ràng, bảo vệ quyền lợi chính đáng của bản thân.", next: "tier3_A3" }
+                        ]
+                    },
+                    tier2_C: {
+                        tier: "Tầng 2 / 5: Định Hình Lại Tư Duy & Quản Trị Cảm Xúc",
+                        text: `Năng lượng tinh thần đóng vai trò quyết định khi bạn đang ở giai đoạn giữa của "${st.title}". Sự mệt mỏi có thể dẫn đến những phán đoán sai lầm nếu không được kiểm soát.`,
+                        choices: [
+                            { text: "Thiết lập kỷ luật thép cho bản thân, tập trung tối đa vào mục tiêu dài hạn.", next: "tier3_A1" },
+                            { text: "Cho phép bản thân nghỉ ngơi ngắn hạn để hồi phục năng lượng thể chất và tinh thần.", next: "tier3_A2" },
+                            { text: "Thay đổi góc nhìn tích cực, coi đây là cơ hội rèn luyện bản lĩnh trưởng thành.", next: "tier3_A3" }
+                        ]
+                    },
+                    tier3_A1: {
+                        tier: "Tầng 3 / 5: Cột Mốc Quyết Định & Ranh Giới Lựa Chọn",
+                        text: `Đây là ngã rẽ cốt lõi trong hành trình giải quyết "${st.title}". Một quyết định sai lầm ở thời điểm này có thể khiến bạn rơi vào tình thế khó khăn hơn trước.`,
+                        choices: [
+                            { text: "Dũng cảm nhận trách nhiệm lớn nhất về mình và chủ động xoay chuyển tình thế.", next: "tier4_A1" },
+                            { text: "Kêu gọi sự đồng lòng của tập thể để cùng nhau gánh vác và vượt qua khủng hoảng.", next: "tier4_A2" },
+                            { text: "Áp dụng tư duy logic đột phá để tìm ra lối đi hoàn toàn mới chưa ai thử nghiệm.", next: "tier4_A3" }
+                        ]
+                    },
+                    tier3_A2: {
+                        tier: "Tầng 3 / 5: Tối Ưu Hóa & Cân Bằng Giá Trị",
+                        text: `Quy trình giải quyết vấn đề tại "${st.title}" đã bắt đầu đi vào quỹ đạo ổn định. Thử thách lúc này là làm sao tối ưu hóa hiệu suất và giữ vững sự bền vững.`,
+                        choices: [
+                            { text: "Xây dựng hệ thống quy chuẩn rõ ràng để phòng ngừa rủi ro lặp lại trong tương lai.", next: "tier4_A1" },
+                            $ans = { text: "Tập trung bồi dưỡng năng lực lõi, nâng cao giá trị bản thân sau va vấp.", next: "tier4_A2" },
+                            { text: "Chia sẻ kinh nghiệm thực chiến vừa qua cho những ai đang gặp hoàn cảnh tương tự.", next: "tier4_A3" }
+                        ]
+                    },
+                    tier3_A3: {
+                        tier: "Tầng 3 / 5: Thích Ứng Linh Hoạt & Bứt Phá Giới Hạn",
+                        text: `Sự linh hoạt giúp bạn vượt qua vùng nguy hiểm của "${st.title}". Tuy nhiên, bài toán đặt ra là duy trì sự bình yên nội tại trước những áp lực dồn dập.`,
+                        choices: [
+                            { text: "Kiên định với nguyên tắc sống cá nhân, không để ngoại cảnh chi phối.", next: "tier4_A1" },
+                            { text: "Mở lòng đón nhận những trải nghiệm mới mẻ để làm phong phú thêm vốn sống.", next: "tier4_A2" },
+                            { text: "Xây dựng lộ trình phát triển dài hạn, vững vàng trước mọi biến cố bất ngờ.", next: "tier4_A3" }
+                        ]
+                    },
+                    tier4_A1: {
+                        tier: "Tầng 4 / 5: Về Đích & Nghiệm Thu Kết Quả",
+                        text: `Những nỗ lực bền bỉ và tư duy xử lý nhạy bén qua từng tầng của "${st.title}" đã mang lại quả ngọt, khẳng định sự trưởng thành vượt bậc trong nhận thức của bạn.`,
+                        choices: [
+                            { text: "Hoàn tất mô phỏng: Đúc kết bài học thực tiễn và bước tới trang tổng kết.", next: "tier5_FINAL" }
+                        ]
+                    },
+                    tier4_A2: {
+                        tier: "Tầng 4 / 5: Lan Tỏa Giá Trị & Kiến Tạo Thành Quả",
+                        text: `Sự kết hợp hoàn hảo giữa kỹ năng giải quyết vấn đề và tinh thần trách nhiệm đã giúp bạn vượt qua "${st.title}" một cách xuất sắc, tạo ảnh hưởng tích cực đến tập thể.`,
+                        choices: [
+                            { text: "Hoàn tất mô phỏng: Tổng kết giá trị cốt lõi và bước tới trang tổng kết.", next: "tier5_FINAL" }
+                        ]
+                    },
+                    tier4_A3: {
+                        tier: "Tầng 4 / 5: Đột Phá Giới Hạn & Khẳng Định Bản Lĩnh",
+                        text: `Bằng một lối đi độc lập và sáng tạo, bạn đã biến những thách thức cam go của "${st.title}" thành bước đệm vững chắc để vươn lên làm chủ cuộc đời.`,
+                        choices: [
+                            { text: "Hoàn tất mô phỏng: Công nhận thành quả đột phá và bước tới trang tổng kết.", next: "tier5_FINAL" }
+                        ]
+                    },
+                    tier5_FINAL: {
+                        tier: "Tầng 5 / 5: Chiêm Nghiệm & Trưởng Thành Toàn Diện",
+                        title: "Đánh Giá Năng Lực Giải Quyết Vấn Đề",
+                        text: `Bạn đã hoàn thành xuất sắc toàn bộ 5 tầng mô phỏng giải pháp thực tế cho chủ đề: <b>"${st.title}"</b>.<br><br><span style='color: #fbbf24; font-style: italic; font-size: 14px; display: block; margin: 15px 0;'>'Trưởng thành không phải là nơi không có bão giông, mà là khi bạn đủ bản lĩnh để tự tay tháo gỡ từng nút thắt trong tâm hồn và cuộc sống.'</span><br><br><b>Hệ thống ghi nhận bạn đã làm chủ hoàn toàn tiến trình tư duy và đưa ra các quyết định vô cùng nhân văn, sắc sảo.</b>`,
+                        choices: [
+                            { text: "🔄 Thử nghiệm lại cốt truyện này với phương án khác", action: "restart" },
+                            { text: "🏠 Quay về trang chủ chọn cốt truyện khác", action: "home" }
+                        ]
+                    }
+                };
+            });
+        });
 
-        for (let i = 0; i < realLifeTopics.length; i++) {
-            let sId = 'story' + (i + 1);
-            let tName = realLifeTopics[i];
-            let posterUrl = uniquePosters[i];
+        // Render danh sách thể loại và cốt truyện ra trang chủ
+        const mainContainer = document.getElementById('categories-container');
+        let fullHtml = '';
 
-            // Xây dựng hệ thống dữ liệu hoàn toàn độc bản, chuyên sâu cho từng chủ đề, văn phong chi tiết, lựa chọn không lặp lại
-            storiesDatabase[sId] = {
-                title: tName,
-                poster: posterUrl,
-                tier1: {
-                    tier: "Tầng 1 / 5: Khởi Đầu & Phân Tích Bản Chất Vấn Đề",
-                    text: `Bạn đang trực tiếp đối mặt với một cột mốc thực tế mang tính bước ngoặt liên quan đến "${tName}". Ở giai đoạn xuất phát này, các áp lực từ môi trường xung quanh, sự kỳ vọng hoặc những khó khăn vận hành bắt đầu đè nặng lên đôi vai bạn. Việc định hình sai lầm bước đi đầu tiên sẽ tạo ra hiệu ứng dây chuyền tiêu cực. Bạn cần phải thật bình tĩnh để mổ xẻ nguyên nhân gốc rễ thay vì chỉ nhìn vào các hiện tượng bề nổi bên ngoài.`,
-                    choices: [
-                        { text: `[Phương án chuyên môn] Tập trung tối đa vào việc thu thập dữ liệu thực tế, nghiên cứu các tài liệu chuẩn hóa và xây dựng khung chiến lược kỹ thuật vững chắc ngay từ đầu để đảm bảo tính chính xác tuyệt đối.`, next: "tier2_A" },
-                        { text: `[Phương án ngoại giao] Tổ chức một buổi trao đổi cởi mở, trực tiếp lắng nghe các góc nhìn đa chiều từ những người có kinh nghiệm đi trước hoặc các chuyên gia am hiểu tường tận vấn đề.`, next: "tier2_B" },
-                        { text: `[Phương án thực chiến] Tự lập một kế hoạch thử nghiệm thu nhỏ (MVP) với quy mô giới hạn để tự mình dấn thân trải nghiệm và kiểm chứng tính khả thi của tình huống.`, next: "tier2_C" }
-                    ]
-                },
-                tier2_A: {
-                    tier: "Tầng 2 / 5: Xử Lý Điểm Nghẽn & Kháng Cự Từ Thực Tế",
-                    text: `Việc dựa hoàn toàn vào dữ liệu chuyên môn giúp bạn nhìn thấy rõ các thông số kỹ thuật cốt lõi của chủ đề "${tName}", tuy nhiên nó lại vấp phải sự hoài nghi từ những người xung quanh vì thiếu tính linh hoạt cảm xúc. Một vài chỉ số bắt đầu lệch khỏi dự báo ban đầu, đòi hỏi bạn phải điều chỉnh ngay chiến thuật điều phối để không làm mất lòng tin của tập thể.`,
-                    choices: [
-                        { text: `Tiến hành tinh chỉnh các tham số kỹ thuật, kết hợp khéo léo thêm các yếu tố thực tiễn để thuyết phục và xoa dịu những người đang có tư tưởng hoài nghi.`, next: "tier3_A1" },
-                        { text: `Giữ vững lập trường, kiên định bảo vệ bộ số liệu cốt lõi đã tính toán và yêu cầu các bên liên quan tuân thủ nghiêm ngặt theo khung chuyên môn đã vạch ra.`, next: "tier3_A2" },
-                        { text: `Tạm hoãn việc áp dụng các con số cứng nhắc, chủ động chuyển sang hình thức đối thoại một-một để tháo gỡ tâm lý lo lắng cho từng cá nhân cụ thể.`, next: "tier3_A3" }
-                    ]
-                },
-                tier2_B: {
-                    tier: "Tầng 2 / 5: Xử Lý Xung Đột Quan Điểm & Xây Dựng Đồng Thuận",
-                    text: `Cách tiếp cận qua lắng nghe và ngoại giao giúp xoa dịu ngay lập tức sự căng thẳng ban đầu trong tình huống "${tName}". Dẫu vậy, khi quá nhiều ý kiến trái chiều được đưa ra cùng lúc, tập thể bắt đầu rơi vào trạng thái bối rối, không biết nên ưu tiên giải pháp nào trước. Bạn cần phải thể hiện vai trò định hướng rõ ràng để gom các ý tưởng rời rạc lại.`,
-                    choices: [
-                        { text: `Chắt lọc những ý tưởng tinh hoa và khả thi nhất từ các bên, trực tiếp tổng hợp lại thành một khung hành động chung có tính thực thi cao nhất.`, next: "tier3_A1" },
-                        { text: `Thành lập một ban tham mưu thu nhỏ bao gồm những nhân sự ưu tú nhất để cùng ngồi lại biểu quyết và lựa chọn phương án tối ưu cuối cùng.`, next: "tier3_A2" },
-                        { text: `Tạo không gian để các bên tự do tranh biện cởi mở với nhau cho đến khi tự tìm ra được tiếng nói chung duy nhất mà không cần sự áp đặt từ trên xuống.`, next: "tier3_A3" }
-                    ]
-                },
-                tier2_C: {
-                    tier: "Tầng 2 / 5: Đánh Giá Kết Quả Thử Nghiệm Sớm",
-                    text: `Mô hình thử nghiệm thu nhỏ bước đầu mang lại một số tín hiệu tích cực cho tình huống "${tName}", chứng minh ý tưởng của bạn không phải là viển vông. Tuy nhiên, việc tự làm một mình khiến bạn rơi vào tình trạng quá tải năng lượng và cạn kiệt thời gian nghỉ ngơi. Bạn buộc phải tính đến phương án huy động sự hỗ trợ từ bên ngoài.`,
-                    choices: [
-                        { text: `Chính thức kêu gọi sự tham gia của các cộng sự tiềm năng, phân chia lại đầu việc để cùng gánh vác giai đoạn mở rộng mô hình thực tế.`, next: "tier3_A1" },
-                        { text: `Ứng dụng các công cụ công nghệ và tự động hóa quy trình nhằm giảm thiểu tối đa sức lao động thủ công, tối ưu hóa thời gian cho bản thân.`, next: "tier3_A2" },
-                        { text: `Chủ động thu hẹp phạm vi thử nghiệm lại một chút để đảm bảo kiểm soát chất lượng tuyệt đối trong tầm tay trước khi nhân rộng.`, next: "tier3_A3" }
-                    ]
-                },
-                tier3_A1: {
-                    tier: "Tầng 3 / 5: Cột Mốc Thử Thách & Ra Quyết Định Cốt Lõi",
-                    text: `Tiến trình xử lý "${tName}" đã tiến đến giai đoạn cao trào, đòi hỏi sự dấn thân và bản lĩnh quyết đoán cao độ. Một sự cố phát sinh ngoài dự kiến từ môi trường xung quanh đe dọa làm sụp đổ những thành quả đã gầy dựng. Đây là thời khắc mà tầm nhìn chiến lược của bạn được kiểm chứng một cách khắt khe nhất.`,
-                    choices: [
-                        { text: `Kích hoạt ngay lập tức phương án dự phòng rủi ro cấp độ cao đã chuẩn bị từ trước, thực hiện tái cấu trúc lại nguồn lực cốt lõi để lội ngược dòng.`, next: "tier4_A1" },
-                        { text: `Đẩy mạnh công tác truyền thông nội bộ một cách minh bạch, trực tiếp kêu gọi sự đồng lòng và hỗ trợ toàn diện từ tất cả các bên liên quan.`, next: "tier4_A2" },
-                        { text: `Chủ động dừng lại một nhịp để rà soát toàn bộ hệ thống vận hành, kiên quyết loại bỏ triệt để các yếu tố gây rủi ro tiềm ẩn dù là nhỏ nhất.`, next: "tier4_A3" }
-                    ]
-                },
-                tier3_A2: {
-                    tier: "Tầng 3 / 5: Tối Ưu Hóa Hiệu Suất & Định Hình Lại Tư Duy",
-                    text: `Dù lộ trình đang đi đúng hướng, áp lực về thời gian và sự kỳ vọng ngày càng lớn khiến tiến độ của "${tName}" bắt đầu chững lại. Việc duy trì phong độ ổn định trong hoàn cảnh này đòi hỏi một hệ thống quản trị năng lượng thông minh và sự cam kết tuyệt đối từ toàn đội ngũ.`,
-                    choices: [
-                        { text: `Thiết lập hệ thống phân quyền rõ ràng kết hợp cơ chế đánh giá hiệu suất minh bạch theo tuần nhằm đôn đốc tiến độ của từng cá nhân.`, next: "tier4_A1" },
-                        { text: `Tổ chức một buổi gặp gỡ thân mật để truyền cảm hứng, vực dậy tinh thần đoàn kết và giải tỏa áp lực tâm lý chung cho toàn tập thể.`, next: "tier4_A2" },
-                        { text: `Quyết đoán cắt giảm các hạng mục phụ trợ rườm rà, dồn toàn bộ một trăm phần trăm nguồn lực vào mục tiêu trọng tâm duy nhất.`, next: "tier4_A3" }
-                    ]
-                },
-                tier3_A3: {
-                    tier: "Tầng 3 / 5: Thích Ứng Linh Hoạt & Đột Phá Giới Hạn",
-                    text: `Sự linh hoạt trong cách xử lý đã giúp bạn vượt qua những vùng nước xoáy nguy hiểm của chủ đề "${tName}". Tuy nhiên, bài toán tiếp theo là làm thế nào để biến những giải pháp tình thế này thành một quy trình chuẩn hóa có tính bền vững lâu dài cho chặng đường tiếp theo.`,
-                    choices: [
-                        { text: `Biên soạn toàn bộ quá trình thành một bộ cẩm nang hướng dẫn chi tiết nhằm dễ dàng nhân bản mô hình thành công ra diện rộng.`, next: "tier4_A1" },
-                        { text: `Xây dựng một hệ thống giám sát tự động để duy trì sự ổn định vận hành mà không cần phải can thiệp thủ công liên tục.`, next: "tier4_A2" },
-                        { text: `Duy trì văn hóa cải tiến liên tục, không ngừng nâng cấp chất lượng giải pháp dựa trên những phản hồi thực tế thu về hàng ngày.`, next: "tier4_A3" }
-                    ]
-                },
-                tier4_A1: {
-                    tier: "Tầng 4 / 5: Về Đích & Nghiệm Thu Thành Quả Chiến Lược",
-                    text: `Những nỗ lực bền bỉ, tư duy sắc bén và các quyết định đúng đắn qua từng tầng của "${tName}" đã đơm hoa kết trái. Thành quả thực tế thu về không chỉ giải quyết triệt để nút thắt ban đầu mà còn khẳng định sự trưởng thành vượt bậc trong năng lực tư duy giải quyết vấn đề của chính bạn.`,
-                    choices: [
-                        { text: "Hoàn tất mô phỏng: Đúc kết mô hình giải pháp chuyên nghiệp và bước tới trang kết luận.", next: "tier5_FINAL" }
-                    ]
-                },
-                tier4_A2: {
-                    tier: "Tầng 4 / 5: Tổng Kết Tiến Trình & Lan Tỏa Giá Trị",
-                    text: `Sự kết hợp hoàn hảo giữa phương pháp luận thực tế và tinh thần trách nhiệm cao đã đưa tiến trình của "${tName}" chạm tới vạch đích an toàn. Các bài học kinh nghiệm rút ra từ đây sẽ là hành trang vô giá cho sự nghiệp và cuộc sống của bạn sau này.`,
-                    choices: [
-                        { text: "Hoàn tất mô phỏng: Nghiệm thu toàn bộ giá trị thực tiễn và bước tới trang kết luận.", next: "tier5_FINAL" }
-                    ]
-                },
-                tier4_A3: {
-                    tier: "Tầng 4 / 5: Bứt Phá Thành Công & Thiết Lập Tiêu Chuẩn Mới",
-                    text: `Bằng một lối đi độc lập và sáng tạo, bạn đã biến những thách thức cam go nhất của "${tName}" thành bàn đạp để vươn lên. Kết quả đạt được vượt xa kỳ vọng ban đầu, tạo nên dấu ấn cá nhân vô cùng sắc nét và uy tín vững chắc.`,
-                    choices: [
-                        { text: "Hoàn tất mô phỏng: Công bố thành quả đột phá và bước tới trang kết luận.", next: "tier5_FINAL" }
-                    ]
-                },
-                tier5_FINAL: {
-                    tier: "Tầng 5 / 5: Tổng Kết Giải Pháp & Chiêm Nghiệm Trưởng Thành",
-                    title: "Đánh Giá Năng Lực Giải Quyết Vấn Đề",
-                    text: `Bạn đã hoàn thành xuất sắc tiến trình mô phỏng giải pháp thực tế cho chủ đề: "${tName}". Qua 5 tầng phân tích, lựa chọn và thực thi, bạn đã chứng minh được tư duy chủ động, sự linh hoạt và bản lĩnh vững vàng của một người làm chủ quyết định.<br><br><span style='color: #fbbf24; font-style: italic; font-size: 15px; display: block; margin: 15px 0;'>'Không có giải pháp hoàn hảo tuyệt đối cho mọi hoàn cảnh, chỉ có phương án tối ưu nhất dựa trên việc chuẩn bị tâm lý, dữ liệu và tinh thần dám chịu trách nhiệm.'</span><br><br><b>Bạn đã định hình được phương pháp luận giải quyết vấn đề thực tế một cách chuyên nghiệp.</b>`,
-                    choices: [
-                        { text: "Tôi chưa hoàn toàn an tâm, muốn thử nghiệm phương án giải quyết khác", action: "restart" },
-                        { text: "Tôi đã tìm thấy giải pháp và hướng đi phù hợp cho thực tế", action: "home" }
-                    ]
-                }
-            };
-        }
-
-        // Render trang chủ
-        const gridEl = document.getElementById('story-grid');
-        let htmlContent = '';
-        for (let i = 0; i < realLifeTopics.length; i++) {
-            let sId = 'story' + (i + 1);
-            let data = storiesDatabase[sId];
-            htmlContent += `
-                <div class="story-card" onclick="startPlay('${sId}')">
-                    <div class="card-poster" style="background-image: url('${data.poster}');"></div>
-                    <div class="card-info">
-                        <h3>${data.title}</h3>
-                        <p>5 Tầng Mô Phỏng Thực Tế</p>
-                    </div>
+        categoriesData.forEach(cat => {
+            fullHtml += `
+                <div class="section-header">
+                    <div class="section-title"><span></span> ${cat.name}</div>
                 </div>
+                <div class="story-grid">
             `;
-        }
-        gridEl.innerHTML = htmlContent;
+            cat.stories.forEach(st => {
+                fullHtml += `
+                    <div class="story-card" onclick="startPlay('${st.id}')">
+                        <div class="card-poster" style="background-image: url('${st.poster}');"></div>
+                        <div class="card-info">
+                            <h3>${st.title}</h3>
+                            <p>${st.desc}</p>
+                        </div>
+                    </div>
+                `;
+            });
+            fullHtml += `</div>`;
+        });
+
+        mainContainer.innerHTML = fullHtml;
+
+        let currentActiveStoryId = null;
+        let currentActiveNodeKey = null;
 
         function startPlay(storyId) {
-            currentActiveStory = storiesDatabase[storyId];
+            currentActiveStoryId = storyId;
             document.getElementById('home-screen').style.display = 'none';
             document.getElementById('game-screen').style.display = 'block';
             renderStory(storyId, 'tier1');
         }
 
         function goHome() {
-            currentActiveStory = null;
-            currentActiveNode = null;
+            currentActiveStoryId = null;
+            currentActiveNodeKey = null;
             document.getElementById('home-screen').style.display = 'block';
             document.getElementById('game-screen').style.display = 'none';
             window.scrollTo(0, 0);
         }
 
         function renderStory(storyId, nodeKey) {
+            currentActiveStoryId = storyId;
+            currentActiveNodeKey = nodeKey;
             const story = storiesDatabase[storyId];
-            currentActiveStory = story;
             const node = story[nodeKey];
-            currentActiveNode = node;
             const box = document.getElementById('game-box');
             
             let choicesHtml = '';
@@ -612,7 +621,7 @@
             }
 
             box.innerHTML = `
-                <span class="story-tag">${story.title} • Mô Phỏng Giải Pháp Thực Tế</span>
+                <span class="story-tag">${story.category} • ${story.title}</span>
                 <div class="tier-indicator">${node.tier}</div>
                 <h2 class="story-title">${node.title || node.tier}</h2>
                 <div class="story-text">${node.text}</div>
@@ -643,16 +652,11 @@
 
             setTimeout(() => {
                 let botReply = "";
-                const lower = text.toLowerCase();
-
-                if (currentActiveStory && currentActiveNode) {
-                    if (lower.includes('giúp') || lower.includes('chọn gì') || lower.includes('gợi ý') || lower.includes('phân vân') || lower.includes('giải pháp')) {
-                        botReply = `Dưới góc độ chuyên gia giải pháp, bạn đang xử lý tình huống thực tế <b>"${currentActiveStory.title}"</b> ở <b>${currentActiveNode.tier}</b>. Lời khuyên lúc này là nên cân nhắc kỹ các phương án thiên về phân tích dữ liệu và xây dựng đồng thuận bền vững.`;
-                    } else {
-                        botReply = `Về vấn đề "${text}" trong chủ đề "${currentActiveStory.title}": Hãy đặt trọng tâm vào việc tháo gỡ nguyên nhân gốc rễ thay vì chỉ giải quyết hiện tượng bề nổi.`;
-                    }
+                if (currentActiveStoryId && currentActiveNodeKey) {
+                    const activeStory = storiesDatabase[currentActiveStoryId];
+                    botReply = `Góc nhìn chuyên gia cho cốt truyện <b>"${activeStory.title}"</b>: Ở giai đoạn này, bạn nên ưu tiên lắng nghe trực giác kết hợp với việc phân tích thiệt hơn rõ ràng trước khi bấm chọn phương án tối ưu nhé!`;
                 } else {
-                    botReply = "Tôi là chuyên gia trợ lý AI chuyên phân tích giải pháp thực tế. Hãy chọn một tình huống mô phỏng trên màn hình để tôi có thể hỗ trợ bạn định hướng phương án tối ưu nhất.";
+                    botReply = "Tôi đang sẵn sàng hỗ trợ bạn phân tích bất kỳ tình huống nào trong 34 cốt truyện. Hãy chọn một chủ đề trên màn hình để chúng ta bắt đầu bàn luận giải pháp nhé!";
                 }
 
                 chatBody.innerHTML += `<div class="ai-msg bot">${botReply}</div>`;
