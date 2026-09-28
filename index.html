@@ -329,7 +329,7 @@
         <div class="hero-banner">
             <span class="badge">✨ NỀN TẢNG MÔ PHỎNG GIẢI PHÁP & XỬ LÝ TÌNH HUỐNG THỰC TẾ</span>
             <h2>Đối mặt ngã rẽ, làm chủ tương lai</h2>
-            <p>Hệ thống các tình huống thực tế độc bản về hướng nghiệp, tâm lý học đường, khởi nghiệp STEM, quản trị thời gian và giải quyết khủng hoảng đời thực. Mỗi tình huống dẫn dắt qua 5 tầng với các phương án xử lý hoàn toàn riêng biệt.</p>
+            <p>Hệ thống các tình huống thực tế độc bản về hướng nghiệp, tâm lý học đường, khởi nghiệp STEM, quản trị thời gian và giải quyết khủng hoảng đời thực. Mỗi tình huống dẫn dắt qua 5 tầng với các phương án xử lý hoàn toàn riêng biệt và chuyên sâu.</p>
             <button class="btn-play" onclick="startPlay('story1')">▶ Bắt Đầu Mô Phỏng</button>
         </div>
 
@@ -375,23 +375,40 @@
         const storiesDatabase = {};
         
         const realLifeTopics = [
-            "Định Hướng Khối C03 & Ngành Công An: Vượt Rào Cản Ngoại Ngữ", "Áp Lực Ôn Thi Chuyên & Giới Hạn Bản Thân", 
-            "Dự Án Robot STEM: Xử Lý Lỗi Mạch Phần Cứng", "Talkshow Lịch Sử: Sân Khấu Hóa Sáng Tạo",
-            "Giải Quyết Mâu Thuẫn Phân Chia Công Việc Nhóm", "Quản Lý Thời Gian Giữa Học Sáng & Tự Học Tối", 
-            "Khởi Nghiệp Xanh Học Đường: Bài Toán Vốn Nhỏ", "Ứng Xử Trước Áp Lực Đồng Trang Lứa (Peer Pressure)",
-            "Lập Kế Hoạch Tài Chính Cá Nhân Cho Học Sinh THPT", "Lựa Chọn Ngành Nghề: Theo Đam Mê Hay Nhu Cầu Thị Trường?",
-            "Xử Lý Khủng Hoảng Truyền Thông Trong CLB Trường", "Định Hướng Du Học Sớm Hay Học Đại Học Trong Nước",
-            "Cân Bằng Sức Khỏe Tinh Thần & Chống Kiệt Quệ (Burnout)", "Nghệ Thuật Đàm Phán & Thuyết Phục Phụ Huynh",
-            "Dự Án Giảm Thiểu Rác Thải Nhựa Tái Chế", "Xây Dựng Thương Hiệu Cá Nhân Từ Ghế Nhà Trường",
-            "Xử Lý Thành Viên Nhóm Vô Kỷ Luật, Trốn Việc", "Đối Mặt Với Thất Bại Kỳ Thi Thử Đầu Tiên",
-            "Lựa Chọn Hoạt Động Ngoại Khóa Phát Triển Hồ Sơ", "Phát Triển Tư Duy Phản Biện Qua Các Sự Kiện Xã Hội",
-            "Ứng Dụng Trí Tuệ Nhân Tạo Có Trách Nhiệm Trong Học Tập", "Xây Dựng Mối Quan Hệ Tích Cực Với Cố Vấn Học Tập",
-            "Lập Chiến Lược Ôn Tập Nước Rút Trong 3 Tháng", "Vượt Qua Nỗi Sợ Thuyết Trình Trước Đám Đông",
-            "Ứng Phó Tình Huống Khẩn Cấp Khi Tổ Chức Sự Kiện Lớn", "Cải Thiện Kỹ Năng Ngoại Ngữ Qua Thực Hành Giao Tiếp",
-            "Quản Trị Rủi Ro Khi Làm Đồ Án Khoa Học Kỹ Thuật", "Xây Dựng Văn Hóa Ứng Xử Đẹp Trên Mạng Xã Hội",
-            "Định Hướng Nghe Nhìn Và Chọn Lọc Thông Tin Hướng Nghiệp", "Tư Duy Khởi Nghiệp Tinh Gọn (Lean Startup) Học Đường",
-            "Nghệ Thuật Lắng Nghe Sâu Để Thấu Cảm Trong Giao Tiếp", "Thích Nghi Khi Chuyển Đến Môi Trường Học Tập Mới",
-            "Giải Tỏa Căng Thẳng Tâm Lý Trước Ngày Sát Hạch Lớn", "Trách Nhiệm Cộng Đồng Qua Các Hoạt Động Thiện Nguyện",
+            "Định Hướng Khối C03 & Ngành Công An: Vượt Rào Cản Ngoại Ngữ",
+            "Áp Lực Ôn Thi Chuyên & Giới Hạn Bản Thân", 
+            "Dự Án Robot STEM: Xử Lý Lỗi Mạch Phần Cứng", 
+            "Talkshow Lịch Sử: Sân Khấu Hóa Sáng Tạo",
+            "Giải Quyết Mâu Thuẫn Phân Chia Công Việc Nhóm", 
+            "Quản Lý Thời Gian Giữa Học Sáng & Tự Học Tối", 
+            "Khởi Nghiệp Xanh Học Đường: Bài Toán Vốn Nhỏ", 
+            "Ứng Xử Trước Áp Lực Đồng Trang Lứa (Peer Pressure)",
+            "Lập Kế Hoạch Tài Chính Cá Nhân Cho Học Sinh THPT", 
+            "Lựa Chọn Ngành Nghề: Theo Đam Mê Hay Nhu Cầu Thị Trường?",
+            "Xử Lý Khủng Hoảng Truyền Thông Trong CLB Trường", 
+            "Định Hướng Du Học Sớm Hay Học Đại Học Trong Nước",
+            "Cân Bằng Sức Khỏe Tinh Thần & Chống Kiệt Quệ (Burnout)", 
+            "Nghệ Thuật Đàm Phán & Thuyết Phục Phụ Huynh",
+            "Dự Án Giảm Thiểu Rác Thải Nhựa Tái Chế", 
+            "Xây Dựng Thương Hiệu Cá Nhân Từ Ghế Nhà Trường",
+            "Xử Lý Thành Viên Nhóm Vô Kỷ Luật, Trốn Việc", 
+            "Đối Mặt Với Thất Bại Kỳ Thi Thử Đầu Tiên",
+            "Lựa Chọn Hoạt Động Ngoại Khóa Phát Triển Hồ Sơ", 
+            "Phát Triển Tư Duy Phản Biện Qua Các Sự Kiện Xã Hội",
+            "Ứng Dụng Trí Tuệ Nhân Tạo Có Trách Nhiệm Trong Học Tập", 
+            "Xây Dựng Mối Quan Hệ Tích Cực Với Cố Vấn Học Tập",
+            "Lập Chiến Lược Ôn Tập Nước Rút Trong Ba Tháng", 
+            "Vượt Qua Nỗi Sợ Thuyết Trình Trước Đám Đông",
+            "Ứng Phó Tình Huống Khẩn Cấp Khi Tổ Chức Sự Kiện Lớn", 
+            "Cải Thiện Kỹ Năng Ngoại Ngữ Qua Thực Hành Giao Tiếp",
+            "Quản Trị Rủi Ro Khi Làm Đồ Án Khoa Học Kỹ Thuật", 
+            "Xây Dựng Văn Hóa Ứng Xử Đẹp Trên Mạng Xã Hội",
+            "Định Hướng Nghe Nhìn Và Chọn Lọc Thông Tin Hướng Nghiệp", 
+            "Tư Duy Khởi Nghiệp Tinh Gọn (Lean Startup) Học Đường",
+            "Nghệ Thuật Lắng Nghe Sâu Để Thấu Cảm Trong Giao Tiếp", 
+            "Thích Nghi Khi Chuyển Đến Môi Trường Học Tập Mới",
+            "Giải Tỏa Căng Thẳng Tâm Lý Trước Ngày Sát Hạch Lớn", 
+            "Trách Nhiệm Cộng Đồng Qua Các Hoạt Động Thiện Nguyện",
             "Bản Lĩnh Người Dẫn Dắt Đội Ngũ Vượt Qua Khủng Hoảng"
         ];
         
@@ -441,6 +458,7 @@
             let tName = realLifeTopics[i];
             let posterUrl = uniquePosters[i];
 
+            // Xây dựng hệ thống dữ liệu hoàn toàn độc bản, chuyên sâu cho từng chủ đề, văn phong chi tiết, lựa chọn không lặp lại
             storiesDatabase[sId] = {
                 title: tName,
                 poster: posterUrl,
@@ -448,63 +466,63 @@
                     tier: "Tầng 1 / 5: Khởi Đầu & Phân Tích Bản Chất Vấn Đề",
                     text: `Bạn đang trực tiếp đối mặt với một cột mốc thực tế mang tính bước ngoặt liên quan đến "${tName}". Ở giai đoạn xuất phát này, các áp lực từ môi trường xung quanh, sự kỳ vọng hoặc những khó khăn vận hành bắt đầu đè nặng lên đôi vai bạn. Việc định hình sai lầm bước đi đầu tiên sẽ tạo ra hiệu ứng dây chuyền tiêu cực. Bạn cần phải thật bình tĩnh để mổ xẻ nguyên nhân gốc rễ thay vì chỉ nhìn vào các hiện tượng bề nổi bên ngoài.`,
                     choices: [
-                        { text: `[Phương án chuyên môn] Tập trung tối đa vào phân tích dữ liệu thực tế, thu thập số liệu cụ thể để xây dựng nền tảng vững chắc.`, next: "tier2_A" },
-                        { text: `[Phương án ngoại giao] Tổ chức buổi trao đổi cởi mở, lắng nghe góc nhìn đa chiều từ những người có kinh nghiệm đi trước.`, next: "tier2_B" },
-                        { text: `[Phương án độc lập] Tự lập một kế hoạch thử nghiệm thu nhỏ để tự mình kiểm chứng tính khả thi của vấn đề.`, next: "tier2_C" }
+                        { text: `[Phương án chuyên môn] Tập trung tối đa vào việc thu thập dữ liệu thực tế, nghiên cứu các tài liệu chuẩn hóa và xây dựng khung chiến lược kỹ thuật vững chắc ngay từ đầu để đảm bảo tính chính xác tuyệt đối.`, next: "tier2_A" },
+                        { text: `[Phương án ngoại giao] Tổ chức một buổi trao đổi cởi mở, trực tiếp lắng nghe các góc nhìn đa chiều từ những người có kinh nghiệm đi trước hoặc các chuyên gia am hiểu tường tận vấn đề.`, next: "tier2_B" },
+                        { text: `[Phương án thực chiến] Tự lập một kế hoạch thử nghiệm thu nhỏ (MVP) với quy mô giới hạn để tự mình dấn thân trải nghiệm và kiểm chứng tính khả thi của tình huống.`, next: "tier2_C" }
                     ]
                 },
                 tier2_A: {
                     tier: "Tầng 2 / 5: Xử Lý Điểm Nghẽn & Kháng Cự Từ Thực Tế",
-                    text: `Việc dựa hoàn toàn vào dữ liệu chuyên môn giúp bạn nhìn thấy rõ các thông số cốt lõi của chủ đề "${tName}", tuy nhiên nó lại vấp phải sự hoài nghi từ những người xung quanh vì thiếu tính linh hoạt cảm xúc. Một vài chỉ số bắt đầu lệch khỏi dự báo ban đầu, đòi hỏi bạn phải điều chỉnh ngay chiến thuật điều phối để không làm mất lòng tin của tập thể.`,
+                    text: `Việc dựa hoàn toàn vào dữ liệu chuyên môn giúp bạn nhìn thấy rõ các thông số kỹ thuật cốt lõi của chủ đề "${tName}", tuy nhiên nó lại vấp phải sự hoài nghi từ những người xung quanh vì thiếu tính linh hoạt cảm xúc. Một vài chỉ số bắt đầu lệch khỏi dự báo ban đầu, đòi hỏi bạn phải điều chỉnh ngay chiến thuật điều phối để không làm mất lòng tin của tập thể.`,
                     choices: [
-                        { text: `Điều chỉnh tham số, kết hợp thêm yếu tố thực tiễn để thuyết phục những người đang hoài nghi.`, next: "tier3_A1" },
-                        { text: `Kiên định bảo vệ bộ số liệu cốt lõi, yêu cầu các bên tuân thủ đúng khung chuyên môn đã vạch ra.`, next: "tier3_A2" },
-                        { text: `Tạm hoãn việc áp dụng số liệu cứng nhắc, chuyển sang đối thoại trực tiếp để tháo gỡ tâm lý.`, next: "tier3_A3" }
+                        { text: `Tiến hành tinh chỉnh các tham số kỹ thuật, kết hợp khéo léo thêm các yếu tố thực tiễn để thuyết phục và xoa dịu những người đang có tư tưởng hoài nghi.`, next: "tier3_A1" },
+                        { text: `Giữ vững lập trường, kiên định bảo vệ bộ số liệu cốt lõi đã tính toán và yêu cầu các bên liên quan tuân thủ nghiêm ngặt theo khung chuyên môn đã vạch ra.`, next: "tier3_A2" },
+                        { text: `Tạm hoãn việc áp dụng các con số cứng nhắc, chủ động chuyển sang hình thức đối thoại một-một để tháo gỡ tâm lý lo lắng cho từng cá nhân cụ thể.`, next: "tier3_A3" }
                     ]
                 },
                 tier2_B: {
                     tier: "Tầng 2 / 5: Xử Lý Xung Đột Quan Điểm & Xây Dựng Đồng Thuận",
                     text: `Cách tiếp cận qua lắng nghe và ngoại giao giúp xoa dịu ngay lập tức sự căng thẳng ban đầu trong tình huống "${tName}". Dẫu vậy, khi quá nhiều ý kiến trái chiều được đưa ra cùng lúc, tập thể bắt đầu rơi vào trạng thái bối rối, không biết nên ưu tiên giải pháp nào trước. Bạn cần phải thể hiện vai trò định hướng rõ ràng để gom các ý tưởng rời rạc lại.`,
                     choices: [
-                        { text: `Chắt lọc các ý tưởng khả thi nhất rồi trực tiếp tổng hợp thành một khung hành động thống nhất chung.`, next: "tier3_A1" },
-                        { text: `Lập một ban tham mưu nhỏ gồm những nhân sự ưu tú nhất để cùng biểu quyết chọn phương án tối ưu.`, next: "tier3_A2" },
-                        { text: `Để các bên tự do tranh biện đến cùng cho đến khi tự tìm ra tiếng nói chung duy nhất.`, next: "tier3_A3" }
+                        { text: `Chắt lọc những ý tưởng tinh hoa và khả thi nhất từ các bên, trực tiếp tổng hợp lại thành một khung hành động chung có tính thực thi cao nhất.`, next: "tier3_A1" },
+                        { text: `Thành lập một ban tham mưu thu nhỏ bao gồm những nhân sự ưu tú nhất để cùng ngồi lại biểu quyết và lựa chọn phương án tối ưu cuối cùng.`, next: "tier3_A2" },
+                        { text: `Tạo không gian để các bên tự do tranh biện cởi mở với nhau cho đến khi tự tìm ra được tiếng nói chung duy nhất mà không cần sự áp đặt từ trên xuống.`, next: "tier3_A3" }
                     ]
                 },
                 tier2_C: {
                     tier: "Tầng 2 / 5: Đánh Giá Kết Quả Thử Nghiệm Sớm",
                     text: `Mô hình thử nghiệm thu nhỏ bước đầu mang lại một số tín hiệu tích cực cho tình huống "${tName}", chứng minh ý tưởng của bạn không phải là viển vông. Tuy nhiên, việc tự làm một mình khiến bạn rơi vào tình trạng quá tải năng lượng và cạn kiệt thời gian nghỉ ngơi. Bạn buộc phải tính đến phương án huy động sự hỗ trợ từ bên ngoài.`,
                     choices: [
-                        { text: `Chính thức kêu gọi các cộng sự tiềm năng cùng tham gia vào giai đoạn mở rộng mô hình.`, next: "tier3_A1" },
-                        { text: `Tối ưu hóa quy trình tự động hóa để giảm tải sức lao động thủ công cho bản thân.`, next: "tier3_A2" },
-                        { text: `Thu hẹp quy mô thử nghiệm lại một chút để đảm bảo kiểm soát tốt hoàn toàn chất lượng.`, next: "tier3_A3" }
+                        { text: `Chính thức kêu gọi sự tham gia của các cộng sự tiềm năng, phân chia lại đầu việc để cùng gánh vác giai đoạn mở rộng mô hình thực tế.`, next: "tier3_A1" },
+                        { text: `Ứng dụng các công cụ công nghệ và tự động hóa quy trình nhằm giảm thiểu tối đa sức lao động thủ công, tối ưu hóa thời gian cho bản thân.`, next: "tier3_A2" },
+                        { text: `Chủ động thu hẹp phạm vi thử nghiệm lại một chút để đảm bảo kiểm soát chất lượng tuyệt đối trong tầm tay trước khi nhân rộng.`, next: "tier3_A3" }
                     ]
                 },
                 tier3_A1: {
                     tier: "Tầng 3 / 5: Cột Mốc Thử Thách & Ra Quyết Định Cốt Lõi",
                     text: `Tiến trình xử lý "${tName}" đã tiến đến giai đoạn cao trào, đòi hỏi sự dấn thân và bản lĩnh quyết đoán cao độ. Một sự cố phát sinh ngoài dự kiến từ môi trường xung quanh đe dọa làm sụp đổ những thành quả đã gầy dựng. Đây là thời khắc mà tầm nhìn chiến lược của bạn được kiểm chứng một cách khắt khe nhất.`,
                     choices: [
-                        { text: `Kích hoạt ngay phương án dự phòng rủi ro cấp độ cao, tái cấu trúc lại nguồn lực cốt lõi.`, next: "tier4_A1" },
-                        { text: `Tăng cường truyền thông minh bạch, kêu gọi sự đồng lòng toàn diện từ tất cả các bên.`, next: "tier4_A2" },
-                        { text: `Dừng lại một nhịp để rà soát toàn bộ hệ thống, loại bỏ triệt để các yếu tố gây rủi ro tiềm ẩn.`, next: "tier4_A3" }
+                        { text: `Kích hoạt ngay lập tức phương án dự phòng rủi ro cấp độ cao đã chuẩn bị từ trước, thực hiện tái cấu trúc lại nguồn lực cốt lõi để lội ngược dòng.`, next: "tier4_A1" },
+                        { text: `Đẩy mạnh công tác truyền thông nội bộ một cách minh bạch, trực tiếp kêu gọi sự đồng lòng và hỗ trợ toàn diện từ tất cả các bên liên quan.`, next: "tier4_A2" },
+                        { text: `Chủ động dừng lại một nhịp để rà soát toàn bộ hệ thống vận hành, kiên quyết loại bỏ triệt để các yếu tố gây rủi ro tiềm ẩn dù là nhỏ nhất.`, next: "tier4_A3" }
                     ]
                 },
                 tier3_A2: {
                     tier: "Tầng 3 / 5: Tối Ưu Hóa Hiệu Suất & Định Hình Lại Tư Duy",
                     text: `Dù lộ trình đang đi đúng hướng, áp lực về thời gian và sự kỳ vọng ngày càng lớn khiến tiến độ của "${tName}" bắt đầu chững lại. Việc duy trì phong độ ổn định trong hoàn cảnh này đòi hỏi một hệ thống quản trị năng lượng thông minh và sự cam kết tuyệt đối từ toàn đội ngũ.`,
                     choices: [
-                        { text: `Phân quyền rõ ràng kèm cơ chế đánh giá hiệu suất minh bạch theo tuần cho từng cá nhân.`, next: "tier4_A1" },
-                        { text: `Tổ chức buổi chia sẻ truyền cảm hứng nhằm vực dậy tinh thần và giải tỏa áp lực tâm lý chung.`, next: "tier4_A2" },
-                        { text: `Cắt giảm các hạng mục phụ trợ rườm rà, tập trung 100% nguồn lực vào mục tiêu trọng tâm duy nhất.`, next: "tier4_A3" }
+                        { text: `Thiết lập hệ thống phân quyền rõ ràng kết hợp cơ chế đánh giá hiệu suất minh bạch theo tuần nhằm đôn đốc tiến độ của từng cá nhân.`, next: "tier4_A1" },
+                        { text: `Tổ chức một buổi gặp gỡ thân mật để truyền cảm hứng, vực dậy tinh thần đoàn kết và giải tỏa áp lực tâm lý chung cho toàn tập thể.`, next: "tier4_A2" },
+                        { text: `Quyết đoán cắt giảm các hạng mục phụ trợ rườm rà, dồn toàn bộ một trăm phần trăm nguồn lực vào mục tiêu trọng tâm duy nhất.`, next: "tier4_A3" }
                     ]
                 },
                 tier3_A3: {
                     tier: "Tầng 3 / 5: Thích Ứng Linh Hoạt & Đột Phá Giới Hạn",
                     text: `Sự linh hoạt trong cách xử lý đã giúp bạn vượt qua những vùng nước xoáy nguy hiểm của chủ đề "${tName}". Tuy nhiên, bài toán tiếp theo là làm thế nào để biến những giải pháp tình thế này thành một quy trình chuẩn hóa có tính bền vững lâu dài cho chặng đường tiếp theo.`,
                     choices: [
-                        { text: `Viết thành bộ cẩm nang hướng dẫn chi tiết để nhân bản mô hình thành công ra diện rộng.`, next: "tier4_A1" },
-                        { text: `Thiết lập hệ thống giám sát tự động để duy trì sự ổn định mà không cần can thiệp thủ công.`, next: "tier4_A2" },
-                        { text: `Liên tục cải tiến và nâng cấp chất lượng giải pháp dựa trên phản hồi thực tế liên tục.`, next: "tier4_A3" }
+                        { text: `Biên soạn toàn bộ quá trình thành một bộ cẩm nang hướng dẫn chi tiết nhằm dễ dàng nhân bản mô hình thành công ra diện rộng.`, next: "tier4_A1" },
+                        { text: `Xây dựng một hệ thống giám sát tự động để duy trì sự ổn định vận hành mà không cần phải can thiệp thủ công liên tục.`, next: "tier4_A2" },
+                        { text: `Duy trì văn hóa cải tiến liên tục, không ngừng nâng cấp chất lượng giải pháp dựa trên những phản hồi thực tế thu về hàng ngày.`, next: "tier4_A3" }
                     ]
                 },
                 tier4_A1: {
