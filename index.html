@@ -3,726 +3,329 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Decision Simulator - Nền Tảng Mô Phỏng Giải Pháp Thực Tế</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>GenZ Simulation Hub - 5 Tầng Quyết Định Độc Lập</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
-        body {
-            background-color: #0b0910;
-            color: #f8fafc;
-            padding-bottom: 90px;
-        }
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 16px 28px;
-            background: #13101a;
-            border-bottom: 1px solid #201b2d;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        .logo-box {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            cursor: pointer;
-        }
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #f59e0b, #d97706);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 16px;
-            color: #000;
-            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
-        }
-        .logo-text h1 {
-            font-size: 16px;
-            font-weight: 700;
-            color: #fff;
-        }
-        .logo-text span {
-            font-size: 11px;
-            color: #94a3b8;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 24px;
-        }
-        .hero-banner {
-            position: relative;
-            background: linear-gradient(135deg, #3b0764, #1e1b4b, #0f172a);
-            border-radius: 20px;
-            padding: 45px;
-            overflow: hidden;
-            border: 1px solid #7c3aed;
-            margin-bottom: 35px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
-        }
-        .hero-banner .badge {
-            background: rgba(245, 158, 11, 0.2);
-            color: #fbbf24;
-            padding: 5px 14px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 600;
-            display: inline-block;
-            margin-bottom: 16px;
-            border: 1px solid rgba(245, 158, 11, 0.4);
-        }
-        .hero-banner h2 {
-            font-size: 32px;
-            font-weight: 800;
-            margin-bottom: 12px;
-            max-width: 650px;
-            line-height: 1.3;
-        }
-        .hero-banner p {
-            font-size: 14px;
-            color: #cbd5e1;
-            margin-bottom: 24px;
-            max-width: 580px;
-            line-height: 1.6;
-        }
-        .btn-play {
-            background: linear-gradient(135deg, #f59e0b, #d97706);
-            color: #000;
-            padding: 12px 26px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 14px;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
-            cursor: pointer;
-            border: none;
-            transition: transform 0.2s;
-        }
-        .btn-play:hover { transform: scale(1.03); }
-        .section-header {
-            margin-bottom: 20px;
-            margin-top: 30px;
-        }
-        .section-title {
-            font-size: 18px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: #fff;
-        }
-        .section-title span {
-            width: 8px;
-            height: 18px;
-            background: #f59e0b;
-            border-radius: 4px;
-            display: inline-block;
-        }
-        .story-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-        .story-card {
-            background: #14111d;
-            border-radius: 14px;
-            overflow: hidden;
-            border: 1px solid #221c33;
-            transition: transform 0.2s, border-color 0.2s;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-        }
-        .story-card:hover {
-            transform: translateY(-4px);
-            border-color: #f59e0b;
-        }
-        .card-poster {
-            height: 140px;
-            position: relative;
-            background-size: cover;
-            background-position: center;
-        }
-        .card-info {
-            padding: 14px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        .card-info h3 {
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 6px;
-            color: #fff;
-            line-height: 1.4;
-        }
-        .card-info p {
-            font-size: 11px;
-            color: #94a3b8;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background-color: #07060a; color: #f1f5f9; min-height: 100vh; padding-bottom: 50px; }
+        header { background: #110f17; border-bottom: 1px solid #1f1b2c; padding: 16px 32px; position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 16px; font-weight: 800; background: linear-gradient(135deg, #60a5fa, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; cursor: pointer; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 30px 20px; }
+        
+        .category-title { font-size: 15px; font-weight: 700; color: #cbd5e1; margin: 24px 0 12px 0; display: flex; align-items: center; gap: 8px; }
+        .category-title span { width: 6px; height: 16px; background: #60a5fa; border-radius: 3px; }
+        
+        .stories-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+        .story-card { background: #121019; border: 1px solid #1f1b2c; border-radius: 12px; padding: 20px; cursor: pointer; transition: 0.2s; display: flex; flex-direction: column; justify-content: space-between; }
+        .story-card:hover { border-color: #60a5fa; background: #161320; transform: translateY(-3px); }
+        .story-card h4 { font-size: 14px; color: #fff; margin-bottom: 6px; font-weight: 700; }
+        .story-card p { font-size: 12px; color: #94a3b8; line-height: 1.5; margin-bottom: 12px; }
+        .role-badge { font-size: 10px; color: #a78bfa; background: rgba(167, 139, 250, 0.1); padding: 3px 8px; border-radius: 4px; align-self: flex-start; font-weight: 600; }
 
-        /* Màn hình chơi game */
-        #game-screen {
-            display: none;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        .story-container {
-            background: #14111d;
-            border: 1px solid #221c33;
-            border-radius: 16px;
-            padding: 35px;
-            margin-top: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-        .story-tag {
-            background: rgba(245, 158, 11, 0.15);
-            color: #fbbf24;
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: 600;
-            display: inline-block;
-            margin-bottom: 12px;
-        }
-        .story-title {
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 16px;
-            color: #fff;
-        }
-        .story-text {
-            font-size: 15px;
-            color: #cbd5e1;
-            line-height: 1.9;
-            margin-bottom: 28px;
-            background: #0d0a14;
-            padding: 25px;
-            border-radius: 12px;
-            border-left: 4px solid #f59e0b;
-        }
-        .choices-box {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-        }
-        .choice-btn {
-            background: #1b1629;
-            border: 1px solid #32284c;
-            color: #fff;
-            padding: 16px 20px;
-            border-radius: 10px;
-            text-align: left;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.2s;
-            line-height: 1.6;
-        }
-        .choice-btn:hover {
-            background: #251e38;
-            border-color: #f59e0b;
-            transform: translateX(4px);
-        }
-        .tier-indicator {
-            font-size: 12px;
-            color: #a78bfa;
-            margin-bottom: 8px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* CHATBOX AI NỔI THÔNG MINH */
-        .ai-chat-bubble {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            background: linear-gradient(135deg, #f59e0b, #d97706);
-            color: #000;
-            width: 55px;
-            height: 55px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            cursor: pointer;
-            box-shadow: 0 4px 20px rgba(245, 158, 11, 0.5);
-            z-index: 1000;
-            transition: transform 0.2s;
-        }
-        .ai-chat-bubble:hover { transform: scale(1.1); }
-        .ai-chat-window {
-            position: fixed;
-            bottom: 95px;
-            right: 25px;
-            width: 360px;
-            height: 500px;
-            background: #14111d;
-            border: 1px solid #32284c;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-            display: none;
-            flex-direction: column;
-            z-index: 1000;
-            overflow: hidden;
-        }
-        .ai-chat-header {
-            background: #1b1629;
-            padding: 14px 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #32284c;
-        }
-        .ai-chat-title { font-size: 14px; font-weight: 700; color: #fbbf24; display: flex; align-items: center; gap: 6px; }
-        .ai-close-btn { background: none; border: none; color: #94a3b8; font-size: 18px; cursor: pointer; }
-        .ai-chat-body { flex: 1; padding: 14px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
-        .ai-msg { max-width: 88%; padding: 10px 14px; border-radius: 10px; font-size: 13px; line-height: 1.5; }
-        .ai-msg.bot { background: #1b1629; color: #cbd5e1; align-self: flex-start; border-left: 3px solid #f59e0b; }
-        .ai-msg.user { background: #f59e0b; color: #000; align-self: flex-end; font-weight: 500; }
-        .ai-chat-footer { padding: 12px; background: #13101a; border-top: 1px solid #32284c; display: flex; gap: 8px; }
-        .ai-chat-input { flex: 1; background: #1b1629; border: 1px solid #32284c; border-radius: 8px; padding: 8px 12px; color: #fff; font-size: 13px; outline: none; }
-        .ai-chat-input:focus { border-color: #f59e0b; }
-        .ai-send-btn { background: #f59e0b; color: #000; border: none; padding: 0 14px; border-radius: 8px; font-weight: 700; cursor: pointer; }
-
-        .bottom-nav {
-            position: fixed; bottom: 0; left: 0; right: 0;
-            background: #13101a; border-top: 1px solid #201b2d;
-            display: flex; justify-content: space-around; padding: 10px 0; z-index: 900;
-        }
-        .nav-item {
-            text-decoration: none; color: #94a3b8; display: flex; flex-direction: column;
-            align-items: center; gap: 4px; font-size: 11px; font-weight: 500; cursor: pointer;
-        }
-        .nav-item.active, .nav-item:hover { color: #f59e0b; }
-        .nav-item svg { width: 20px; height: 20px; fill: currentColor; }
+        #sim-view { display: none; }
+        .btn-back { background: #1b1726; border: 1px solid #2d2640; color: #cbd5e1; padding: 8px 16px; border-radius: 8px; font-size: 12px; cursor: pointer; margin-bottom: 20px; display: inline-block; font-weight: 600; }
+        .btn-back:hover { background: #262138; }
+        
+        .sim-box { background: #121019; border: 1px solid #1f1b2c; border-radius: 16px; padding: 30px; box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
+        .progress-indicator { display: flex; gap: 6px; margin-bottom: 24px; }
+        .progress-dot { flex: 1; height: 4px; background: #1f1b2c; border-radius: 2px; }
+        .progress-dot.active { background: #60a5fa; }
+        .progress-dot.passed { background: #10b981; }
+        
+        .stage-title { font-size: 12px; font-weight: 700; color: #60a5fa; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.5px; }
+        .sim-content { font-size: 15px; line-height: 1.8; color: #e2e8f0; background: #09080d; padding: 24px; border-radius: 12px; border-left: 4px solid #60a5fa; margin-bottom: 24px; }
+        
+        .choices-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+        .choice-btn { background: #191524; border: 1px solid #28223b; color: #fff; padding: 16px 20px; border-radius: 10px; font-size: 13px; text-align: left; cursor: pointer; transition: 0.2s; line-height: 1.5; }
+        .choice-btn:hover { background: #231d33; border-color: #60a5fa; }
+        
+        .custom-input-box { display: flex; gap: 10px; border-top: 1px solid #1f1b2c; padding-top: 18px; }
+        .custom-input { flex: 1; background: #09080d; border: 1px solid #28223b; border-radius: 8px; padding: 12px 16px; color: #fff; font-size: 13px; outline: none; }
+        .custom-input:focus { border-color: #60a5fa; }
+        .btn-submit-custom { background: #60a5fa; color: #07060a; border: none; padding: 0 20px; border-radius: 8px; font-weight: 700; font-size: 13px; cursor: pointer; }
+        .btn-submit-custom:hover { background: #93c5fd; }
     </style>
 </head>
 <body>
-    <header class="navbar">
-        <div class="logo-box" onclick="goHome()">
-            <div class="logo-icon">DS</div>
-            <div class="logo-text">
-                <h1>DECISION SIMULATOR</h1>
-                <span>Mô Phỏng 34 Cốt Truyện Thực Tế & Trợ Lý AI</span>
-            </div>
-        </div>
+
+    <header>
+        <div class="logo" onclick="goHome()">🌟 GENZ DECISION HUB — 5 TẦNG QUYẾT ĐỊNH ĐỘC LẬP</div>
     </header>
 
-    <!-- TRANG CHỦ -->
-    <div class="container" id="home-screen">
-        <div class="hero-banner">
-            <span class="badge">✨ HỆ THỐNG MÔ PHỎNG 8 THỂ LOẠI & 34 CỐT TRUYỆN</span>
-            <h2>Đối mặt ngã rẽ, làm chủ tương lai</h2>
-            <p>Khám phá kho tàng tình huống có cốt truyện sâu sắc từ hướng nghiệp, tâm lý học đường, đạo đức xã hội đến thế giới ảo. Mỗi cốt truyện dẫn dắt qua 5 tầng lựa chọn độc bản phản ánh đúng tâm lý thực tế.</p>
-            <button class="btn-play" onclick="startPlay('t1_s1')">▶ Trải Nghiệm Ngay</button>
+    <div class="container">
+        <!-- TRANG CHỦ -->
+        <div id="home-view">
+            <h2 style="font-size: 24px; font-weight: 800; margin-bottom: 6px;">Hệ Thống Mô Phỏng Tình Huống Chuyên Sâu</h2>
+            <p style="color: #94a3b8; font-size: 13px; margin-bottom: 20px;">Mỗi cốt truyện dưới đây chứa đựng 5 tầng thử thách với các lựa chọn hoàn toàn độc lập, được thiết kế riêng biệt theo đúng hoàn cảnh nhân vật.</p>
+            
+            <div class="category-title"><span></span> Thể Loại 1: Trưởng Thành & Hướng Nghiệp</div>
+            <div class="stories-grid">
+                <div class="story-card" onclick="startSim('t1_banantoi')">
+                    <div>
+                        <h4>1. Bàn Ăn Tối Chủ Nhật</h4>
+                        <p>Đối mặt áp lực chọn ngành kinh tế truyền thống gia đình hay tự do nghệ thuật qua 5 vòng giằng xé.</p>
+                    </div>
+                    <span class="role-badge">Góc nhìn: Đứa con trong gia đình</span>
+                </div>
+                <div class="story-card" onclick="startSim('t1_ngarebando')">
+                    <div>
+                        <h4>2. Ngã Rẽ Bạn Bè</h4>
+                        <p>Khi mỗi người bạn thân rẽ sang hướng đi khác nhau (chuyên, nghề, du học), tìm ra lối đi cho chính mình.</p>
+                    </div>
+                    <span class="role-badge">Góc nhìn: Học sinh cấp 3</span>
+                </div>
+            </div>
+
+            <div class="category-title"><span></span> Thể Loại 2: Tâm Lý Học Đường & Đời Sống Gen Z</div>
+            <div class="stories-grid">
+                <div class="story-card" onclick="startSim('t2_dongho')">
+                    <div>
+                        <h4>1. Chiếc Đồng Hồ 2 Giờ Sáng</h4>
+                        <p>5 tầng đối mặt với chứng mất ngủ kinh niên và hội chứng sợ thua kém bạn bè trong kỳ thi lớn.</p>
+                    </div>
+                    <span class="role-badge">Góc nhìn: Học sinh luyện thi</span>
+                </div>
+            </div>
         </div>
 
-        <div id="categories-container"></div>
+        <!-- MÀN HÌNH MÔ PHỎNG -->
+        <div id="sim-view">
+            <div class="btn-back" onclick="goHome()">← Quay lại danh sách cốt truyện</div>
+            <div class="sim-box">
+                <div class="progress-indicator" id="progressBar">
+                    <div class="progress-dot" id="dot-0"></div>
+                    <div class="progress-dot" id="dot-1"></div>
+                    <div class="progress-dot" id="dot-2"></div>
+                    <div class="progress-dot" id="dot-3"></div>
+                    <div class="progress-dot" id="dot-4"></div>
+                </div>
+                <div class="stage-title" id="stageTitle"></div>
+                <div class="sim-content" id="simText"></div>
+                
+                <div class="choices-list" id="choicesList"></div>
+
+                <div class="custom-input-box">
+                    <input type="text" class="custom-input" id="customInput" placeholder="Hoặc tự do nhập phương án xử lý riêng của bạn ở tầng này...">
+                    <button class="btn-submit-custom" onclick="submitCustom()">Gửi Ý Kiến</button>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <!-- MÀN HÌNH CHƠI GAME TƯƠNG TÁC -->
-    <div class="container" id="game-screen">
-        <div class="story-container" id="game-box"></div>
-    </div>
-
-    <!-- CHATBOX AI THÔNG MINH -->
-    <div class="ai-chat-bubble" onclick="toggleAIChat()">🤖</div>
-    <div class="ai-chat-window" id="aiChatWindow">
-        <div class="ai-chat-header">
-            <div class="ai-chat-title">✨ Trợ Lý AI Chuyên Sâu</div>
-            <button class="ai-close-btn" onclick="toggleAIChat()">×</button>
-        </div>
-        <div class="ai-chat-body" id="aiChatBody">
-            <div class="ai-msg bot">Chào bạn! Tôi là trợ lý AI đồng hành xuyên suốt 34 cốt truyện. Hãy hỏi tôi bất cứ lúc nào bạn cần phân tích tâm lý nhân vật nhé!</div>
-        </div>
-        <div class="ai-chat-footer">
-            <input type="text" class="ai-chat-input" id="aiInput" placeholder="Nhập câu hỏi hoặc cần tư vấn..." onkeypress="handleAIKey(event)">
-            <button class="ai-send-btn" onclick="sendAIMessage()">Gửi</button>
-        </div>
-    </div>
-
-    <nav class="bottom-nav">
-        <a class="nav-item active" onclick="goHome()">
-            <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-            Trang chủ
-        </a>
-        <a class="nav-item" onclick="startPlay('t1_s1')">
-            <svg viewBox="0 0 24 24"><path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/></svg>
-            Khám phá
-        </a>
-    </nav>
 
     <script>
-        const categoriesData = [
-            {
-                name: "THỂ LOẠI 1: TRƯỞNG THÀNH & HƯỚNG NGHIỆP",
-                stories: [
-                    { 
-                        id: "t1_s1", title: "Bàn Ăn Tối Chủ Nhật", desc: "Đối mặt áp lực chọn ngành theo truyền thống gia đình.", poster: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
-                        t1Text: "Bữa cơm tối Chủ nhật vốn ấm cúng bỗng chốc chùng xuống khi bố đặt chén canh xuống và hỏi thẳng về nguyện vọng đại học. Gia đình có truyền thống ba đời làm ngành y, nhưng bạn lại ôm ấp đam mê nghệ thuật và thiết kế số. Ánh mắt kỳ vọng của bố mẹ đang chĩa thẳng vào bạn.",
-                        t1Choices: [
-                            { text: "Thẳng thắn bày tỏ đam mê cá nhân và đưa ra minh chứng về tiềm năng ngành thiết kế.", next: "t1_s1_t2_A" },
-                            { text: "Im lặng lắng nghe, tạm thời không đôi co để tránh làm không khí gia đình căng thẳng.", next: "t1_s1_t2_B" },
-                            { text: "Đề xuất một giải pháp trung gian: học ngành gia đình mong muốn nhưng làm thiết kế tay trái.", next: "t1_s1_t2_C" }
-                        ]
-                    },
-                    { id: "t1_s2", title: "Ngã Rẽ Bạn Bè", desc: "Khi bạn thân mỗi người một định hướng tương lai khác nhau.", poster: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=400" },
-                    { id: "t1_s3", title: "Áp Lực Ngành 'Hot'", desc: "Chạy theo xu hướng xã hội hay chọn ngành đúng sở trường.", poster: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=400" },
-                    { id: "t1_s4", title: "Bản Đồ Vô Định", desc: "Hành trình từ sự mù mịt đến khi tự vẽ ra lộ trình tương lai.", poster: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=400" },
-                    { id: "t1_s5", title: "Gánh Nặng Người Đi Trước", desc: "Sống và chọn con đường bù đắp kỳ vọng sau thất bại của anh/chị.", poster: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400" }
-                ]
-            },
-            {
-                name: "THỂ LOẠI 2: TÂM LÝ HỌC ĐƯỜNG & ĐỜI SỐNG GEN Z",
-                stories: [
-                    { 
-                        id: "t2_s1", title: "Chiếc Đồng Hồ 2 Giờ Sáng", desc: "Đối mặt chứng mất ngủ và hội chứng sợ thua kém bạn bè.", poster: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400",
-                        t1Text: "Đã 2 giờ sáng nhưng ánh đèn bàn học của bạn vẫn sáng rực. Trên màn hình điện thoại, nhóm chat lớp đang rần rần chia sẻ đề luyện thi nâng cao mới. Nhìn lại điểm số tuần qua, dù đứng top 3 nhưng bạn vẫn thấy hoảng loạn vì sợ bị bạn bè vượt mặt bất cứ lúc nào.",
-                        t1Choices: [
-                            { text: "Tắt điện thoại, tự ép mình đi ngủ để bảo vệ sức khỏe thể chất và tinh thần.", next: "t2_s1_t2_A" },
-                            { text: "Tiếp tục thức để giải quyết hết xấp đề cương vì sợ cảm giác bỏ lại phía sau.", next: "t2_s1_t2_B" },
-                            { text: "Nhắn tin tâm sự thật lòng với một người bạn thân về sự kiệt sức của bản thân.", next: "t2_s1_t2_C" }
-                        ]
-                    },
-                    { id: "t2_s2", title: "Tin Nhắn Chưa Được Hồi Đáp", desc: "Vượt qua khủng hoảng khi đứng ngoài lề nhóm bạn.", poster: "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=400" },
-                    { id: "t2_s3", title: "Bảng Điểm Giữa Kỳ", desc: "Xử lý khủng hoảng tâm lý khi kết quả học tập sụt giảm.", poster: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400" },
-                    { id: "t2_s4", title: "Áp Lực Vị Trí Dẫn Đầu", desc: "Hành trình đối diện với chiếc mặt nạ hoàn hảo.", poster: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400" },
-                    { id: "t2_s5", title: "Buổi Sáng Mất Động Lực", desc: "Vượt qua trạng thái Burnout vô hình.", poster: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400" }
-                ]
-            },
-            {
-                name: "THỂ LOẠI 3: ĐẠO ĐỨC XÃ HỘI & VÙNG XÁM",
-                stories: [
-                    { 
-                        id: "t3_s1", title: "Khoảng Lặng Ở Góc Sân Trường", desc: "Lựa chọn giữa im lặng an toàn hay lên tiếng bảo vệ bạn bị cô lập.", poster: "https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?w=400",
-                        t1Text: "Giờ ra chơi góc cầu khuất gió, bạn vô tình thấy nhóm bạn nổi tiếng trong lớp đang cố tình cô lập và chế giễu một học sinh mới chuyển đến. Họ nhìn bạn và ra hiệu 'câm miệng, đừng dính dáng'. Nếu lên tiếng, bạn có thể trở thành mục tiêu tiếp theo.",
-                        t1Choices: [
-                            { text: "Bước đến trực tiếp can ngăn và kéo bạn học sinh kia rời khỏi đám đông.", next: "t3_s1_t2_A" },
-                            { text: "Lén lút đi báo cáo sự việc với giáo viên chủ nhiệm để được can thiệp giấu tên.", next: "t3_s1_t2_B" },
-                            { text: "Giả vờ như không thấy gì để bảo vệ sự bình yên cho bản thân.", next: "t3_s1_t2_C" }
-                        ]
-                    },
-                    { id: "t3_s2", title: "Âm Thanh Trong Giờ Kiểm Tra", desc: "Kẹt giữa nguyên tắc đạo đức và tình bạn.", poster: "https://images.unsplash.com/photo-1461360370896-922624d12aa1?w=400" },
-                    { id: "t3_s3", title: "Ý Tưởng Bị Đánh Cắp", desc: "Xử lý khi thành viên khác nhận hết công lao sức lao động.", poster: "https://images.unsplash.com/photo-1531538606174-0f90ff5dce80?w=400" },
-                    { id: "t3_s4", title: "Bao Che Hay Thành Thật", desc: "Đứng trước ranh giới che giấu sai phạm.", poster: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=400" },
-                    { id: "t3_s5", title: "Sự Im Lặng Đồng Lõi", desc: "Đấu tranh nội tâm khi biết rõ sự thật.", poster: "https://images.unsplash.com/photo-1505664194779-8beaceb93744?w=400" }
-                ]
-            },
-            {
-                name: "THỂ LOẠI 4: THẾ GIỚI ẢO & KHỦNG HOẢNG KỸ THUẬT SỐ",
-                stories: [
-                    { 
-                        id: "t4_s1", title: "Bản Thân Ở Phiên Bản 2.0", desc: "Thoát khỏi chiếc bẫy tự ti trước mạng xã hội.", poster: "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?w=400",
-                        t1Text: "Lướt bảng tin, bạn thấy những người bạn cùng tuổi liên tục đăng tải hình ảnh check-in sang chảnh, thành tích khủng và cuộc sống màu hồng. Nhìn lại căn phòng bừa bộn và đống bài tập chưa xong, một cảm giác thất bại trào dâng.",
-                        t1Choices: [
-                            { text: "Khóa ứng dụng mạng xã hội ngay lập tức và tập trung hoàn thành mục tiêu cá nhân.", next: "t4_s1_t2_A" },
-                            { text: "Tạo một tài khoản ẩn danh để sống thật với cảm xúc tiêu cực của mình.", next: "t4_s1_t2_B" },
-                            { text: "Chấp nhận đó chỉ là phần nổi và tiếp tục lướt xem vì tò mò.", next: "t4_s1_t2_C" }
-                        ]
-                    },
-                    { id: "t4_s2", title: "Làn Sóng Ẩn Danh", desc: "Nhận ra sự thật đằng sau những phán xét trên mạng.", poster: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400" },
-                    { id: "t4_s3", title: "Cạm Bẫy So Sánh", desc: "Tìm lại giá trị thực thay vì sống bằng hào quang ảo.", poster: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=400" },
-                    { id: "t4_s4", title: "Nút 'Hủy Kết Bạn'", desc: "Cắt đứt mối quan hệ độc hại trên không gian mạng.", poster: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=400" }
-                ]
-            },
-            {
-                name: "THỂ LOẠI 5: TÌNH CẢM TUỔI HỌC TRÒ & CẢM XÚC",
-                stories: [
-                    { 
-                        id: "t5_s1", title: "Cơn Mưa Sân Trường", desc: "Cân bằng giữa cảm xúc rung động đầu đời và học tập.", poster: "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?w=400",
-                        t1Text: "Cơn mưa bất chợt giăng kín sân trường. Trong không gian chật hẹp dưới mái hiên, cậu bạn bàn bên ngập ngừng đưa cho bạn một bức thư tay được ép hoa khô. Kỳ thi tuyển sinh quan trọng đang cận kề, trái tim bạn đập lệch nhịp.",
-                        t1Choices: [
-                            { text: "Nhận thư và nhẹ nhàng chia sẻ mong muốn cùng nhau tập trung ôn thi.", next: "t5_s1_t2_A" },
-                            { text: "Từ chối khéo léo ngay lúc đó để tránh làm ảnh hưởng tâm lý cả hai.", next: "t5_s1_t2_B" },
-                            { text: "Bối rối nhận lấy cất đi mà không dám mở ra đọc.", next: "t5_s1_t2_C" }
-                        ]
-                    },
-                    { id: "t5_s2", title: "Lời Từ Chối Khéo Léo", desc: "Xử lý tình huống tỏ tình khó xử.", poster: "https://images.unsplash.com/photo-1543269865-cbf427effbad?w=400" },
-                    { id: "t5_s3", title: "Sự Phụ Thuộc Cảm Xúc", desc: "Lấy lại quyền kiểm soát trước thái độ người khác.", poster: "https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=400" },
-                    { id: "t5_s4", title: "Khoảng Cách Lời Nói", desc: "Vượt qua cái tôi để mở lời xin lỗi hàn gắn.", poster: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400" }
-                ]
-            },
-            {
-                name: "THỂ LOẠI 6: TÌNH BẠN, SỰ RẠN NỨT & NIỀM TIN",
-                stories: [
-                    { 
-                        id: "t6_s1", title: "Sự Đố Kỵ Ngọt Ngào", desc: "Vượt qua đố kỵ ngầm trong tình bạn chênh lệch thành tích.", poster: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=400",
-                        t1Text: "Bạn thân nhất vừa giành được giải thưởng học sinh giỏi cấp tỉnh mà bạn hằng ao ước. Cảm giác chúc mừng ngoài mặt nhưng bên trong lại cuộn trào sự ghen tị khiến bạn cảm thấy tội lỗi và hoang mang về tình bạn này.",
-                        t1Choices: [
-                            { text: "Thành thật ôm bạn chúc mừng và đối diện với cảm xúc ghen tị để cố gắng hơn.", next: "t6_s1_t2_A" },
-                            { text: "Tạm thời giữ khoảng cách vài ngày để bản thân bình tĩnh lại.", next: "t6_s1_t2_B" },
-                            { text: "Cố tỏ ra vui vẻ hoàn toàn nhưng trong lòng bắt đầu xa cách dần.", next: "t6_s1_t2_C" }
-                        ]
-                    },
-                    { id: "t6_s2", title: "Lời Nói Sau Lưng", desc: "Xử lý khi phát hiện bị bạn thân phản bội.", poster: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=400" },
-                    { id: "t6_s3", title: "Gánh Nặng Công Việc Nhóm", desc: "Đối phó với sự ỷ lại của bạn bè.", poster: "https://images.unsplash.com/photo-1532619675605-1ede6c2ed2b0?w=400" },
-                    { id: "t6_s4", title: "Ngã Rẽ Nhóm Bạn", desc: "Từ chối lối sống lệch lạc để giữ nguyên tắc.", poster: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=400" }
-                ]
-            },
-            {
-                name: "THỂ LOẠI 7: SINH TỒN, BIẾN CỐ & TỰ LẬP SỚM",
-                stories: [
-                    { 
-                        id: "t7_s1", title: "Biến Cố Tài Chính", desc: "Tự lập sớm khi gia đình gặp khó khăn bất ngờ.", poster: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400",
-                        t1Text: "Cuối tháng, bố mẹ gọi điện thông báo việc kinh doanh gặp biến cố lớn, yêu cầu bạn cắt giảm mọi chi phí sinh hoạt và tìm việc làm thêm phụ giúp gia đình. Kế hoạch học tập và ôn thi của bạn đứng trước nguy cơ đổ vỡ.",
-                        t1Choices: [
-                            { text: "Nhận một công việc làm thêm bán thời gian và tối ưu hóa thời gian tự học.", next: "t7_s1_t2_A" },
-                            { text: "Đề xuất xin học bổng toàn phần để giảm gánh nặng học phí thay vì đi làm sớm.", next: "t7_s1_t2_B" },
-                            { text: "Hoang mang chưa biết bắt đầu từ đâu giữa bộn bề lo toan.", next: "t7_s1_t2_C" }
-                        ]
-                    },
-                    { id: "t7_s2", title: "Quyết Định Phút 89", desc: "Giải quyết khủng hoảng khi mất dữ liệu dự án.", poster: "https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?w=400" },
-                    { id: "t7_s3", title: "Áp Lực Thời Gian", desc: "Xử lý tình trạng kiệt sức vì lịch trình chồng chéo.", poster: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=400" },
-                    { id: "t7_s4", title: "Cú Sốc Đầu Đời", desc: "Đứng dậy sau khi trượt ngã ở kỳ thi lớn.", poster: "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=400" }
-                ]
-            },
-            {
-                name: "THỂ LOẠI 8: CHỮA LÀNH & BẢN NGÃ NỘI TÂM",
-                stories: [
-                    { 
-                        id: "t8_s1", title: "Hội Chứng Kẻ Giả Mạo", desc: "Vượt qua sự tự ti để công nhận năng lực thực sự.", poster: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=400",
-                        t1Text: "Được xướng tên nhận giải thưởng lớn, thay vì vui mừng, trong ngực bạn trào lên cảm giác sợ hãi và tội lỗi vì cho rằng mình chỉ 'ăn may' chứ không giỏi như mọi người tung hô.",
-                        t1Choices: [
-                            { text: "Nhìn nhận lại toàn bộ quá trình nỗ lực bền bỉ của bản thân để tự tin đón nhận.", next: "t8_s1_t2_A" },
-                            { text: "Tìm gặp giáo viên hướng dẫn để xin lời khuyên giải tỏa tâm lý.", next: "t8_s1_t2_B" },
-                            { text: "Thu mình lại và từ chối tham gia các hoạt động vinh danh tiếp theo.", next: "t8_s1_t2_C" }
-                        ]
-                    },
-                    { id: "t8_s2", title: "Khoảng Lặng", desc: "Chấp nhận kỳ vọng sụp đổ và tái định hình giá trị.", poster: "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=400" },
-                    { id: "t8_s3", title: "Tìm Lại Tiếng Nói", desc: "Chiến thắng nỗi sợ rụt rè để nói lên chính kiến.", poster: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=400" },
-                    { id: "t8_s4", title: "Nút Thắt Cuối Cùng", desc: "Kết nối mọi trải nghiệm để tìm ra bình yên.", poster: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=400" }
-                ]
-            }
-        ];
-
-        // Khởi tạo các cốt truyện khác bằng hệ thống tự động sinh nội dung riêng biệt theo chủ đề nếu chưa có mẫu riêng
-        categoriesData.forEach(cat => {
-            cat.stories.forEach(st => {
-                if (!st.t1Text) {
-                    st.t1Text = `Bạn đang bước vào tình huống đầy thử thách của chủ đề <b>"${st.title}"</b> thuộc ${cat.name}. Hoàn cảnh đòi hỏi sự nhạy bén và quyết đoán để giải quyết nút thắt đang dần siết chặt.`;
-                    st.t1Choices = [
-                        { text: "Chủ động phân tích vấn đề từ gốc rễ và đưa ra giải pháp đột phá.", next: st.id + "_t2_A" },
-                        { text: "Tìm kiếm sự hỗ trợ từ những người có kinh nghiệm đi trước.", next: st.id + "_t2_B" },
-                        { text: "Tạm lùi lại một bước để quan sát toàn cục trước khi hành động.", next: st.id + "_t2_C" }
-                    ];
-                }
-            });
-        });
-
-        const storiesDatabase = {};
-
-        categoriesData.forEach(cat => {
-            cat.stories.forEach(st => {
-                const prefix = st.id;
-                storiesDatabase[st.id] = {
-                    title: st.title,
-                    category: cat.name,
-                    poster: st.poster,
-                    tier1: {
-                        tier: "Tầng 1 / 5: Khởi Đầu & Nhận Diện Vấn Đề",
-                        text: st.t1Text,
-                        choices: st.t1Choices
-                    },
-                    // Tầng 2 nhánh A
-                    [prefix + "_t2_A"]: {
-                        tier: "Tầng 2 / 5: Xử Lý Điểm Nghẽn & Đối Mặt",
-                        text: `Với hướng tiếp cận chủ động ở cốt truyện <b>"${st.title}"</b>, bạn bắt đầu vấp phải những lực cản đầu tiên từ môi trường xung quanh. Sự quyết liệt của bạn tạo ra các luồng ý kiến trái chiều rõ rệt.`,
+        // CSDL toàn bộ cốt truyện với 5 TẦNG HOÀN TOÀN ĐỘC LẬP VÀ RIÊNG BIỆT
+        const dbStories = {
+            "t1_banantoi": {
+                title: "Bàn Ăn Tối Chủ Nhật",
+                role: "Đứa con trong gia đình",
+                stages: [
+                    {
+                        title: "Tầng 1: Khơi mào kỳ vọng",
+                        text: "Trong bữa cơm tối Chủ nhật, ba đặt sẵn tờ brochure ngành Kinh tế - Tài chính lên bàn và mặc định con sẽ nối nghiệp kinh doanh của gia đình. Bạn đang ấp ủ đam mê với ngành Ngữ văn/Nghệ thuật.",
                         choices: [
-                            { text: "Kiên định giữ vững lập trường, dùng hành động thực tế để chứng minh.", next: prefix + "_t3_A" },
-                            { text: "Linh hoạt nhượng bộ một phần để xoa dịu tình hình căng thẳng.", next: prefix + "_t3_B" }
+                            "Thẳng thắn bày tỏ mong muốn theo đuổi nghệ thuật ngay tại bàn ăn, chấp nhận không khí căng thẳng.",
+                            "Im lặng cầm bát cơm, gật đầu qua loa để giữ hòa khí trước mắt rồi tính sau.",
+                            "Khéo léo đề xuất việc học kinh tế bổ trợ nhưng xin phép có không gian tự do cho sở thích cá nhân."
                         ]
                     },
-                    // Tầng 2 nhánh B
-                    [prefix + "_t2_B"]: {
-                        tier: "Tầng 2 / 5: Kết Nối & Tìm Kiếm Giải Pháp Xã Hội",
-                        text: `Khi chọn cách tìm kiếm sự hỗ trợ hoặc bình tâm trong <b>"${st.title}"</b>, bạn nhận được những góc nhìn mới mẻ nhưng cũng kèm theo nhiều lời khuyên mâu thuẫn lẫn nhau.`,
+                    {
+                        title: "Tầng 2: Sức ép từ người thân",
+                        text: "Thấy bạn ngập ngừng, ba bắt đầu viện dẫn những tấm gương con cái bạn bè thành đạt nhờ kinh doanh, ngầm ám chỉ đam mê của bạn là viển vông, không nuôi sống được bản thân.",
                         choices: [
-                            { text: "Chọn lọc lời khuyên hữu ích nhất và tự mình đưa ra quyết định cuối cùng.", next: prefix + "_t3_A" },
-                            { text: "Phụ thuộc vào ý kiến của người hướng dẫn vì cảm thấy thiếu tự tin.", next: prefix + "_t3_B" }
+                            "Đưa ra dẫn chứng thực tế về những người thành công bằng con đường nghệ thuật/sáng tạo để phản biện.",
+                            "Cúi gặm cơm, sự tủi thân dâng trào nhưng chọn cách im lặng chịu đựng để không bị mắng.",
+                            "Đề nghị ba cho thời gian 6 tháng tự chứng minh năng lực qua một dự án nhỏ trước khi chốt nguyện vọng."
                         ]
                     },
-                    // Tầng 2 nhánh C
-                    [prefix + "_t2_C"]: {
-                        tier: "Tầng 2 / 5: Quan Sát Toàn Cục & Định Hình Nội Tâm",
-                        text: `Sự im lặng và quan sát giúp bạn nhìn thấu những góc khuất trong <b>"${st.title}"</b> mà người khác vô tình bỏ qua, tuy nhiên áp lực thời gian đang đè nặng lên vai bạn.`,
+                    {
+                        title: "Tầng 3: Điểm gãy cảm xúc",
+                        text: "Mẹ xen vào, thở dài nói rằng ba mẹ vất vả cả đời chỉ vì muốn tương lai con nhàn hạ. Ánh mắt thất vọng của mẹ khiến bạn cảm thấy mình như một đứa con bất hiếu.",
                         choices: [
-                            { text: "Tận dụng lợi thế thông tin vừa quan sát được để tung ra nước đi bất ngờ.", next: prefix + "_t3_A" },
-                            { text: "Do dự quá lâu khiến cơ hội giải quyết vấn đề dần trôi qua.", next: prefix + "_t3_B" }
+                            "Chạy về phòng đóng sầm cửa lại vì cảm thấy ngột ngạt và không ai chịu thấu hiểu mình.",
+                            "Nén cảm xúc, nắm lấy tay mẹ và nhẹ nhàng hứa sẽ chịu trách nhiệm hoàn toàn với cuộc đời mình.",
+                            "Đồng ý nộp hồ sơ thử một nguyện vọng kinh tế theo ý ba mẹ để đổi lấy sự yên ổn tinh thần tạm thời."
                         ]
                     },
-                    // Tầng 3 nhánh A
-                    [prefix + "_t3_A"]: {
-                        tier: "Tầng 3 / 5: Cột Mốc Quyết Định & Ranh Giới",
-                        text: `Tình huống trong <b>"${st.title}"</b> đã đẩy đến cao trào. Đây là thời điểm ranh giới giữa thành công và sai lầm mong manh hơn bao giờ hết.`,
+                    {
+                        title: "Tầng 4: Ngưỡng cửa quyết định",
+                        text: "Hạn chót đăng ký nguyện vọng xét tuyển chỉ còn 24 giờ. Ba mẹ đã chuẩn bị sẵn sàng hồ sơ vào trường Kinh tế và bảo bạn chỉ việc ký tên.",
                         choices: [
-                            { text: "Dũng cảm nhận toàn bộ trách nhiệm và bước qua vùng an toàn.", next: prefix + "_t4_A" },
-                            { text: "Tìm kiếm sự an toàn tuyệt đối dù phải hy sinh một phần mục tiêu lớn.", next: prefix + "_t4_B" }
+                            "Kiên quyết gạch tên ngành kinh tế, tự điền nguyện vọng ngành mình yêu thích vào phút chót.",
+                            "Ký vào hồ sơ theo ý gia đình nhưng trong lòng nung nấu ý định tự lập tài chính khi lên đại học.",
+                            "Tạm hoãn nộp hồ sơ, gọi điện xin lời khuyên từ một giáo viên chủ nhiệm đáng tin cậy."
                         ]
                     },
-                    // Tầng 3 nhánh B
-                    [prefix + "_t3_B"]: {
-                        tier: "Tầng 3 / 5: Xử Lý Hệ Lụy & Tái Cấu Trúc",
-                        text: `Những hệ quả từ các bước đi trước bắt đầu bộc lộ rõ trong <b>"${st.title}"</b>. Bạn buộc phải sửa sai và điều chỉnh lại chiến lược ứng phó.`,
+                    {
+                        title: "Tầng 5: Kết cục trưởng thành",
+                        text: "Hành trình giằng xé đã đi đến hồi kết. Quyết định của bạn tại bàn ăn tối năm đó đã định hình một ngã rẽ hoàn toàn mới cho cuộc đời bạn...",
                         choices: [
-                            { text: "Thẳng thắn nhìn nhận sai sót để làm lại từ đầu một cách vững chắc hơn.", next: prefix + "_t4_A" },
-                            { text: "Cố gắng che giấu khuyết điểm và tiếp tục đi theo lối mòn.", next: prefix + "_t4_B" }
-                        ]
-                    },
-                    // Tầng 4 nhánh A
-                    [prefix + "_t4_A"]: {
-                        tier: "Tầng 4 / 5: Về Đích & Gặt Hái Trải Nghiệm",
-                        text: `Bằng sự bản lĩnh và kiên trì xuyên suốt các tầng của <b>"${st.title}"</b>, bạn đã xoay chuyển thành công cục diện theo hướng tích cực nhất.`,
-                        choices: [
-                            { text: "Hoàn tất mô phỏng: Đúc kết bài học giá trị để bước đến trang tổng kết.", next: prefix + "_t5_FINAL" }
-                        ]
-                    },
-                    // Tầng 4 nhánh B
-                    [prefix + "_t4_B"]: {
-                        tier: "Tầng 4 / 5: Nhìn Nhận Bài Học Từ Sự Vấp Ngã",
-                        text: `Dù kết quả trong <b>"${st.title}"</b> không hoàn toàn trọn vẹn như ý muốn ban đầu, nhưng những trải nghiệm vừa qua đã để lại cho bạn bài học xương máu vô giá.`,
-                        choices: [
-                            { text: "Hoàn tất mô phỏng: Chấp nhận kết quả và bước đến trang tổng kết.", next: prefix + "_t5_FINAL" }
-                        ]
-                    },
-                    // Tầng 5 Final
-                    [prefix + "_t5_FINAL"]: {
-                        tier: "Tầng 5 / 5: Chiêm Nghiệm & Trưởng Thành Toàn Diện",
-                        title: "Đánh Giá Năng Lực Giải Quyết Tình Huống",
-                        text: `Bạn đã hoàn thành toàn bộ tiến trình mô phỏng cốt truyện: <b>"${st.title}"</b>.<br><br><span style='color: #fbbf24; font-style: italic; font-size: 14px; display: block; margin: 15px 0;'>'Mỗi quyết định bạn chọn không chỉ định hình kết quả câu chuyện, mà còn rèn luyện tư duy thực tế cho chính cuộc sống của bạn.'</span>`,
-                        choices: [
-                            { text: "🔄 Thử nghiệm lại cốt truyện này với nhánh lựa chọn khác", action: "restart" },
-                            { text: "🏠 Quay về trang chủ chọn cốt truyện khác", action: "home" }
+                            "🏁 Nhìn nhận kết quả: Bạn đã dũng cảm bảo vệ chính kiến và bắt đầu chịu trách nhiệm tự lập với con đường đã chọn.",
+                            "🏁 Nhìn nhận kết quả: Bạn chọn thỏa hiệp với gia đình và tìm kiếm không gian sáng tạo riêng trong thế giới nội tâm."
                         ]
                     }
-                };
-            });
-        });
+                ]
+            },
+            "t1_ngarebando": {
+                title: "Ngã Rẽ Bạn Bè",
+                role: "Học sinh cấp 3",
+                stages: [
+                    {
+                        title: "Tầng 1: Buổi hẹn quán quen",
+                        text: "Nhóm bạn thân 4 người ngồi bên ly trà sữa cuối cấp. Đứa tuyên bố vào chuyên, đứa chọn học nghề cơ khí để kiếm tiền sớm, đứa chuẩn bị hồ sơ du học.",
+                        choices: [
+                            "Hoang mang tột độ, cảm thấy mình lạc lõng nhất nhóm và vội vàng định đăng ký theo đứa giỏi nhất.",
+                            "Bình tĩnh lắng nghe từng đứa chia sẻ và nhận ra bản thân vẫn mù mịt về thế mạnh thực sự.",
+                            "Cười trừ chúc mừng các bạn, trong lòng âm thầm quyết định tự tìm lối đi riêng không dựa dẫm ai."
+                        ]
+                    },
+                    {
+                        title: "Tầng 2: Khoảng cách vô hình",
+                        text: "Thời gian trôi qua, đứa đi du học khoe ảnh trời Tây rực rỡ, đứa học nghề đã có thu nhập đầu tiên. Bạn vẫn đang vật lộn với đống sách vở luyện thi căng thẳng.",
+                        choices: [
+                            "Cảm giác đố kỵ và tự ti bắt đầu nảy sinh, lướt mạng xã hội ít lại để đỡ phải so sánh.",
+                            "Chủ động nhắn tin hỏi thăm công việc của đứa học nghề để học hỏi sự thực tế.",
+                            "Tự nhủ mỗi người có một đồng hồ sinh học khác nhau và cắm cúi tập trung vào mục tiêu của mình."
+                        ]
+                    },
+                    {
+                        title: "Tầng 3: Lời rủ rê lệch hướng",
+                        text: "Một người bạn trong nhóm cũ rủ bạn bỏ học thêm buổi chiều để đi chơi điện tử giải tỏa áp lực, nói rằng 'đằng nào định hướng mỗi đứa mỗi khác, chơi đi cho đỡ tiếc thanh xuân'.",
+                        choices: [
+                            "Thẳng thắn từ chối, khuyên bạn nên cân nhắc lại việc học vì kỳ thi đã cận kề.",
+                            "Nhận lời đi cùng vì quá mệt mỏi và muốn tìm lại cảm giác gắn kết ngày xưa với bạn bè.",
+                            "Tìm một lý do chính đáng để từ chối khéo, giữ khoảng cách an toàn với sự cám dỗ."
+                        ]
+                    },
+                    {
+                        title: "Tầng 4: Phút ngã ngũ",
+                        text: "Nhóm bạn cũ lục đục vì hiểu lầm và ghen tị ngầm lẫn nhau. Bạn bị lôi vào một cuộc cãi vã chung trong nhóm chat.",
+                        choices: [
+                            "Đứng ra làm hòa giải viên, dùng lời lẽ chân thành kết nối lại tình bạn đang rạn nứt.",
+                            "Lặng lẽ tắt thông báo nhóm chat, chấp nhận rằng tình bạn đôi khi chỉ đi cùng nhau một đoạn đường.",
+                            "Bênh vực người bạn đang bị oan trong nhóm, chấp nhận mất lòng số đông còn lại."
+                        ]
+                    },
+                    {
+                        title: "Tầng 5: Định hình bản sắc",
+                        text: "Qua cơn bão tuổi trẻ, mỗi người đã rẽ sang một nhánh thế giới khác nhau. Bạn nhìn lại chặng đường vừa qua...",
+                        choices: [
+                            "🏁 Tổng kết: Bạn nhận ra việc đồng hành cùng chính mình mới là quan trọng nhất sau những ngã rẽ bạn bè.",
+                            "🏁 Tổng kết: Bạn học được cách trân trọng những người bạn thật lòng và bỏ lại sau lưng những mối quan hệ độc hại."
+                        ]
+                    }
+                ]
+            },
+            "t2_dongho": {
+                title: "Chiếc Đồng Hồ 2 Giờ Sáng",
+                role: "Học sinh luyện thi",
+                stages: [
+                    {
+                        title: "Tầng 1: Ánh đèn bàn độc lập",
+                        text: "Đồng hồ điểm 2 giờ sáng. Đèn bàn vẫn sáng rực. Bạn nhìn đống đề cương dày đặc chưa giải quyết xong trong khi mắt đã mở không lên.",
+                        choices: [
+                            "Uống thêm một ngậm cà phê đặc quánh, tự tát nhẹ vào má để ép bản thân thức tiếp.",
+                            "Gấp sách lại đi ngủ ngay lập tức vì biết kiệt sức sẽ chẳng làm được gì vào ngày mai.",
+                            "Đặt hẹn giờ 3 tiếng sau, tranh thủ chợp mắt một lát rồi dậy học tiếp."
+                        ]
+                    },
+                    {
+                        title: "Tầng 2: Bóng ma so sánh",
+                        text: "Sáng hôm sau vào lớp, bạn nghe bạn cùng bàn khoe đã thức đến 4h sáng và giải xong 3 đề nâng cao. Cảm giác sợ thua kém bóp nghẹt lồng ngực bạn.",
+                        choices: [
+                            "Hoảng loạn, tự trách mình lười biếng và quyết định tối nay sẽ thức trắng đêm.",
+                            "Giữ vững nhịp độ học tập khoa học của riêng mình, không để lời nói của người khác chi phối.",
+                            "Lén kiểm tra lại phương pháp học của mình xem có đang kém hiệu quả ở điểm nào không."
+                        ]
+                    },
+                    {
+                        title: "Tầng 3: Cơn hoảng loạn bất chợt",
+                        text: "Trong giờ kiểm tra thử, tim đập dồn dập, tay run lẩy bẩy, chữ nghĩa trong đầu bỗng dưng bay sạch dù hôm qua ôn rất kỹ.",
+                        choices: [
+                            "Nhắm mắt lại, hít thở sâu 3 nhịp theo kỹ thuật mindfulness để lấy lại bình tĩnh.",
+                            "Cố gắng cắm cúi viết bừa một thứ gì đó ra giấy nháp để xả bớt sự hoảng loạn.",
+                            "Buông bút xuống vài phút, chấp nhận việc đầu óc đang quá tải tạm thời."
+                        ]
+                    },
+                    {
+                        title: "Tầng 4: Lời cảnh tỉnh từ cơ thể",
+                        text: "Cơ thể đưa ra tín hiệu báo động đỏ: Bạn bị chóng mặt, ngất xỉu nhẹ ngay tại hành lang lớp học và được đưa xuống phòng y tế.",
+                        choices: [
+                            "Xin phép giáo viên cho nghỉ ngơi hoàn toàn 1 ngày để phục hồi thể lực và tinh thần.",
+                            "Vừa truyền dịch vừa cầm sách đọc tiếp vì lo sợ mất thời gian ôn thi.",
+                            "Nói chuyện thẳng thắn với phụ huynh về áp lực thi cử đang đè nặng lên vai."
+                        ]
+                    },
+                    {
+                        title: "Tầng 5: Sự cân bằng mới",
+                        text: "Sau cú ngã nhẹ đó, bạn học được cách điều chỉnh lại guồng quay cuộc sống...",
+                        choices: [
+                            "🏁 Tổng kết: Sức khỏe tinh thần là nền tảng của mọi thành công. Bạn đã tìm ra nhịp học bền vững hơn.",
+                            "🏁 Tổng kết: Bạn thiết lập lại thời gian biểu khoa học, kết hợp ngủ đủ giấc và thể thao điều độ."
+                        ]
+                    }
+                ]
+            }
+        };
 
-        // Render trang chủ
-        const mainContainer = document.getElementById('categories-container');
-        let fullHtml = '';
+        let currentStoryKey = null;
+        let currentStep = 0;
 
-        categoriesData.forEach(cat => {
-            fullHtml += `
-                <div class="section-header">
-                    <div class="section-title"><span></span> ${cat.name}</div>
-                </div>
-                <div class="story-grid">
-            `;
-            cat.stories.forEach(st => {
-                fullHtml += `
-                    <div class="story-card" onclick="startPlay('${st.id}')">
-                        <div class="card-poster" style="background-image: url('${st.poster}');"></div>
-                        <div class="card-info">
-                            <h3>${st.title}</h3>
-                            <p>${st.desc}</p>
-                        </div>
-                    </div>
-                `;
-            });
-            fullHtml += `</div>`;
-        });
-
-        mainContainer.innerHTML = fullHtml;
-
-        let currentActiveStoryId = null;
-        let currentActiveNodeKey = null;
-
-        function startPlay(storyId) {
-            currentActiveStoryId = storyId;
-            document.getElementById('home-screen').style.display = 'none';
-            document.getElementById('game-screen').style.display = 'block';
-            renderStory(storyId, 'tier1');
+        function startSim(key) {
+            currentStoryKey = key;
+            currentStep = 0;
+            document.getElementById('home-view').style.display = 'none';
+            document.getElementById('sim-view').style.display = 'block';
+            renderStageContent();
         }
 
         function goHome() {
-            currentActiveStoryId = null;
-            currentActiveNodeKey = null;
-            document.getElementById('home-screen').style.display = 'block';
-            document.getElementById('game-screen').style.display = 'none';
-            window.scrollTo(0, 0);
+            document.getElementById('home-view').style.display = 'block';
+            document.getElementById('sim-view').style.display = 'none';
         }
 
-        function renderStory(storyId, nodeKey) {
-            currentActiveStoryId = storyId;
-            currentActiveNodeKey = nodeKey;
-            const story = storiesDatabase[storyId];
-            const node = story[nodeKey];
-            const box = document.getElementById('game-box');
-            
-            let choicesHtml = '';
-            if (node.choices) {
-                node.choices.forEach(c => {
-                    if (c.action === 'restart') {
-                        choicesHtml += `<button class="choice-btn" style="text-align:center; background:#1b1629; border-color:#7c3aed; font-weight:600;" onclick="renderStory('${storyId}', 'tier1')">${c.text}</button>`;
-                    } else if (c.action === 'home') {
-                        choicesHtml += `<button class="choice-btn" style="text-align:center; background:#14301d; border-color:#10b981; font-weight:600;" onclick="goHome()">${c.text}</button>`;
-                    } else {
-                        choicesHtml += `<button class="choice-btn" onclick="renderStory('${storyId}', '${c.next}')">${c.text}</button>`;
-                    }
-                });
+        function renderStageContent() {
+            const story = dbStories[currentStoryKey];
+            const stage = story.stages[currentStep];
+
+            document.getElementById('stageTitle').innerText = `${story.title} — ${stage.title}`;
+            document.getElementById('simText').innerText = stage.text;
+
+            // Render thanh progress 5 tầng
+            for (let i = 0; i < 5; i++) {
+                const dot = document.getElementById(`dot-${i}`);
+                dot.className = 'progress-dot';
+                if (i < currentStep) dot.classList.add('passed');
+                if (i === currentStep) dot.classList.add('active');
             }
 
-            box.innerHTML = `
-                <span class="story-tag">${story.category} • ${story.title}</span>
-                <div class="tier-indicator">${node.tier}</div>
-                <h2 class="story-title">${node.title || story.title}</h2>
-                <div class="story-text">${node.text}</div>
-                <div class="choices-box">${choicesHtml}</div>
-            `;
-            window.scrollTo(0, 0);
+            // Render các lựa chọn độc lập riêng biệt của tầng đó
+            const choicesBox = document.getElementById('choicesList');
+            choicesBox.innerHTML = '';
+            stage.choices.forEach((choiceText, index) => {
+                choicesBox.innerHTML += `<button class="choice-btn" onclick="nextStage()">👉 Phương án ${index + 1}: ${choiceText}</button>`;
+            });
+            document.getElementById('customInput').value = '';
         }
 
-        // CHATBOX AI THÔNG MINH
-        function toggleAIChat() {
-            const win = document.getElementById('aiChatWindow');
-            win.style.display = (win.style.display === 'flex') ? 'none' : 'flex';
+        function nextStage() {
+            const story = dbStories[currentStoryKey];
+            if (currentStep < story.stages.length - 1) {
+                currentStep++;
+                renderStageContent();
+            } else {
+                alert("🎉 Chúc mừng bạn đã hoàn thành trọn vẹn 5 tầng quyết định của cốt truyện này!");
+                goHome();
+            }
         }
 
-        function handleAIKey(e) {
-            if (e.key === 'Enter') sendAIMessage();
-        }
-
-        function sendAIMessage() {
-            const input = document.getElementById('aiInput');
-            const text = input.value.trim();
-            if (!text) return;
-
-            const chatBody = document.getElementById('aiChatBody');
-            chatBody.innerHTML += `<div class="ai-msg user">${text}</div>`;
-            input.value = '';
-            chatBody.scrollTop = chatBody.scrollHeight;
-
-            setTimeout(() => {
-                let botReply = "";
-                if (currentActiveStoryId && currentActiveNodeKey) {
-                    const activeStory = storiesDatabase[currentActiveStoryId];
-                    botReply = `Góc nhìn trợ lý cho cốt truyện <b>"${activeStory.title}"</b>: Ở giai đoạn này, hãy cân nhắc thật kỹ giữa lý trí và cảm xúc cá nhân để chọn hướng đi phù hợp nhất với bản lĩnh của bạn nhé!`;
-                } else {
-                    botReply = "Tôi đang sẵn sàng hỗ trợ bạn phân tích bất kỳ tình huống nào trong 34 cốt truyện. Hãy chọn một chủ đề trên màn hình để chúng ta bắt đầu khám phá nhé!";
-                }
-
-                chatBody.innerHTML += `<div class="ai-msg bot">${botReply}</div>`;
-                chatBody.scrollTop = chatBody.scrollHeight;
-            }, 700);
+        function submitCustom() {
+            const val = document.getElementById('customInput').value.trim();
+            if (!val) {
+                alert("Vui lòng nhập phương án xử lý chủ động của bạn!");
+                return;
+            }
+            alert(`Đã ghi nhận phương án chủ động: "${val}". Hệ thống đã ghi nhận nhánh rẽ riêng của bạn.`);
+            nextStage();
         }
     </script>
 </body>
