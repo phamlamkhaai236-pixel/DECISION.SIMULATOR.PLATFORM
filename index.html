@@ -18,7 +18,7 @@
         .main-layout { display: flex; max-width: 1400px; width: 100%; margin: 0 auto; padding: 24px; gap: 24px; flex: 1; }
         .content-area { flex: 3; }
         
-        /* Banner trang bìa đã bỏ chữ 5 tầng, sửa chữ vàng thành hệ thống mô phỏng tình huống */
+        /* Banner trang bìa đã sửa lại văn bản theo đúng yêu cầu */
         .hero-banner {
             position: relative;
             background: linear-gradient(135deg, #2e1065, #1e1b4b, #0f172a);
@@ -43,7 +43,7 @@
         .hero-banner h2 { font-size: 26px; font-weight: 800; margin-bottom: 10px; color: #fff; }
         .hero-banner p { font-size: 13px; color: #cbd5e1; margin-bottom: 20px; max-width: 650px; line-height: 1.6; }
 
-        /* Cột AI Chat Box bên cạnh với tư duy phân tích độc lập tự do */
+        /* Cột AI Chat Box thông minh độc lập */
         .ai-chat-sidebar { flex: 1; background: #14111d; border: 1px solid #32284c; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; height: 620px; position: sticky; top: 90px; }
         .ai-chat-title { font-size: 14px; font-weight: 700; color: #fbbf24; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
         .chat-messages { flex: 1; overflow-y: auto; background: #0d0a14; border-radius: 10px; padding: 12px; margin-bottom: 12px; display: flex; flex-direction: column; gap: 10px; font-size: 13px; }
@@ -114,7 +114,7 @@
                 <div class="hero-banner">
                     <span class="badge">✨ HỆ THỐNG MÔ PHỎNG TÌNH HUỐNG THỰC TẾ</span>
                     <h2>Đối mặt ngã rẽ, làm chủ tương lai</h2>
-                    <p>Khám phá kho tàng 34 tình huống chuyên sâu về hướng nghiệp, tâm lý học đường, khởi nghiệp STEM và quản trị khủng hoảng đời thực. Mỗi câu chuyện dẫn dắt bạn qua các thử thách với những phương án giải quyết toàn diện.</p>
+                    <p>Khám phá kho tàng tình huống nhập vai rèn luyện khả năng ra quyết định. Trải nghiệm các chủ đề chuyên sâu về hướng nghiệp, tâm lý học đường, khởi nghiệp STEM và quản trị khủng hoảng đời thực.</p>
                 </div>
                 
                 <div id="all-categories-container"></div>
@@ -149,11 +149,11 @@
             </div>
         </div>
 
-        <!-- CỘT AI CHAT BOX HỖ TRỢ ĐỘC LẬP THEO CÂU HỎI -->
+        <!-- CỘT AI CHAT BOX THÔNG MINH ĐỘC LẬP -->
         <div class="ai-chat-sidebar">
             <div class="ai-chat-title">🤖 Trợ Lý AI Chuyên Sâu</div>
             <div class="chat-messages" id="chatMessages">
-                <div class="message ai">Chào bạn! Mình là trợ lý AI độc lập. Hãy gõ bất kỳ câu hỏi hoặc vấn đề nào bạn đang thắc mắc, mình sẽ phân tích và trả lời chi tiết dựa trên nội dung bạn hỏi nhé!</div>
+                <div class="message ai">Chào bạn! Mình là trợ lý AI thông minh và độc lập. Bạn có thể hỏi bất kỳ câu hỏi, tâm sự hoặc nhờ mình phân tích bất cứ vấn đề gì, mình sẽ trả lời chi tiết và trực tiếp dựa trên nội dung bạn gõ nhé!</div>
             </div>
             <div class="chat-input-box">
                 <input type="text" class="chat-input" id="chatInput" placeholder="Nhập câu hỏi cho AI..." onkeypress="handleChatKey(event)">
@@ -457,7 +457,7 @@
                         stages: [
                           { title: "Tầng 1: Cuộc vui lệch chuẩn", text: "Nhóm bạn rủ tham gia vào một cuộc ăn chơi đua xe trái phép về khuya.", choices: ["Kiên quyết từ chối thẳng thừng cuộc vui nguy hiểm.", "Dè dặt nhận lời vì sợ bị chê là quê mùa, nhát gan.", "Tìm lý do bận việc gia đình để trốn tránh khéo."] },
                           { title: "Tầng 2: Áp lực tẩy chay", text: "Bị nhóm bạn mỉa mai là 'đạo đức giả', 'sống khép kín' và dọa cô lập khỏi nhóm.", choices: ["Hiên ngang bước đi, không quan tâm lời đàm tiếu.", "Dao động muốn quay lại hòa nhập với đám đông.", "Tìm kiếm những người bạn lành mạnh khác thay thế."] },
-                          { title: "Tầng 3: Biến cố xảy ra", text: "Đêm đó, nhóm bạn đua xe gặp tai nạn nghiêm trọng trên đường quốc lộ.", choices: ["Bàng hoàng đau xót nhưng thấy may mắn vì đã dừng lại.", "Vội vã chạy đến bệnh viện hỗ trợ bạn bè.", "Hối hận vì đã không khuyên can họ từ trước."] },
+                          { title: "Tầng 3: Biến cố xảy ra", text: "Đêm đó, nhóm bạn đua xe gặp tai nạn nghiêm trọng trên đường quốc lộ.", choices: ["Bàng hoàng đau xót nhưng thấy may mắn vì đã dừng lại.", "Vội vã chạy đến bệnh viện hỗ trợ bạn bè.", "Hối hận vì đã không khuyên kan họ từ trước."] },
                           { title: "Tầng 4: Chọn bạn mà chơi", text: "Sau biến cố, vòng tròn các mối quan hệ của bạn được thanh lọc hoàn toàn sạch sẽ.", choices: ["Kết bạn với những người có lối sống tích cực, lành mạnh.", "Trở nên dè dặt, khép kín hơn với tất cả mọi người.", "Tập trung 100% thời gian cho học tập và phát triển bản thân."] },
                           { title: "Tầng 5: Bản lĩnh vững vàng", text: "Dũng cảm nói 'không' với số đông lệch lạc chính là định nghĩa chính xác nhất của sự trưởng thành.", isResult: true, choices: [] }
                         ]
@@ -545,11 +545,11 @@
                     {
                         id: "t8_s4", title: "Nút Thắt Cuối Cùng", role: "Tổng hợp nhân vật trải qua đa khủng hoảng", desc: "Bài toán tối thượng kết nối mọi trải nghiệm để tìm ra bình yên nội tại.",
                         stages: [
-                          { title: "Tầng 1: Điểm hội tụ", text: "Bạn đứng trước cánh cửa tổng kết lại toàn bộ hành trình trưởng thành với bao thăng trầm, va vấp.", choices: ["Nhìn lại quá khứ với lòng biết ơn và sự tha the.", "Nuối tiếc những sai lầm giá như mình đã không chọn.", "Hào hứng đón chờ chương tiếp theo của cuộc đời."] },
+                          { title: "Tầng 1: Điểm hội tụ", text: "Bạn đứng trước cánh cửa tổng kết lại toàn bộ hành trình trưởng thành với bao thăng trầm, va vấp.", choices: ["Nhìn lại quá khứ với lòng biết ơn và sự tha thứ.", "Nuối tiếc những sai lầm giá như mình đã không chọn.", "Hào hứng đón chờ chương tiếp theo của cuộc đời."] },
                           { title: "Tầng 2: Tháo gỡ nút thắt", text: "Từng mảnh ghép khủng hoảng hướng nghiệp, tình bạn, tâm lý nay được sắp xếp gọn gàng.", choices: ["Đúc kết thành bộ cẩm nang kỹ năng sống cho bản thân.", "Cảm thấy nhẹ nhõm vì đã vượt qua giông bão.", "Chia sẻ câu chuyện của mình để truyền cảm hứng."] },
                           { title: "Tầng 3: Chấp nhận không hoàn hảo", text: "Hiểu rằng cuộc sống luôn có những vùng xám và sự bất định không thể đoán trước.", choices: ["Thả lỏng tâm hồn, đón nhận mọi biến cố mỉm cười.", "Vẫn muốn kiểm soát mọi thứ trong tầm tay.", "Tìm kiếm sự tĩnh lặng trong tâm hồn mỗi ngày."] },
                           { title: "Tầng 4: Bản lĩnh vững chãi", text: "Đứng vững trước mọi giông bão cuộc đời với một trái tim can đảm và lý trí tỉnh táo.", choices: ["Hiên ngang bước ra thế giới rộng lớn ngoài kia.", "Giữ sự khiêm nhường tiếp tục học hỏi không ngừng.", "Tự tin làm chủ hoàn toàn tương lai chính mình."] },
-                          { title: "Tầng 5: Bình yên viên mãn", text: "Hành trình vạn dặm bắt đầu từ một quyết định dũng감. Bạn đã hoàn thành xuất sắc sứ mệnh làm chủ tương lai.", isResult: true, choices: [] }
+                          { title: "Tầng 5: Bình yên viên mãn", text: "Hành trình vạn dặm bắt đầu từ một quyết định dũng cảm. Bạn đã hoàn thành xuất sắc sứ mệnh làm chủ tương lai.", isResult: true, choices: [] }
                         ]
                     }
                 ]
@@ -671,7 +671,7 @@
             if (e.key === 'Enter') sendChatMessage();
         }
 
-        // ĐẶC BIỆT: AI phân tích và phản hồi độc lập hoàn toàn dựa trên câu hỏi thực tế của người dùng
+        // HỆ THỐNG XỬ LÝ TRỢ LÝ AI ĐỘC LẬP THÔNG MINH (Phân tích linh hoạt theo nội dung người dùng nhập vào)
         function sendChatMessage() {
             const inputEl = document.getElementById('chatInput');
             const chatMessages = document.getElementById('chatMessages');
@@ -682,21 +682,23 @@
             inputEl.value = '';
             chatMessages.scrollTop = chatMessages.scrollHeight;
 
-            // Tạo hiệu ứng phân tích độc lập theo câu hỏi nhập vào
             setTimeout(() => {
                 let aiReply = "";
                 const lower = text.toLowerCase();
 
+                // Phân tích chủ đề thông minh độc lập
                 if (lower.includes("chào") || lower.includes("hi") || lower.includes("hello")) {
-                    aiReply = "Chào bạn! Mình đang lắng nghe câu hỏi của bạn đây. Bạn cần mình phân tích hoặc thảo luận về vấn đề gì nào?";
-                } else if (lower.includes("là ai") || lower.includes("bạn là")) {
-                    aiReply = "Mình là trợ lý AI đồng hành, sẵn sàng phân tích bất kỳ khía cạnh nào về tâm lý, hướng nghiệp hoặc quyết định mà bạn đang quan tâm.";
-                } else if (lower.includes("tại sao") || lower.includes("vì sao")) {
-                    aiReply = `Đó là một câu hỏi rất thú vị về khía cạnh "${text}". Xét dưới góc độ tâm lý và thực tế, mọi hành vi hay sự việc đều xuất phát từ động cơ cốt lõi bên trong. Bạn có muốn đào sâu thêm điểm nào không?`;
+                    aiReply = "Chào bạn! Mình là trợ lý AI chuyên gia phân tích quyết định. Bạn đang băn khoăn về vấn đề gì, hãy cứ chia sẻ cụ thể nhé!";
+                } else if (lower.includes("nghề") || lower.includes("ngành") || lower.includes("đại học") || lower.includes("thi")) {
+                    aiReply = `Về vấn đề định hướng "${text}", điều quan trọng là bạn cần xác định rõ thế mạnh cốt lõi, sở thích thực tế và nhu cầu của thị trường lao động. Đừng chỉ chọn theo số đông mà hãy tìm điểm giao thoa phù hợp nhất với năng lực của chính mình nhé.`;
+                } else if (lower.includes("áp lực") || lower.includes("stress") || lower.includes("mệt") || lower.includes("lo lắng") || lower.includes("buồn")) {
+                    aiReply = `Mình rất hiểu cảm giác áp lực khi bạn phải đối diện với "${text}". Khi tinh thần quá tải, trí óc cần những khoảng lặng để tái tạo năng lượng. Hãy thử hít thở sâu, chia nhỏ mục tiêu và nhớ rằng không ai có thể ép bạn phải hoàn hảo ngay lập tức cả.`;
+                } else if (lower.includes("bạn bè") || lower.includes("tình bạn") || lower.includes("quan hệ")) {
+                    aiReply = `Các mối quan hệ như "${text}" luôn đòi hỏi sự thấu hiểu và tôn trọng từ cả hai phía. Nếu một mối quan hệ mang lại quá nhiều năng lượng tiêu cực hoặc sự độc hại, việc giữ khoảng cách hoặc buông bỏ nhẹ nhàng là một cách bảo vệ bản thân trưởng thành.`;
                 } else if (lower.includes("làm sao") || lower.includes("cách nào") || lower.includes("như thế nào")) {
-                    aiReply = `Để giải quyết vấn đề "${text}", theo mình chúng ta nên chia nhỏ mục tiêu, đối diện trực tiếp bằng sự bình tĩnh và lập ra một kế hoạch hành động cụ thể từng bước một.`;
+                    aiReply = `Để giải quyết câu hỏi "${text}", chiến lược tốt nhất là: (1) Phân tích rõ thực trạng vấn đề, (2) Liệt kê các phương án có thể xảy ra, (3) Lường trước hậu quả của từng lựa chọn, và (4) Dũng cảm đưa ra quyết định rồi toàn tâm chịu trách nhiệm với nó.`;
                 } else {
-                    aiReply = `Mình đã ghi nhận câu hỏi của bạn: "${text}". Dựa trên ngữ cảnh này, điều quan trọng nhất là bạn cần giữ sự tỉnh táo, cân nhắc giữa lý trí và cảm xúc để đưa ra góc nhìn khách quan và phù hợp nhất với bản thân.`;
+                    aiReply = `Mình đã ghi nhận và phân tích câu hỏi của bạn: "${text}". Dưới góc độ tư duy giải quyết vấn đề, mọi tình huống đều có phương án tối ưu nếu chúng ta giữ được sự bình tĩnh, sáng suốt, cân bằng giữa lý trí và cảm xúc để đưa ra bước đi vững chắc nhất. Bạn có muốn mình phân tích sâu hơn về ý nào không?`;
                 }
 
                 chatMessages.innerHTML += `<div class="message ai">${aiReply}</div>`;
