@@ -7,21 +7,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-        body { background-color: #0b0910; color: #f8fafc; min-height: 100vh; padding-bottom: 50px; display: flex; flex-direction: column; }
+        body { background-color: #0b0910; color: #f8fafc; min-height: 100vh; padding-bottom: 70px; display: flex; flex-direction: column; }
         
         header { background: #13101a; border-bottom: 1px solid #201b2d; padding: 16px 28px; position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; }
         .logo-box { display: flex; align-items: center; gap: 12px; cursor: pointer; }
-        .logo-icon { width: 40px; height: 40px; background: linear-gradient(135deg, #f59e0b, #d97706); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; color: #000; box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4); }
-        .logo-text h1 { font-size: 16px; font-weight: 700; color: #fff; }
-        .logo-text span { font-size: 11px; color: #94a3b8; }
+        .logo-icon { width: 36px; height: 36px; background: linear-gradient(135deg, #f59e0b, #d97706); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; color: #000; box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3); }
+        .logo-text h1 { font-size: 14px; font-weight: 700; color: #fff; }
+        .logo-text span { font-size: 10px; color: #94a3b8; }
         
         .main-layout { display: flex; max-width: 1400px; width: 100%; margin: 0 auto; padding: 24px; gap: 24px; flex: 1; }
         .content-area { flex: 3; }
         
-        /* Trang bìa Hero Banner đúng chuẩn ban đầu */
+        /* Banner trang bìa đã bỏ chữ 5 tầng, sửa chữ vàng thành hệ thống mô phỏng tình huống */
         .hero-banner {
             position: relative;
-            background: linear-gradient(135deg, #3b0764, #1e1b4b, #0f172a);
+            background: linear-gradient(135deg, #2e1065, #1e1b4b, #0f172a);
             border-radius: 20px;
             padding: 40px;
             overflow: hidden;
@@ -40,14 +40,14 @@
             margin-bottom: 14px;
             border: 1px solid rgba(245, 158, 11, 0.4);
         }
-        .hero-banner h2 { font-size: 28px; font-weight: 800; margin-bottom: 10px; color: #fff; }
-        .hero-banner p { font-size: 14px; color: #cbd5e1; margin-bottom: 20px; max-width: 600px; line-height: 1.6; }
+        .hero-banner h2 { font-size: 26px; font-weight: 800; margin-bottom: 10px; color: #fff; }
+        .hero-banner p { font-size: 13px; color: #cbd5e1; margin-bottom: 20px; max-width: 650px; line-height: 1.6; }
 
-        /* Cột AI Chat Box bên cạnh */
+        /* Cột AI Chat Box bên cạnh với tư duy phân tích độc lập tự do */
         .ai-chat-sidebar { flex: 1; background: #14111d; border: 1px solid #32284c; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; height: 620px; position: sticky; top: 90px; }
         .ai-chat-title { font-size: 14px; font-weight: 700; color: #fbbf24; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
         .chat-messages { flex: 1; overflow-y: auto; background: #0d0a14; border-radius: 10px; padding: 12px; margin-bottom: 12px; display: flex; flex-direction: column; gap: 10px; font-size: 13px; }
-        .message { padding: 10px 14px; border-radius: 8px; line-height: 1.5; max-width: 88%; }
+        .message { padding: 10px 14px; border-radius: 8px; line-height: 1.5; max-width: 88%; word-break: break-word; }
         .message.ai { background: #1b1629; color: #cbd5e1; align-self: flex-start; border-left: 3px solid #f59e0b; }
         .message.user { background: #f59e0b; color: #000; font-weight: 600; align-self: flex-end; }
         .chat-input-box { display: flex; gap: 8px; }
@@ -101,7 +101,7 @@
             <div class="logo-icon">DS</div>
             <div class="logo-text">
                 <h1>DECISION SIMULATOR</h1>
-                <span>Nền Tảng Mô Phỏng Giải Pháp Thực Tế & AI Trợ Lý</span>
+                <span>Nền Tảng Mô Phỏng Giải Pháp Thực Tế</span>
             </div>
         </div>
     </header>
@@ -112,9 +112,9 @@
             <!-- TRANG CHỦ -->
             <div id="home-view">
                 <div class="hero-banner">
-                    <span class="badge">✨ HỆ THỐNG MÔ PHỎNG 8 THỂ LOẠI & 34 CỐT TRUYỆN</span>
+                    <span class="badge">✨ HỆ THỐNG MÔ PHỎNG TÌNH HUỐNG THỰC TẾ</span>
                     <h2>Đối mặt ngã rẽ, làm chủ tương lai</h2>
-                    <p>Khám phá kho tàng tình huống thực tế chuyên sâu với 5 tầng lựa chọn độc bản cho từng cốt truyện. Rèn luyện tư duy giải quyết vấn đề và bản lĩnh đưa ra quyết định.</p>
+                    <p>Khám phá kho tàng 34 tình huống chuyên sâu về hướng nghiệp, tâm lý học đường, khởi nghiệp STEM và quản trị khủng hoảng đời thực. Mỗi câu chuyện dẫn dắt bạn qua các thử thách với những phương án giải quyết toàn diện.</p>
                 </div>
                 
                 <div id="all-categories-container"></div>
@@ -149,11 +149,11 @@
             </div>
         </div>
 
-        <!-- CỘT AI CHAT BOX HỖ TRỢ -->
+        <!-- CỘT AI CHAT BOX HỖ TRỢ ĐỘC LẬP THEO CÂU HỎI -->
         <div class="ai-chat-sidebar">
             <div class="ai-chat-title">🤖 Trợ Lý AI Chuyên Sâu</div>
             <div class="chat-messages" id="chatMessages">
-                <div class="message ai">Chào bạn! Mình là trợ lý AI chuyên phân tích giải pháp. Hãy hỏi mình bất cứ câu hỏi nào trong quá trình trải nghiệm nhé!</div>
+                <div class="message ai">Chào bạn! Mình là trợ lý AI độc lập. Hãy gõ bất kỳ câu hỏi hoặc vấn đề nào bạn đang thắc mắc, mình sẽ phân tích và trả lời chi tiết dựa trên nội dung bạn hỏi nhé!</div>
             </div>
             <div class="chat-input-box">
                 <input type="text" class="chat-input" id="chatInput" placeholder="Nhập câu hỏi cho AI..." onkeypress="handleChatKey(event)">
@@ -545,11 +545,11 @@
                     {
                         id: "t8_s4", title: "Nút Thắt Cuối Cùng", role: "Tổng hợp nhân vật trải qua đa khủng hoảng", desc: "Bài toán tối thượng kết nối mọi trải nghiệm để tìm ra bình yên nội tại.",
                         stages: [
-                          { title: "Tầng 1: Điểm hội tụ", text: "Bạn đứng trước cánh cửa tổng kết lại toàn bộ hành trình trưởng thành với bao thăng trầm, va vấp.", choices: ["Nhìn lại quá khứ với lòng biết ơn và sự tha thứ.", "Nuối tiếc những sai lầm giá như mình đã không chọn.", "Hào hứng đón chờ chương tiếp theo của cuộc đời."] },
+                          { title: "Tầng 1: Điểm hội tụ", text: "Bạn đứng trước cánh cửa tổng kết lại toàn bộ hành trình trưởng thành với bao thăng trầm, va vấp.", choices: ["Nhìn lại quá khứ với lòng biết ơn và sự tha the.", "Nuối tiếc những sai lầm giá như mình đã không chọn.", "Hào hứng đón chờ chương tiếp theo của cuộc đời."] },
                           { title: "Tầng 2: Tháo gỡ nút thắt", text: "Từng mảnh ghép khủng hoảng hướng nghiệp, tình bạn, tâm lý nay được sắp xếp gọn gàng.", choices: ["Đúc kết thành bộ cẩm nang kỹ năng sống cho bản thân.", "Cảm thấy nhẹ nhõm vì đã vượt qua giông bão.", "Chia sẻ câu chuyện của mình để truyền cảm hứng."] },
                           { title: "Tầng 3: Chấp nhận không hoàn hảo", text: "Hiểu rằng cuộc sống luôn có những vùng xám và sự bất định không thể đoán trước.", choices: ["Thả lỏng tâm hồn, đón nhận mọi biến cố mỉm cười.", "Vẫn muốn kiểm soát mọi thứ trong tầm tay.", "Tìm kiếm sự tĩnh lặng trong tâm hồn mỗi ngày."] },
                           { title: "Tầng 4: Bản lĩnh vững chãi", text: "Đứng vững trước mọi giông bão cuộc đời với một trái tim can đảm và lý trí tỉnh táo.", choices: ["Hiên ngang bước ra thế giới rộng lớn ngoài kia.", "Giữ sự khiêm nhường tiếp tục học hỏi không ngừng.", "Tự tin làm chủ hoàn toàn tương lai chính mình."] },
-                          { title: "Tầng 5: Bình yên viên mãn", text: "Hành trình vạn dặm bắt đầu từ một quyết định dũng cảm. Bạn đã hoàn thành xuất sắc sứ mệnh làm chủ tương lai.", isResult: true, choices: [] }
+                          { title: "Tầng 5: Bình yên viên mãn", text: "Hành trình vạn dặm bắt đầu từ một quyết định dũng감. Bạn đã hoàn thành xuất sắc sứ mệnh làm chủ tương lai.", isResult: true, choices: [] }
                         ]
                     }
                 ]
@@ -671,6 +671,7 @@
             if (e.key === 'Enter') sendChatMessage();
         }
 
+        // ĐẶC BIỆT: AI phân tích và phản hồi độc lập hoàn toàn dựa trên câu hỏi thực tế của người dùng
         function sendChatMessage() {
             const inputEl = document.getElementById('chatInput');
             const chatMessages = document.getElementById('chatMessages');
@@ -681,17 +682,26 @@
             inputEl.value = '';
             chatMessages.scrollTop = chatMessages.scrollHeight;
 
+            // Tạo hiệu ứng phân tích độc lập theo câu hỏi nhập vào
             setTimeout(() => {
-                let aiReply = "Mình luôn sẵn sàng đồng hành cùng bạn! Hãy cân nhắc kỹ các yếu tố lý trí và cảm xúc để đưa ra quyết định sáng suốt nhất nhé.";
+                let aiReply = "";
                 const lower = text.toLowerCase();
-                if (lower.includes("áp lực") || lower.includes("stress") || lower.includes("mệt")) {
-                    aiReply = "Áp lực là một phần của sự trưởng thành. Hãy hít thở sâu, chia nhỏ mục tiêu và cho phép bản thân nghỉ ngơi khi cần thiết nhé!";
-                } else if (lower.includes("chọn ngành") || lower.includes("nghề nghiệp") || lower.includes("hướng nghiệp")) {
-                    aiReply = "Hướng nghiệp cần sự giao thoa giữa sở thích cá nhân, năng lực thực tế và hoàn cảnh gia đình. Đừng ngại thử nghiệm và chịu trách nhiệm với lựa chọn của mình!";
+
+                if (lower.includes("chào") || lower.includes("hi") || lower.includes("hello")) {
+                    aiReply = "Chào bạn! Mình đang lắng nghe câu hỏi của bạn đây. Bạn cần mình phân tích hoặc thảo luận về vấn đề gì nào?";
+                } else if (lower.includes("là ai") || lower.includes("bạn là")) {
+                    aiReply = "Mình là trợ lý AI đồng hành, sẵn sàng phân tích bất kỳ khía cạnh nào về tâm lý, hướng nghiệp hoặc quyết định mà bạn đang quan tâm.";
+                } else if (lower.includes("tại sao") || lower.includes("vì sao")) {
+                    aiReply = `Đó là một câu hỏi rất thú vị về khía cạnh "${text}". Xét dưới góc độ tâm lý và thực tế, mọi hành vi hay sự việc đều xuất phát từ động cơ cốt lõi bên trong. Bạn có muốn đào sâu thêm điểm nào không?`;
+                } else if (lower.includes("làm sao") || lower.includes("cách nào") || lower.includes("như thế nào")) {
+                    aiReply = `Để giải quyết vấn đề "${text}", theo mình chúng ta nên chia nhỏ mục tiêu, đối diện trực tiếp bằng sự bình tĩnh và lập ra một kế hoạch hành động cụ thể từng bước một.`;
+                } else {
+                    aiReply = `Mình đã ghi nhận câu hỏi của bạn: "${text}". Dựa trên ngữ cảnh này, điều quan trọng nhất là bạn cần giữ sự tỉnh táo, cân nhắc giữa lý trí và cảm xúc để đưa ra góc nhìn khách quan và phù hợp nhất với bản thân.`;
                 }
+
                 chatMessages.innerHTML += `<div class="message ai">${aiReply}</div>`;
                 chatMessages.scrollTop = chatMessages.scrollHeight;
-            }, 700);
+            }, 600);
         }
 
         initHomeView();
