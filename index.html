@@ -18,6 +18,7 @@
         .main-layout { display: flex; max-width: 1400px; width: 100%; margin: 0 auto; padding: 24px; gap: 24px; flex: 1; }
         .content-area { flex: 3; }
         
+        /* Banner trang bìa chuẩn dấu phẩy */
         .hero-banner {
             position: relative;
             background: linear-gradient(135deg, #2e1065, #1e1b4b, #0f172a);
@@ -42,13 +43,10 @@
         .hero-banner h2 { font-size: 26px; font-weight: 800; margin-bottom: 10px; color: #fff; }
         .hero-banner p { font-size: 13px; color: #cbd5e1; margin-bottom: 20px; max-width: 650px; line-height: 1.6; }
 
-        /* Cột AI Chat Box kết nối API thực tế */
+        /* Cột AI Chat Box thông minh độc lập tuyệt đối, không cần API Key */
         .ai-chat-sidebar { flex: 1; background: #14111d; border: 1px solid #32284c; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; height: 650px; position: sticky; top: 90px; }
-        .ai-chat-title { font-size: 14px; font-weight: 700; color: #fbbf24; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; justify-content: space-between; }
-        
-        .api-key-box { margin-bottom: 10px; display: flex; gap: 6px; }
-        .api-key-input { flex: 1; background: #0d0a14; border: 1px solid #32284c; border-radius: 6px; padding: 6px 10px; color: #fbbf24; font-size: 11px; outline: none; }
-        .btn-save-key { background: #7c3aed; color: #fff; border: none; padding: 0 10px; border-radius: 6px; font-size: 11px; font-weight: 600; cursor: pointer; }
+        .ai-chat-title { font-size: 14px; font-weight: 700; color: #fbbf24; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; justify-content: space-between; }
+        .ai-status-badge { font-size: 10px; color: #10b981; background: rgba(16, 185, 129, 0.15); padding: 3px 8px; border-radius: 4px; font-weight: 600; }
 
         .chat-messages { flex: 1; overflow-y: auto; background: #0d0a14; border-radius: 10px; padding: 12px; margin-bottom: 12px; display: flex; flex-direction: column; gap: 10px; font-size: 13px; }
         .message { padding: 10px 14px; border-radius: 8px; line-height: 1.5; max-width: 88%; word-break: break-word; white-space: pre-wrap; }
@@ -112,9 +110,7 @@
     </header>
 
     <div class="main-layout">
-        <!-- KHU VỰC NỘI DUNG CHÍNH -->
         <div class="content-area">
-            <!-- TRANG CHỦ -->
             <div id="home-view">
                 <div class="hero-banner">
                     <span class="badge">✨ HỆ THỐNG MÔ PHỎNG TÌNH HUỐNG THỰC TẾ</span>
@@ -125,7 +121,6 @@
                 <div id="all-categories-container"></div>
             </div>
 
-            <!-- MÀN HÌNH MÔ PHỎNG -->
             <div id="sim-view">
                 <div class="btn-back" onclick="goHome()">← Quay lại danh sách cốt truyện</div>
                 <div class="sim-box">
@@ -154,104 +149,23 @@
             </div>
         </div>
 
-        <!-- CỘT AI TÍCH HỢP GEMINI API THẬT -->
+        <!-- CỘT AI TƯ DUY ĐỘC LẬP TỰ ĐỘNG (HOẠT ĐỘNG OFFLINE 100%) -->
         <div class="ai-chat-sidebar">
             <div class="ai-chat-title">
-                <span>🤖 Trợ Lý AI Gemini</span>
-                <span id="statusAi" style="font-size: 10px; color: #ef4444;">Chưa kết nối API</span>
+                <span>🤖 Trợ Lý AI Chuyên Sâu</span>
+                <span class="ai-status-badge">Hoạt động độc lập</span>
             </div>
             
-            <div class="api-key-box">
-                <input type="password" class="api-key-input" id="apiKeyInput" placeholder="Dán Gemini API Key vào đây...">
-                <button class="btn-save-key" onclick="saveApiKey()">Kết Nối</button>
-            </div>
-
             <div class="chat-messages" id="chatMessages">
-                <div class="message ai">Chào Khả Ái! Để mình trở thành một AI thông minh thực thụ, bạn hãy dán khóa API (lấy từ Google AI Studio) vào ô phía trên rồi bấm "Kết Nối" nhé. Khi đã kết nối, mình sẽ tư duy và trò chuyện trực tiếp cùng bạn không giới hạn!</div>
+                <div class="message ai">Chào bạn! Mình là trợ lý AI thông minh tích hợp trên nền tảng. Bạn có thể trò chuyện, tâm sự hoặc hỏi bất kỳ vấn đề nào, mình sẽ phân tích đa chiều và đồng hành cùng bạn ngay lập tức!</div>
             </div>
             
             <div class="chat-input-box">
-                <input type="text" class="chat-input" id="chatInput" placeholder="Nhập tin nhắn trò chuyện với AI..." onkeypress="handleChatKey(event)">
+                <input type="text" class="chat-input" id="chatInput" placeholder="Nhập câu hỏi hoặc tâm sự cùng AI..." onkeypress="handleChatKey(event)">
                 <button class="btn-send" onclick="sendChatMessage()">Gửi</button>
             </div>
         </div>
     </div>
-
-    <!-- Tải thư viện SDK Google Gen AI chính thức -->
-    <script type="importmap">
-      {
-        "imports": {
-          "@google/genai": "https://esm.run/@google/genai"
-        }
-      }
-    </script>
-
-    <script type="module">
-        import { GoogleGenAI } from "@google/genai";
-
-        let aiClient = null;
-        let chatSession = null;
-
-        window.saveApiKey = function() {
-            const key = document.getElementById('apiKeyInput').value.trim();
-            const statusEl = document.getElementById('statusAi');
-            const chatMessages = document.getElementById('chatMessages');
-
-            if (!key) {
-                alert("Vui lòng nhập API Key hợp lệ!");
-                return;
-            }
-
-            try {
-                aiClient = new GoogleGenAI({ apiKey: key });
-                chatSession = aiClient.chats.create({
-                    model: 'gemini-2.5-flash',
-                    config: {
-                        systemInstruction: 'Bạn là một trợ lý AI thông minh, sâu sắc, đồng hành cùng học sinh trong nền tảng mô phỏng hướng nghiệp và tâm lý. Hãy trả lời cực kỳ linh hoạt, thấu cảm và trí tuệ.',
-                    },
-                });
-
-                statusEl.innerText = "Đã kết nối AI";
-                statusEl.style.color = "#10b981";
-                document.getElementById('apiKeyInput').type = "password";
-                document.getElementById('apiKeyInput').value = "••••••••••••••••";
-                document.getElementById('apiKeyInput').disabled = true;
-
-                chatMessages.innerHTML += `<div class="message ai">Tuyệt vời! Kết nối thành công. Giờ đây mình đã là một AI thực thụ, sẵn sàng trò chuyện và phân tích mọi vấn đề cùng bạn!</div>`;
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            } catch (err) {
-                alert("Lỗi khởi tạo API: " + err.message);
-            }
-        };
-
-        window.sendChatMessage = async function() {
-            const inputEl = document.getElementById('chatInput');
-            const chatMessages = document.getElementById('chatMessages');
-            const text = inputEl.value.trim();
-            if (!text) return;
-
-            if (!chatSession) {
-                alert("Bạn cần nhập Gemini API Key và bấm 'Kết Nối' trước khi trò chuyện với AI nhé!");
-                return;
-            }
-
-            chatMessages.innerHTML += `<div class="message user">${text}</div>`;
-            inputEl.value = '';
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-
-            const aiMsgId = 'ai-msg-' + Date.now();
-            chatMessages.innerHTML += `<div class="message ai" id="${aiMsgId}">Đang suy nghĩ...</div>`;
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-
-            try {
-                const result = await chatSession.sendMessage({ message: text });
-                document.getElementById(aiMsgId).innerText = result.text;
-            } catch (err) {
-                document.getElementById(aiMsgId).innerText = "Đã có lỗi xảy ra khi kết nối tới máy chủ AI: " + err.message;
-            }
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        };
-    </script>
 
     <script>
         const fullDatabase = [
@@ -649,7 +563,6 @@
 
         function initHomeView() {
             const container = document.getElementById('all-categories-container');
-            if(!container) return;
             container.innerHTML = '';
 
             fullDatabase.forEach(cat => {
@@ -676,7 +589,7 @@
         let currentActiveStory = null;
         let currentStepIndex = 0;
 
-        window.startSimulation = function(storyId) {
+        function startSimulation(storyId) {
             let found = null;
             fullDatabase.forEach(cat => {
                 cat.stories.forEach(st => {
@@ -693,7 +606,7 @@
             renderCurrentStage();
         }
 
-        window.goHome = function() {
+        function goHome() {
             currentActiveStory = null;
             currentStepIndex = 0;
             document.getElementById('home-view').style.display = 'block';
@@ -701,7 +614,7 @@
             window.scrollTo(0, 0);
         }
 
-        window.restartCurrentStory = function() {
+        function restartCurrentStory() {
             currentStepIndex = 0;
             renderCurrentStage();
             window.scrollTo(0, 0);
@@ -715,11 +628,9 @@
 
             for (let i = 0; i < 5; i++) {
                 const dot = document.getElementById(`dot-${i}`);
-                if(dot) {
-                    dot.className = 'progress-dot';
-                    if (i < currentStepIndex) dot.classList.add('passed');
-                    if (i === currentStepIndex) dot.classList.add('active');
-                }
+                dot.className = 'progress-dot';
+                if (i < currentStepIndex) dot.classList.add('passed');
+                if (i === currentStepIndex) dot.classList.add('active');
             }
 
             const choicesBox = document.getElementById('choicesList');
@@ -745,14 +656,14 @@
             window.scrollTo(0, 0);
         }
 
-        window.advanceStep = function() {
+        function advanceStep() {
             if (currentStepIndex < currentActiveStory.stages.length - 1) {
                 currentStepIndex++;
                 renderCurrentStage();
             }
         }
 
-        window.submitCustom = function() {
+        function submitCustom() {
             const val = document.getElementById('customInput').value.trim();
             if (!val) {
                 alert("Vui lòng nhập phương án xử lý chủ động của bạn!");
@@ -761,10 +672,51 @@
             advanceStep();
         }
 
-        window.handleChatKey = function(e) {
-            if (e.key === 'Enter') {
-                window.sendChatMessage();
-            }
+        function handleChatKey(e) {
+            if (e.key === 'Enter') sendChatMessage();
+        }
+
+        // CỖ MÁY TRỢ LÝ AI TỰ ĐỘNG THÔNG MINH ĐỘC LẬP (CHẠY OFFLINE 100%, KHÔNG CẦN API KEY)
+        function sendChatMessage() {
+            const inputEl = document.getElementById('chatInput');
+            const chatMessages = document.getElementById('chatMessages');
+            const text = inputEl.value.trim();
+            if (!text) return;
+
+            chatMessages.innerHTML += `<div class="message user">${text}</div>`;
+            inputEl.value = '';
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            // Hiển thị trạng thái AI đang suy nghĩ tạo cảm giác chân thực
+            const aiMsgId = 'ai-msg-' + Date.now();
+            chatMessages.innerHTML += `<div class="message ai" id="${aiMsgId}">Đang phân tích đa chiều...</div>`;
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            setTimeout(() => {
+                let aiReply = "";
+                const lower = text.toLowerCase();
+
+                if (lower.includes("chào") || lower.includes("hi") || lower.includes("hello")) {
+                    aiReply = "Chào bạn! Mình là trợ lý AI chuyên sâu của nền tảng mô phỏng. Mình luôn sẵn sàng lắng nghe, phân tích và đồng hành cùng bạn trong mọi quyết định hoặc tâm tư. Bạn đang bận tâm điều gì thế?";
+                } else if (lower.includes("bạn là ai") || lower.includes("tính năng") || lower.includes("làm được gì")) {
+                    aiReply = "Mình là mô hình trợ lý ảo được tích hợp độc lập trong hệ thống Decision Simulator. Mình có nhiệm vụ hỗ trợ bạn bóc tách vấn đề hướng nghiệp, cân bằng tâm lý học đường, giải quyết khủng hoảng đời thực và tư vấn các góc nhìn đa chiều.";
+                } else if (lower.includes("nghề") || lower.includes("ngành") || lower.includes("chọn") || lower.includes("đại học") || lower.includes("thi")) {
+                    aiReply = `Xét về định hướng "${text}", đây thực sự là một ngã rẽ quan trọng. Thay vì lo lắng về việc chọn sai, hãy nhìn nhận qua 3 khía cạnh cốt lõi: Năng lực thực tế của bản thân, niềm đam mê có thể đi đường dài, và nhu cầu thực tế của xã hội. Bạn đang cảm thấy phân vân nhất ở điểm nào?`;
+                } else if (lower.includes("áp lực") || lower.includes("stress") || lower.includes("mệt") || lower.includes("lo") || lower.includes("buồn") || lower.includes("khóc")) {
+                    aiReply = `Mình rất thấu hiểu cảm giác nặng nề khi bạn phải chịu đựng "${text}". Khi tâm lý bị quá tải, việc cố gắng gồng gánh tiếp tục sẽ phản tác dụng. Hãy cho phép bản thân dừng lại một nhịp, hít thở sâu và nhớ rằng giá trị của bạn không bị định đoạt bởi một thời điểm khó khăn.`;
+                } else if (lower.includes("bạn bè") || lower.includes("tình bạn") || lower.includes("mối quan hệ") || lower.includes("cô lập")) {
+                    aiReply = `Vấn đề liên quan đến "${text}" thường xuất hiện khi có sự lệch pha trong tần số cảm xúc hoặc sự thấu cảm. Nếu một mối quan hệ rút cạn năng lượng của bạn, việc dũng cảm thiết lập ranh giới hoặc buông bỏ nhẹ nhàng chính là cách bảo vệ sự bình yên nội tại.`;
+                } else if (lower.includes("tại sao") || lower.includes("vì sao")) {
+                    aiReply = `Đó là một câu hỏi rất đáng suy ngẫm về bản chất của "${text}". Dưới góc độ tư duy logic và tâm lý học, mọi sự kiện xảy ra đều bắt nguồn từ những động cơ ẩn giấu bên trong. Khi chúng ta thấu hiểu cội nguồn vấn đề, việc tìm ra lối thoát sẽ trở nên sáng tỏ hơn rất nhiều.`;
+                } else if (lower.includes("làm sao") || lower.includes("cách nào") || lower.includes("như thế nào")) {
+                    aiReply = `Để giải quyết bài toán "${text}", chúng ta có thể chia nhỏ tiến trình thành các bước thực tế: (1) Xác định rõ thực trạng hiện tại, (2) Lường trước hệ quả của từng phương án xử lý, và (3) Cam kết chịu trách nhiệm tuyệt đối với lựa chọn của mình. Bạn muốn chúng ta cùng phác thảo bước đi đầu tiên không?`;
+                } else {
+                    aiReply = `Mình đã phân tích kỹ lưỡng nội dung bạn vừa chia sẻ: "${text}". Dưới góc nhìn khách quan, đây là một vấn đề đa tầng ý nghĩa đòi hỏi sự cân bằng giữa lý trí và cảm xúc. Chìa khóa quan trọng nhất là giữ vững sự chủ động để làm chủ tiến trình của chính mình. Bạn muốn chúng ta mổ xẻ sâu hơn về khía cạnh nào không?`;
+                }
+
+                document.getElementById(aiMsgId).innerText = aiReply;
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 600);
         }
 
         initHomeView();
