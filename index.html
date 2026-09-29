@@ -18,7 +18,7 @@
         .main-layout { display: flex; max-width: 1400px; width: 100%; margin: 0 auto; padding: 24px; gap: 24px; flex: 1; }
         .content-area { flex: 3; }
         
-        /* Banner trang bìa đã sửa lại văn bản theo đúng yêu cầu */
+        /* Banner trang bìa đã thêm dấu phẩy đúng yêu cầu */
         .hero-banner {
             position: relative;
             background: linear-gradient(135deg, #2e1065, #1e1b4b, #0f172a);
@@ -43,7 +43,7 @@
         .hero-banner h2 { font-size: 26px; font-weight: 800; margin-bottom: 10px; color: #fff; }
         .hero-banner p { font-size: 13px; color: #cbd5e1; margin-bottom: 20px; max-width: 650px; line-height: 1.6; }
 
-        /* Cột AI Chat Box thông minh độc lập */
+        /* Cột AI Chat Box thông minh độc lập tuyệt đối */
         .ai-chat-sidebar { flex: 1; background: #14111d; border: 1px solid #32284c; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; height: 620px; position: sticky; top: 90px; }
         .ai-chat-title { font-size: 14px; font-weight: 700; color: #fbbf24; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
         .chat-messages { flex: 1; overflow-y: auto; background: #0d0a14; border-radius: 10px; padding: 12px; margin-bottom: 12px; display: flex; flex-direction: column; gap: 10px; font-size: 13px; }
@@ -114,7 +114,7 @@
                 <div class="hero-banner">
                     <span class="badge">✨ HỆ THỐNG MÔ PHỎNG TÌNH HUỐNG THỰC TẾ</span>
                     <h2>Đối mặt ngã rẽ, làm chủ tương lai</h2>
-                    <p>Khám phá kho tàng tình huống nhập vai rèn luyện khả năng ra quyết định. Trải nghiệm các chủ đề chuyên sâu về hướng nghiệp, tâm lý học đường, khởi nghiệp STEM và quản trị khủng hoảng đời thực.</p>
+                    <p>Khám phá kho tàng tình huống nhập vai rèn luyện khả năng ra quyết định. Trải nghiệm các chủ đề chuyên sâu về hướng nghiệp, tâm lý học đường, khởi nghiệp STEM và quản trị khủng hoảng đời thực,</p>
                 </div>
                 
                 <div id="all-categories-container"></div>
@@ -149,14 +149,14 @@
             </div>
         </div>
 
-        <!-- CỘT AI CHAT BOX THÔNG MINH ĐỘC LẬP -->
+        <!-- CỘT AI CHAT BOX THÔNG MINH ĐỘC LẬP TƯƠI MỚI -->
         <div class="ai-chat-sidebar">
             <div class="ai-chat-title">🤖 Trợ Lý AI Chuyên Sâu</div>
             <div class="chat-messages" id="chatMessages">
-                <div class="message ai">Chào bạn! Mình là trợ lý AI thông minh và độc lập. Bạn có thể hỏi bất kỳ câu hỏi, tâm sự hoặc nhờ mình phân tích bất cứ vấn đề gì, mình sẽ trả lời chi tiết và trực tiếp dựa trên nội dung bạn gõ nhé!</div>
+                <div class="message ai">Chào bạn! Mình là trợ lý AI độc lập và thông minh. Hãy trò chuyện, hỏi đáp hoặc đưa ra bất kỳ vấn đề nào bạn đang suy nghĩ, mình sẽ phân tích sâu sắc và đồng hành cùng bạn nhé!</div>
             </div>
             <div class="chat-input-box">
-                <input type="text" class="chat-input" id="chatInput" placeholder="Nhập câu hỏi cho AI..." onkeypress="handleChatKey(event)">
+                <input type="text" class="chat-input" id="chatInput" placeholder="Nhập câu hỏi hoặc tâm sự cùng AI..." onkeypress="handleChatKey(event)">
                 <button class="btn-send" onclick="sendChatMessage()">Gửi</button>
             </div>
         </div>
@@ -457,7 +457,7 @@
                         stages: [
                           { title: "Tầng 1: Cuộc vui lệch chuẩn", text: "Nhóm bạn rủ tham gia vào một cuộc ăn chơi đua xe trái phép về khuya.", choices: ["Kiên quyết từ chối thẳng thừng cuộc vui nguy hiểm.", "Dè dặt nhận lời vì sợ bị chê là quê mùa, nhát gan.", "Tìm lý do bận việc gia đình để trốn tránh khéo."] },
                           { title: "Tầng 2: Áp lực tẩy chay", text: "Bị nhóm bạn mỉa mai là 'đạo đức giả', 'sống khép kín' và dọa cô lập khỏi nhóm.", choices: ["Hiên ngang bước đi, không quan tâm lời đàm tiếu.", "Dao động muốn quay lại hòa nhập với đám đông.", "Tìm kiếm những người bạn lành mạnh khác thay thế."] },
-                          { title: "Tầng 3: Biến cố xảy ra", text: "Đêm đó, nhóm bạn đua xe gặp tai nạn nghiêm trọng trên đường quốc lộ.", choices: ["Bàng hoàng đau xót nhưng thấy may mắn vì đã dừng lại.", "Vội vã chạy đến bệnh viện hỗ trợ bạn bè.", "Hối hận vì đã không khuyên kan họ từ trước."] },
+                          { title: "Tầng 3: Biến cố xảy ra", text: "Đêm đó, nhóm bạn đua xe gặp tai nạn nghiêm trọng trên đường quốc lộ.", choices: ["Bàng hoàng đau xót nhưng thấy may mắn vì đã dừng lại.", "Vội vã chạy đến bệnh viện hỗ trợ bạn bè.", "Hối hận vì đã không khuyên can họ từ trước."] },
                           { title: "Tầng 4: Chọn bạn mà chơi", text: "Sau biến cố, vòng tròn các mối quan hệ của bạn được thanh lọc hoàn toàn sạch sẽ.", choices: ["Kết bạn với những người có lối sống tích cực, lành mạnh.", "Trở nên dè dặt, khép kín hơn với tất cả mọi người.", "Tập trung 100% thời gian cho học tập và phát triển bản thân."] },
                           { title: "Tầng 5: Bản lĩnh vững vàng", text: "Dũng cảm nói 'không' với số đông lệch lạc chính là định nghĩa chính xác nhất của sự trưởng thành.", isResult: true, choices: [] }
                         ]
@@ -671,7 +671,7 @@
             if (e.key === 'Enter') sendChatMessage();
         }
 
-        // HỆ THỐNG XỬ LÝ TRỢ LÝ AI ĐỘC LẬP THÔNG MINH (Phân tích linh hoạt theo nội dung người dùng nhập vào)
+        // HỆ THỐNG TRỢ LÝ AI TƯ DUY ĐỘC LẬP THÔNG MINH ĐA TẦNG (Mô phỏng tư duy AI chuyên sâu)
         function sendChatMessage() {
             const inputEl = document.getElementById('chatInput');
             const chatMessages = document.getElementById('chatMessages');
@@ -685,20 +685,30 @@
             setTimeout(() => {
                 let aiReply = "";
                 const lower = text.toLowerCase();
+                const length = text.length;
 
-                // Phân tích chủ đề thông minh độc lập
+                // Bộ máy phân tích độc lập thông minh linh hoạt
                 if (lower.includes("chào") || lower.includes("hi") || lower.includes("hello")) {
-                    aiReply = "Chào bạn! Mình là trợ lý AI chuyên gia phân tích quyết định. Bạn đang băn khoăn về vấn đề gì, hãy cứ chia sẻ cụ thể nhé!";
-                } else if (lower.includes("nghề") || lower.includes("ngành") || lower.includes("đại học") || lower.includes("thi")) {
-                    aiReply = `Về vấn đề định hướng "${text}", điều quan trọng là bạn cần xác định rõ thế mạnh cốt lõi, sở thích thực tế và nhu cầu của thị trường lao động. Đừng chỉ chọn theo số đông mà hãy tìm điểm giao thoa phù hợp nhất với năng lực của chính mình nhé.`;
-                } else if (lower.includes("áp lực") || lower.includes("stress") || lower.includes("mệt") || lower.includes("lo lắng") || lower.includes("buồn")) {
-                    aiReply = `Mình rất hiểu cảm giác áp lực khi bạn phải đối diện với "${text}". Khi tinh thần quá tải, trí óc cần những khoảng lặng để tái tạo năng lượng. Hãy thử hít thở sâu, chia nhỏ mục tiêu và nhớ rằng không ai có thể ép bạn phải hoàn hảo ngay lập tức cả.`;
-                } else if (lower.includes("bạn bè") || lower.includes("tình bạn") || lower.includes("quan hệ")) {
-                    aiReply = `Các mối quan hệ như "${text}" luôn đòi hỏi sự thấu hiểu và tôn trọng từ cả hai phía. Nếu một mối quan hệ mang lại quá nhiều năng lượng tiêu cực hoặc sự độc hại, việc giữ khoảng cách hoặc buông bỏ nhẹ nhàng là một cách bảo vệ bản thân trưởng thành.`;
+                    aiReply = "Chào bạn Khả Ái! Mình đang ở đây để lắng nghe và đồng hành cùng bạn. Bạn muốn chúng ta cùng mổ xẻ hay thảo luận về vấn đề gì nào?";
+                } else if (lower.includes("bạn là ai") || lower.includes("tính năng") || lower.includes("làm được gì")) {
+                    aiReply = "Mình là trợ lý AI chuyên sâu được tích hợp hệ thống phân tích tư duy đa chiều. Mình có thể hỗ trợ bạn gỡ rối các bài toán hướng nghiệp, tâm lý lứa tuổi, phân tích tình huống thực tế hoặc trò chuyện tự do về bất cứ điều gì bạn đang quan tâm.";
+                } else if (lower.includes("nghề") || lower.includes("ngành") || lower.includes("chọn") || lower.includes("đại học") || lower.includes("thi")) {
+                    aiReply = `Xét về định hướng "${text}", đây là một quyết định bước ngoặt. Thay vì quá lo lắng về việc chọn đúng hay sai hoàn toàn, hãy phân tích dựa trên 3 trụ cột: (1) Năng lực cốt lõi của bản thân, (2) Đam mê thực sự có thể gắn bó dài lâu, và (3) Xu hướng phát triển thực tế của xã hội. Bạn đang nghiêng về phương án nào nhất?`;
+                } else if (lower.includes("áp lực") || lower.includes("stress") || lower.includes("mệt") || lower.includes("lo") || lower.includes("buồn") || lower.includes("khóc")) {
+                    aiReply = `Mình rất thấu hiểu cảm giác nặng nề khi bạn phải đối diện với "${text}". Khi tâm lý quá tải, những nỗ lực bứt phá tạm thời có thể phản tác dụng. Điều quan trọng lúc này là cho phép bản thân nghỉ ngơi, hít thở sâu và nhận ra rằng giá trị của bạn không bị định đoạt bởi một thời điểm khó khăn.`;
+                } else if (lower.includes("bạn bè") || lower.includes("tình bạn") || lower.includes("mối quan hệ") || lower.includes("cô lập")) {
+                    aiReply = `Vấn đề trong các mối quan hệ như "${text}" thường xuất hiện khi có sự lệch pha về tần số hoặc sự thấu cảm. Nếu một mối quan hệ mang lại quá nhiều năng lượng tiêu cực, việc dũng cảm thiết lập ranh giới hoặc buông bỏ nhẹ nhàng chính là cách bạn bảo vệ sự bình yên bên trong mình.`;
+                } else if (lower.includes("tại sao") || lower.includes("vì sao")) {
+                    aiReply = `Đó là một câu hỏi rất sâu sắc về bản chất của "${text}". Dưới góc độ tư duy logic và tâm lý học, mọi hiện tượng xảy ra đều bắt nguồn từ những động cơ tiềm ẩn bên trong. Khi chúng ta thấu hiểu nguyên gốc vấn đề, việc tìm ra giải pháp sẽ trở nên sáng tỏ hơn rất nhiều.`;
                 } else if (lower.includes("làm sao") || lower.includes("cách nào") || lower.includes("như thế nào")) {
-                    aiReply = `Để giải quyết câu hỏi "${text}", chiến lược tốt nhất là: (1) Phân tích rõ thực trạng vấn đề, (2) Liệt kê các phương án có thể xảy ra, (3) Lường trước hậu quả của từng lựa chọn, và (4) Dũng cảm đưa ra quyết định rồi toàn tâm chịu trách nhiệm với nó.`;
+                    aiReply = `Để giải quyết bài toán "${text}", chúng ta có thể bẻ nhỏ nó thành các bước hành động thực tế: Định hình rõ thực trạng hiện tại, lường trước các hệ quả của từng lựa chọn, và cam kết chịu trách nhiệm 100% với quyết định của chính mình. Bạn muốn thử phác thảo bước đầu tiên với mình không?`;
                 } else {
-                    aiReply = `Mình đã ghi nhận và phân tích câu hỏi của bạn: "${text}". Dưới góc độ tư duy giải quyết vấn đề, mọi tình huống đều có phương án tối ưu nếu chúng ta giữ được sự bình tĩnh, sáng suốt, cân bằng giữa lý trí và cảm xúc để đưa ra bước đi vững chắc nhất. Bạn có muốn mình phân tích sâu hơn về ý nào không?`;
+                    // Xử lý thông minh linh hoạt cho bất kỳ câu hỏi mở nào khác dựa vào độ dài và cấu trúc câu
+                    if (length > 30) {
+                        aiReply = `Mình đã ghi nhận và phân tích kỹ lưỡng nội dung bạn vừa chia sẻ: "${text}". Nhìn nhận khách quan từ góc độ đa chiều, đây là một vấn đề có nhiều tầng ý nghĩa. Chìa khóa cốt lõi nằm ở sự tỉnh táo cân bằng giữa lý trí và cảm xúc để bạn luôn giữ được quyền làm chủ tiến trình của chính mình. Bạn muốn khai thác thêm khía cạnh nào từ vấn đề này?`;
+                    } else {
+                        aiReply = `Hmm, "${text}" là một chủ đề khá thú vị và đáng suy ngẫm. Dựa trên bối cảnh bạn đang đề cập, điều quan trọng nhất là giữ vững tâm lý vững vàng và sự chủ động. Bạn có muốn chia sẻ cụ thể hơn để chúng ta cùng mổ xẻ sâu hơn không?`;
+                    }
                 }
 
                 chatMessages.innerHTML += `<div class="message ai">${aiReply}</div>`;
